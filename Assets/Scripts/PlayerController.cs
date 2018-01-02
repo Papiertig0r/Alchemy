@@ -4,12 +4,26 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public static PlayerController player;
     public float speed;
+
+    public Inventory inventory;
+
     private Animator animator;
     // Use this for initialization
     void Start ()
     {
+        if(player == null)
+        {
+            player = this;
+        }
+        if(player != this)
+        {
+            Destroy(this.gameObject);
+        }
+
         animator = GetComponent<Animator>();
+        inventory = GetComponent<Inventory>();
     }
 
     // Update is called once per frame

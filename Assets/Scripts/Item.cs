@@ -4,7 +4,13 @@ using UnityEngine;
 
 public class Item : MonoBehaviour
 {
+    public Sprite sprite;
     private bool canBePickedUp = false;
+
+    public void Awake()
+    {
+        sprite = GetComponent<SpriteRenderer>().sprite;
+    }
 
     private void OnTriggerEnter2D(Collider2D coll)
     {
@@ -26,8 +32,11 @@ public class Item : MonoBehaviour
     {
         if(canBePickedUp && Input.GetButtonDown("Fire1"))
         {
-            canBePickedUp = false;
-            gameObject.SetActive(false);
+            if(PlayerController.player.inventory.AddItem(this))
+            {
+                canBePickedUp = false;
+                gameObject.SetActive(false);
+            }
         }
     }
 }
