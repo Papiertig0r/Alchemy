@@ -32,7 +32,6 @@ public class Inventory : MonoBehaviour
             slot.quantity++;
         }
 
-        Debug.Log("Updating inventory UI");
         inventoryUI.UpdateInventoryUI(itemSlots);
         return true;
     }

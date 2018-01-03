@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 212897857411883538}
   - component: {fileID: 61264051884392796}
   - component: {fileID: 114418861396563968}
+  - component: {fileID: 114910374100124286}
   m_Layer: 0
   m_Name: Herb
   m_TagString: Untagged
@@ -78,6 +79,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a82b067f14bde7e4591edf237fcfa2df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sprite: {fileID: 0}
+--- !u!114 &114910374100124286
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1985862277652182}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6bae2ccb44839224d9240326cd2a603b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ingredientType: 0
+  phaseTransition:
+  - toolType: 0
+    originalType: 0
+    endType: 2
+  - toolType: 1
+    originalType: 2
+    endType: 1
+  - toolType: 2
+    originalType: 1
+    endType: 2
+  - toolType: 2
+    originalType: 2
+    endType: 3
 --- !u!212 &212897857411883538
 SpriteRenderer:
   m_ObjectHideFlags: 1
