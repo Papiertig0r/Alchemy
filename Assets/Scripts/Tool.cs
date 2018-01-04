@@ -22,7 +22,6 @@ public class Tool : MonoBehaviour
             phaseTransition == null
             )
         {
-            Debug.Log("No ingredient has matching phase transition");
             return false;
         }
 
@@ -40,8 +39,6 @@ public class Tool : MonoBehaviour
         if(toolCanBeUsed && Input.GetButtonDown("Fire1"))
         {
             // Handles Input
-            Debug.Log("Tool is open");
-            AddIngredient(PlayerController.player.inventory.itemSlots.Find(itemSlot => itemSlot.item.name == "Herb").item.GetComponent<Ingredient>());
         }
 
         if(ingredient != null)

@@ -96,15 +96,19 @@ MonoBehaviour:
   - toolType: 0
     originalType: 0
     endType: 2
+    endProductName: Healing Paste
   - toolType: 1
     originalType: 2
     endType: 1
+    endProductName: Healing Potion
   - toolType: 2
     originalType: 1
     endType: 2
+    endProductName: Healing Paste
   - toolType: 2
     originalType: 2
     endType: 3
+    endProductName: Healing Powder
 --- !u!212 &212897857411883538
 SpriteRenderer:
   m_ObjectHideFlags: 1
