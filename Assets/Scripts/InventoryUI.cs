@@ -16,19 +16,36 @@ public class InventoryUI : MonoBehaviour
 
         for (i = 0; i < inventory.Count; i++)
         {
-            itemSlotUIs[i].UpdateItem(inventory[i]);
+            itemSlotUIs[i].AddItemSlot(inventory[i]);
         }
 
         for(; i < itemSlotUIs.Count; i++)
         {
-            itemSlotUIs[i].RemoveItem();
+            itemSlotUIs[i].RemoveItemSlot();
         }
     }
 
+    public void SetActive(bool value)
+    {
+        gameObject.SetActive(value);
+    }
+
+    public bool active
+    {
+        get
+        {
+            return gameObject.activeSelf;
+        }
+    }
+
+    /*
     public void Update()
     {
-        SelectItemSlot();
-    }
+        // This is for controller support
+        //SelectItemSlot();
+
+        //Handle 
+    }*/
 
     private void SelectItemSlot()
     {

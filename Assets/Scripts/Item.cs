@@ -14,29 +14,29 @@ public class Item : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D coll)
     {
-        if(coll.GetComponent<PlayerController>())
+        PlayerController player = coll.GetComponent<PlayerController>();
+        if (player)
         {
-            canBePickedUp = true;
+            player.onInventoryDown += PickUp;
         }
     }
 
     private void OnTriggerExit2D(Collider2D coll)
     {
+        PlayerController player = coll.GetComponent<PlayerController>();
         if (coll.GetComponent<PlayerController>())
         {
-            canBePickedUp = false;
+            player.onInventoryDown -= PickUp;
         }
     }
 
-    private void Update()
+    private void PickUp()
     {
-        if(canBePickedUp && Input.GetButtonDown("Fire1"))
+        PlayerController player = PlayerController.player;
+        if (player.inventory.AddItem(this))
         {
-            if(PlayerController.player.inventory.AddItem(this))
-            {
-                canBePickedUp = false;
-                gameObject.SetActive(false);
-            }
+            gameObject.SetActive(false);
+            gameObject.transform.SetParent(player.transform);
         }
     }
 }

@@ -5,16 +5,34 @@ using UnityEngine.UI;
 
 public class ToolUI : MonoBehaviour
 {
-    public static float ticksPerSecond = 10f;
     public ItemSlotUI itemSlotUI;
     public Slider progressSlider;
 
-    private void Update()
+    public void UpdateSlider(float newValue)
     {
-        progressSlider.value += Time.deltaTime * ticksPerSecond;
-        if(progressSlider.value >= progressSlider.maxValue)
+        progressSlider.value = newValue;
+    }
+
+    public void SetActive(bool newActive)
+    {
+        gameObject.SetActive(newActive);
+    }
+
+    public bool active
+    {
+        get
         {
-            progressSlider.value = progressSlider.minValue;
+            return gameObject.activeSelf;
         }
+    }
+
+    public void AddItem()
+    {
+
+    }
+
+    public void RemoveItem()
+    {
+
     }
 }

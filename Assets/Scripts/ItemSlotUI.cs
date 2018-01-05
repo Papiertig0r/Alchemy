@@ -10,6 +10,7 @@ public class ItemSlotUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
     public Text quantityText;
     public Image itemImage;
+    public ItemSlot itemSlot = null;
 
     public void OnPointerEnter(PointerEventData eventData)
     {
@@ -21,21 +22,35 @@ public class ItemSlotUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
     }
 
-    public void UpdateItem(ItemSlot itemSlot)
+    public void AddItemSlot(ItemSlot itemSlot)
     {
-        quantityText.text = itemSlot.quantity.ToString();
-        quantityText.gameObject.SetActive(true);
-        itemImage.sprite = itemSlot.item.sprite;
-        itemImage.preserveAspect = true;
-        itemImage.gameObject.SetActive(true);
+        this.itemSlot = itemSlot;
+        UpdateItemSlotUI();
     }
 
-    public void RemoveItem()
+    public void UpdateItemSlotUI()
     {
-        quantityText.text = "";
-        quantityText.gameObject.SetActive(false);
-        itemImage.sprite = null;
-        itemImage.gameObject.SetActive(false);
+        if(itemSlot == null)
+        {
+            quantityText.text = "";
+            quantityText.gameObject.SetActive(false);
+            itemImage.sprite = null;
+            itemImage.gameObject.SetActive(false);
+        }
+        else
+        {
+            quantityText.text = itemSlot.quantity.ToString();
+            quantityText.gameObject.SetActive(true);
+            itemImage.sprite = itemSlot.item.sprite;
+            itemImage.preserveAspect = true;
+            itemImage.gameObject.SetActive(true);
+        }
+    }
+
+    public void RemoveItemSlot()
+    {
+        this.itemSlot = null;
+        UpdateItemSlotUI();
     }
 
     public static void MarkSlot(ItemSlotUI slot)

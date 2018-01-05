@@ -5,19 +5,25 @@ using UnityEngine;
 public class Inventory : MonoBehaviour
 {
     public InventoryUI inventoryUI;
+    public int slotCount = 6;
     public List<ItemSlot> itemSlots = new List<ItemSlot>();
 
-    private void Update()
+    public void Display(bool display)
     {
-        if(Input.GetButtonDown("Inventory"))
+        inventoryUI.SetActive(display);
+    }
+
+    public bool isUiActive
+    {
+        get
         {
-            inventoryUI.gameObject.SetActive(!inventoryUI.gameObject.activeSelf);
+            return inventoryUI.active;
         }
     }
 
     public bool AddItem(Item item)
     {
-        if(itemSlots.Count == 6)
+        if(itemSlots.Count == slotCount)
         {
             return false;
         }
