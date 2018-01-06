@@ -2,27 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.EventSystems;
 
-public class ItemSlotUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class ItemSlotUI : MonoBehaviour
 {
     public static ItemSlotUI selectedSlot = null;
 
     public Text quantityText;
     public Image itemImage;
-    public ItemSlot itemSlot = null;
 
-    public void OnPointerEnter(PointerEventData eventData)
-    {
-        MarkSlot(this);
-    }
+    public bool showQuantity;
+    public int capacity;
 
-    public void OnPointerExit(PointerEventData eventData)
-    {
+    private ItemSlot itemSlot = null;
 
-    }
-
-    public void AddItemSlot(ItemSlot itemSlot)
+    public void AddItemToSlot(ItemSlot itemSlot)
     {
         this.itemSlot = itemSlot;
         UpdateItemSlotUI();
@@ -39,28 +32,30 @@ public class ItemSlotUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         }
         else
         {
-            quantityText.text = itemSlot.quantity.ToString();
-            quantityText.gameObject.SetActive(true);
+            if(showQuantity)
+            {
+                quantityText.text = itemSlot.quantity.ToString();
+                quantityText.gameObject.SetActive(true);
+            }
             itemImage.sprite = itemSlot.item.sprite;
             itemImage.preserveAspect = true;
             itemImage.gameObject.SetActive(true);
         }
     }
 
-    public void RemoveItemSlot()
+    public void RemoveItemFromSlot()
     {
         this.itemSlot = null;
         UpdateItemSlotUI();
     }
 
-    public static void MarkSlot(ItemSlotUI slot)
+    public void ApplyItem()
     {
-        //! \todo better selection method than just color (colored frame!)
-        if(selectedSlot != null)
+        if (itemSlot != null)
         {
-            selectedSlot.GetComponent<Image>().color = new Color(1f, 1f, 1f, 0.4f);
+            if(itemSlot.item.Apply())
+            {
+            }
         }
-        selectedSlot = slot;
-        selectedSlot.GetComponent<Image>().color = Color.red;
     }
 }

@@ -5,11 +5,16 @@ using UnityEngine;
 public class Item : MonoBehaviour
 {
     public Sprite sprite;
-    private bool canBePickedUp = false;
 
     public void Awake()
     {
         sprite = GetComponent<SpriteRenderer>().sprite;
+    }
+
+    public bool Apply()
+    {
+        Debug.Log("Applied item " + name);
+        return true;
     }
 
     private void OnTriggerEnter2D(Collider2D coll)

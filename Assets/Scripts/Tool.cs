@@ -8,19 +8,12 @@ public class Tool : MonoBehaviour
     public Ingredient ingredient;
     public IngredientType ingredientType;
     public ToolType toolType;
-
-    private bool toolCanBeUsed = false;
+    public float efficiency;
 
     public bool AddIngredient(Ingredient ingredient)
     {
-        // Find all phase transitions using this tool type
-        List<PhaseTransition> phaseTransitions = ingredient.phaseTransition.FindAll(phase => phase.toolType == this.toolType);
-        PhaseTransition phaseTransition = phaseTransitions.Find(phase => phase.originalType == ingredient.ingredientType);
-
-        if (
-            phaseTransitions.Count == 0 ||
-            phaseTransition == null
-            )
+        PhaseTransition phTr = FindSuitablePhaseTransition(ingredient);
+        if(phTr == null)
         {
             return false;
         }
@@ -36,6 +29,15 @@ public class Tool : MonoBehaviour
         return true;
     }
 
+    private PhaseTransition FindSuitablePhaseTransition(Ingredient ingredient)
+    {
+        // Find all phase transitions using this tool type
+        List<PhaseTransition> phaseTransitions = ingredient.phaseTransition.FindAll(phase => phase.toolType == this.toolType);
+        PhaseTransition phaseTransition = phaseTransitions.Find(phase => phase.originalType == ingredient.ingredientType);
+
+        return phaseTransition;
+    }
+
     private void Update()
     {
         if(ingredient != null)
@@ -47,10 +49,14 @@ public class Tool : MonoBehaviour
     private void ProcessIngredient()
     {
         ingredient.currentProgress += Time.deltaTime * TimeManager.ticksPerSecond;
+        ingredient.ChangeConcentration(Time.deltaTime * TimeManager.ticksPerSecond * efficiency);
 
-        if(ingredient.currentProgress >= Ingredient.maxProgress)
+        if (ingredient.currentProgress >= Ingredient.maxProgress)
         {
             ingredient.currentProgress = Ingredient.minProgress;
+            PhaseTransition phTr = FindSuitablePhaseTransition(ingredient);
+            ingredient.ingredientType = phTr.endType;
+            ingredient.name = phTr.endProductName;
         }
 
         toolUI.UpdateSlider(ingredient.currentProgress);
