@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
 
 [System.Serializable]
 public class Effect
@@ -9,6 +10,9 @@ public class Effect
     public float minConc;
     public float maxConc;
     public float bestConc;
+    public int tier = 1;
+
+    public float[] phaseMultiplier = new float[4];
 
     public float GetPotency(float concentration)
     {
@@ -44,5 +48,15 @@ public class Effect
         }
 
         return 0f;
+    }
+
+    public float Tier()
+    {
+        return 1/(1 + Mathf.Exp(-tier));
+    }
+
+    public float PhaseMultiplier(IngredientType type)
+    {
+        return phaseMultiplier[(int)type];
     }
 }

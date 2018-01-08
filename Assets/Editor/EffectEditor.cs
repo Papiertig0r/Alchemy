@@ -25,12 +25,7 @@ public class EffectEditor : Editor
 
             curveX = new AnimationCurve(keyframes.ToArray());
 
-            curveX = EditorGUILayout.CurveField(curveX, Color.green, new Rect(0f, 0f, 100f, 1f));
-
-            effect.minConc = curveX.keys[0].time;
-            effect.maxConc = curveX.keys[2].time;
-            effect.bestConc = curveX.keys[1].time;
-
+            EditorGUILayout.CurveField(curveX, Color.green, new Rect(0f, 0f, 100f, 1f));
         }
     }
 }

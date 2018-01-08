@@ -1,4 +1,5 @@
-﻿// e.g for herb
+﻿using UnityEngine;
+// e.g for herb
 // SOLID => PASTE w/ mortar & pestle
 // PASTE => LIQUID w/ distill
 // LIQUID => PASTE w/ calcinator
@@ -10,4 +11,5 @@ public class PhaseTransition
     public IngredientType originalType;
     public IngredientType endType;
     public string endProductName;
+    public Sprite endProductSprite;
 }

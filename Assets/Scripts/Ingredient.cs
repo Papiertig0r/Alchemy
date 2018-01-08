@@ -18,6 +18,13 @@ public class Ingredient : MonoBehaviour
 
     public List<Effect> effectList = new List<Effect>();
 
+    public void Awake()
+    {
+        Debug.Log(effectList[0].GetPotency(concentration));
+        Debug.Log(effectList[0].Tier());
+        Debug.Log(effectList[0].PhaseMultiplier(ingredientType));
+    }
+
     public void Transition()
     {
 

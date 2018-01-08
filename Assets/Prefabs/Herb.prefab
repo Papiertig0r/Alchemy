@@ -36,8 +36,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1985862277652182}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 2.5, y: -1.7, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -91,7 +91,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bae2ccb44839224d9240326cd2a603b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ingredientType: 0
+  concentration: 40
+  ingredientType: 2
   currentToolType: 0
   currentProgress: 0
   phaseTransition:
@@ -99,18 +100,34 @@ MonoBehaviour:
     originalType: 0
     endType: 2
     endProductName: Healing Paste
+    endProductSprite: {fileID: 0}
   - toolType: 1
     originalType: 2
     endType: 1
     endProductName: Healing Potion
+    endProductSprite: {fileID: 0}
   - toolType: 2
     originalType: 1
     endType: 2
     endProductName: Healing Paste
+    endProductSprite: {fileID: 0}
   - toolType: 2
     originalType: 2
     endType: 3
     endProductName: Healing Powder
+    endProductSprite: {fileID: 0}
+  effectList:
+  - name: Healing
+    description: 
+    minConc: 20
+    maxConc: 70
+    bestConc: 50
+    tier: 1
+    phaseMultiplier:
+    - 1.25
+    - 1.25
+    - 1.5
+    - 1
 --- !u!212 &212897857411883538
 SpriteRenderer:
   m_ObjectHideFlags: 1
