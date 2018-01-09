@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b676037e0149fb46b9203fee5f22077, type: 3}
+  m_Name: Healing
+  m_EditorClassIdentifier: 
+  name: Healing
+  description: Heals HP
+  minConc: 20
+  maxConc: 70
+  bestConc: 50
+  phaseMultiplier:
+  - 0
+  - 0
+  - 0
+  - 0

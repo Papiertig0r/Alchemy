@@ -1,44 +1,27 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class Inventory : MonoBehaviour
 {
-    public InventoryUI inventoryUI;
     public int slotCount = 6;
+    public int slotSize = 20;
     public List<ItemSlot> itemSlots = new List<ItemSlot>();
 
-    public void Display(bool display)
+    public bool AddItem(Item itemToAdd)
     {
-        inventoryUI.SetActive(display);
-    }
+        ItemSlot slot = itemSlots.Find(itemSlot => itemSlot.item.name == itemToAdd.name);
 
-    public bool isUiActive
-    {
-        get
-        {
-            return inventoryUI.active;
-        }
-    }
-
-    public bool AddItem(Item item)
-    {
-        if(itemSlots.Count == slotCount)
-        {
-            return false;
-        }
-
-        ItemSlot slot = itemSlots.Find(x => x.item.name == item.name);
         if(slot == null)
         {
-            itemSlots.Add(new ItemSlot(item));
+            itemSlots.Add(new ItemSlot(itemToAdd));
         }
         else
         {
             slot.quantity++;
         }
 
-        inventoryUI.UpdateInventoryUI(itemSlots);
         return true;
     }
 

@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Tool : MonoBehaviour
 {
-    public ToolUI toolUI;
     public Ingredient ingredient;
     public IngredientType ingredientType;
     public ToolType toolType;
@@ -58,38 +57,5 @@ public class Tool : MonoBehaviour
             ingredient.ingredientType = phTr.endType;
             ingredient.name = phTr.endProductName;
         }
-
-        toolUI.UpdateSlider(ingredient.currentProgress);
-    }
-
-    private void OnTriggerEnter2D(Collider2D coll)
-    {
-        PlayerController player = coll.GetComponent<PlayerController>();
-        if (player)
-        {
-            if(player.inventory.isUiActive)
-            {
-                toolUI.SetActive(true);
-            }
-            player.onInventoryDown += Display;
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D coll)
-    {
-        PlayerController player = coll.GetComponent<PlayerController>();
-        if (player)
-        {
-            toolUI.SetActive(false);
-            player.onInventoryDown -= Display;
-        }
-    }
-
-    private void Display()
-    {
-        Inventory inventory = PlayerController.player.inventory;
-        bool isUiActive = !inventory.isUiActive;
-        inventory.Display(isUiActive);
-        toolUI.SetActive(isUiActive);
     }
 }

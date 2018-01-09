@@ -117,17 +117,7 @@ MonoBehaviour:
     endProductName: Healing Powder
     endProductSprite: {fileID: 0}
   effectList:
-  - name: Healing
-    description: 
-    minConc: 20
-    maxConc: 70
-    bestConc: 50
-    tier: 1
-    phaseMultiplier:
-    - 1.25
-    - 1.25
-    - 1.5
-    - 1
+  - {fileID: 11400000, guid: e24e1c80f4791a848bd96347e7a6ce3c, type: 2}
 --- !u!212 &212897857411883538
 SpriteRenderer:
   m_ObjectHideFlags: 1

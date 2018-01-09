@@ -1,18 +1,19 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-[System.Serializable]
-public class Effect
+[CreateAssetMenu(fileName = "New Effect", menuName = "Effects")]
+public class Effect : ScriptableObject
 {
-    public string name;
-    public string description;
+    public new string name = "New Effect";
+    public string description = "Effect description";
 
     public float minConc;
     public float maxConc;
     public float bestConc;
-    public int tier = 1;
 
     public float[] phaseMultiplier = new float[4];
+
+    private int tier = 1;
 
     public float GetPotency(float concentration)
     {
@@ -53,6 +54,11 @@ public class Effect
     public float Tier()
     {
         return 1/(1 + Mathf.Exp(-tier));
+    }
+
+    public void IncreaseTier(int tierChange)
+    {
+        tier += tierChange;
     }
 
     public float PhaseMultiplier(IngredientType type)
