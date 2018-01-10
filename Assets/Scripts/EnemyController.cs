@@ -1,19 +1,14 @@
 ﻿using UnityEngine;
 
-public class EnemyController : MonoBehaviour
+[RequireComponent(typeof(CircleCollider2D))]
+public class EnemyController : CharaController
 {
-
-    public float aggroDistance = 3f;
-    public float speed = 2f;
-
     public bool isTethered;
     public float tetherRange;
 
     public float idleTime = 3f;
     public float targetDistance = 0.1f;
-
-    private Animator animator;
-    private SpriteRenderer spriteRenderer;
+    
     private CircleCollider2D aggroCollider;
 
     private bool isAggro = false;
@@ -22,23 +17,22 @@ public class EnemyController : MonoBehaviour
     private Vector3 targetPosition;
     private bool targetisGoingToBeSet = false;
 
-    private void Start ()
+    protected override void Start ()
     {
-        animator = GetComponent<Animator>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        base.Start();
+
         aggroCollider = GetComponent<CircleCollider2D>();
-        aggroCollider.radius = aggroDistance;
+        aggroCollider.radius = stats.range;
+        aggroCollider.isTrigger = true;
 
         startingPosition = transform.position;
         SetTarget();
     }
 
     // Maybe abstract to Character controller w/ protected keyword
-    private void Update ()
+    protected override void Update ()
     {
-        Vector3 translation = CalculateMovement();
-
-        HandleMovement(translation);
+        base.Update();
 
         if(!isTethered)
         {
@@ -46,7 +40,7 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    private Vector3 CalculateMovement()
+    protected override Vector3 CalculateMovement()
     {
         Vector3 translation = new Vector3(0f, 0f, 0f);
         if (isAggro)
@@ -75,20 +69,6 @@ public class EnemyController : MonoBehaviour
         targetPosition = new Vector3(randomTarget.x, randomTarget.y, 0f);
         targetPosition += startingPosition;
         targetisGoingToBeSet = false;
-    }
-
-    private void HandleMovement(Vector3 translation)
-    {
-        animator.SetBool("isWalking", translation.magnitude > 0f);
-        //! \bug when releasing the stick, the enemy defaults to left
-        spriteRenderer.flipX = translation.x > 0f;
-        if (translation.magnitude > 0f)
-        {
-            animator.SetFloat("x", translation.x);
-            animator.SetFloat("y", translation.y);
-
-            transform.Translate(translation.normalized * Time.deltaTime * speed);
-        }
     }
 
     private void OnTriggerEnter2D(Collider2D collider)

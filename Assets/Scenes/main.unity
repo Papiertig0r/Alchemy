@@ -632,10 +632,11 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 562499917}
-  - component: {fileID: 562499915}
-  - component: {fileID: 562499916}
   - component: {fileID: 562499918}
   - component: {fileID: 562499919}
+  - component: {fileID: 562499915}
+  - component: {fileID: 562499916}
+  - component: {fileID: 562499920}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -728,8 +729,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8dd4b160f5132d047b94f43090b7ff31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  aggroDistance: 3
-  speed: 1.5
   isTethered: 1
   tetherRange: 5
   idleTime: 3
@@ -743,12 +742,28 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0.25}
   serializedVersion: 2
   m_Radius: 0.34375
+--- !u!114 &562499920
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 562499914}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67786850d3b013548b42a9cf3831a6c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 0
+  mana: 0
+  speed: 1.5
+  runningSpeed: 0
+  range: 3
 --- !u!1001 &611589639
 Prefab:
   m_ObjectHideFlags: 0
