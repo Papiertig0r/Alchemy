@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
@@ -64,7 +62,7 @@ public class PlayerController : MonoBehaviour
                 animator.SetFloat("y", y);
             }
 
-            transform.Translate(translation.normalized * translation.magnitude * Time.deltaTime * speed);
+            transform.Translate(translation /*.normalized * translation.magnitude*/ * Time.deltaTime * speed);
         }
     }
 
