@@ -11,7 +11,7 @@ public class Effect : ScriptableObject
     public float maxConc;
     public float bestConc;
 
-    public float[] phaseMultiplier = new float[4];
+    public List<PhaseMultiplier> phaseMultiplier = new List<PhaseMultiplier>();
 
     private int tier = 1;
 
@@ -63,6 +63,12 @@ public class Effect : ScriptableObject
 
     public float PhaseMultiplier(IngredientType type)
     {
-        return phaseMultiplier[(int)type];
+        float multiplier = 1f;
+        PhaseMultiplier phMu = phaseMultiplier.Find(phase => phase.type == type);
+        if(phMu != null)
+        {
+            multiplier = phMu.multiplier;
+        }
+        return multiplier;
     }
 }

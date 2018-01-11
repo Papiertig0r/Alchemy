@@ -10,6 +10,8 @@ public abstract class CharaController : MonoBehaviour
     protected Stats stats;
     protected Animator animator;
     protected SpriteRenderer spriteRenderer;
+    protected bool isTargeting = false;
+    protected bool isRunning = false;
 
     protected virtual void Start()
     {
@@ -34,8 +36,16 @@ public abstract class CharaController : MonoBehaviour
         {
             animator.SetFloat("x", translation.x);
             animator.SetFloat("y", translation.y);
-
-            transform.Translate(translation * Time.deltaTime * stats.speed);
+            float speed = stats.speed;
+            if(isTargeting)
+            {
+                speed = stats.targetingSpeed;
+            }
+            else if(isRunning)
+            {
+                speed = stats.runningSpeed;
+            }
+            transform.Translate(translation * Time.deltaTime * speed);
         }
     }
 

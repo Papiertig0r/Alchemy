@@ -2,11 +2,21 @@
 
 public class Stats : MonoBehaviour
 {
-    public float health;
-    public float mana;
+    public Stat health;
+    public Stat mana;
+
+    public Stat healthRegen;
+    public Stat manaRegen;
 
     public float speed;
     public float runningSpeed;
+    public float targetingSpeed;
 
     public float range;
+
+    private void Update()
+    {
+        health += healthRegen * Time.deltaTime;
+        mana += manaRegen * Time.deltaTime;
+    }
 }

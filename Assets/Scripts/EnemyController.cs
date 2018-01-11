@@ -8,7 +8,7 @@ public class EnemyController : CharaController
 
     public float idleTime = 3f;
     public float targetDistance = 0.1f;
-    
+
     private CircleCollider2D aggroCollider;
 
     private bool isAggro = false;
@@ -87,7 +87,7 @@ public class EnemyController : CharaController
         if (player != null)
         {
             isAggro = false;
-            targetPosition = transform.position;
+            targetPosition = player.transform.position;
             startingPosition = transform.position;
         }
     }

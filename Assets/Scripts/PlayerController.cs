@@ -1,25 +1,23 @@
 ﻿using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : CharaController
 {
     public GameObject target;
     public static PlayerController player;
-    public float speed;
-    public float range;
-    public float lerpingSpeed;
 
     public delegate void OnInventoryDown();
     public OnInventoryDown onInventoryDown;
 
     public Inventory inventory;
 
-    private Animator animator;
     private Vector3 targetOffset;
 
     private bool executedAttack = false;
     // Use this for initialization
-    void Start ()
+    protected override void Start ()
     {
+        base.Start();
+
         if(player == null)
         {
             player = this;
@@ -28,16 +26,14 @@ public class PlayerController : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
-
-        animator = GetComponent<Animator>();
-        inventory = GetComponent<Inventory>();
+        
         targetOffset = target.transform.localPosition;
     }
 
     // Update is called once per frame
-    void Update ()
+    protected override void Update ()
     {
-        HandleMovement();
+        base.Update();
 
         if(target.activeSelf)
         {
@@ -47,23 +43,12 @@ public class PlayerController : MonoBehaviour
         HandleInput();
     }
 
-    private void HandleMovement()
+    protected override Vector3 CalculateMovement()
     {
         float x = Input.GetAxis("Horizontal");
         float y = Input.GetAxis("Vertical");
 
-        Vector3 translation = new Vector3(x, y, 0f);
-        animator.SetBool("isWalking", translation.magnitude > 0f);
-        if (translation.magnitude > 0f)
-        {
-            if(!target.activeSelf)
-            {
-                animator.SetFloat("x", x);
-                animator.SetFloat("y", y);
-            }
-
-            transform.Translate(translation /*.normalized * translation.magnitude*/ * Time.deltaTime * speed);
-        }
+        return new Vector3(x, y, 0f);
     }
 
     private void HandleInput()
@@ -71,10 +56,12 @@ public class PlayerController : MonoBehaviour
         if(Input.GetAxis("Target") != 0f)
         {
             target.SetActive(true);
+            isTargeting = true;
         }
         else
         {
             target.SetActive(false);
+            isTargeting = false;
             target.transform.localPosition = Vector3.zero + targetOffset;
         }
 
@@ -106,13 +93,15 @@ public class PlayerController : MonoBehaviour
 
         Vector3 translation = new Vector3(x, y, 0f);
 
+        //! \bug when releasing the stick, the enemy defaults to left
+        spriteRenderer.flipX = translation.x > 0f;
         if (translation.magnitude > 0f)
         {
             animator.SetFloat("x", x);
             animator.SetFloat("y", y);
         }
 
-        target.transform.localPosition = translation * range + targetOffset;
+        target.transform.localPosition = translation * stats.range + targetOffset;
     }
 
     private void RangedAttack()
