@@ -7,6 +7,10 @@ public class Stat
     public float min;
     public float value;
 
+    public delegate void HandleOutOfRange();
+    public HandleOutOfRange exceed;
+    public HandleOutOfRange fallBelow;
+
     public Stat()
     {
         value = max;
@@ -32,20 +36,72 @@ public class Stat
         this.max = max;
     }
 
+    public void Max()
+    {
+        this.value = this.max;
+    }
+
+    public Vector3 ToVector3()
+    {
+        return new Vector3(this.min, this.value, this.max);
+    }
+
+    public void FromVector3(Vector3 v)
+    {
+        this.min = v.x;
+        this.value = v.y;
+        this.max = v.z;
+    }
+
+    public Vector3 Vector3
+    {
+        get
+        {
+            return ToVector3();
+        }
+
+        set
+        {
+            FromVector3(value);
+        }
+    }
+
+    #region operator
     public static Stat operator +(Stat s1, Stat s2)
     {
         return s1 + s2.value;
     }
 
-    public static Stat operator +(Stat s1, float change)
+    public static Stat operator +(Stat s, float change)
     {
-        s1.value += change;
-        s1.value = Mathf.Clamp(s1.value, s1.min, s1.max);
-        return s1;
+        s.value += change;
+        if(s.value >= s.max && s.exceed != null)
+        {
+            s.exceed.Invoke();
+        }
+        s.value = Mathf.Clamp(s.value, s.min, s.max);
+        return s;
     }
 
-    public static float operator *(Stat s1, float multiplier)
+    public static float operator *(Stat s, float multiplier)
     {
-        return s1.value * multiplier;
+        return s.value * multiplier;
     }
+
+    public static Stat operator -(Stat s1, Stat s2)
+    {
+        return s1 - s2.value;
+    }
+
+    public static Stat operator -(Stat s, float change)
+    {
+        s.value -= change;
+        if (s.value <= s.min && s.fallBelow != null)
+        {
+            s.fallBelow.Invoke();
+        }
+        s.value = Mathf.Clamp(s.value, s.min, s.max);
+        return s;
+    }
+    #endregion
 }

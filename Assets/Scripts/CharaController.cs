@@ -2,26 +2,36 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Stats))]
+[RequireComponent(typeof(BoxCollider2D))]
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(SpriteRenderer))]
 public abstract class CharaController : MonoBehaviour
 {
-    protected Stats stats;
+    public Stats stats;
+    public GameObject bloodParticle;
+
     protected Animator animator;
+    protected BoxCollider2D boxCollider;
     protected SpriteRenderer spriteRenderer;
     protected bool isTargeting = false;
     protected bool isRunning = false;
+    protected bool isLookingRight = false;
 
     protected virtual void Start()
     {
-        stats = GetComponent<Stats>();
         animator = GetComponent<Animator>();
+        boxCollider = GetComponent<BoxCollider2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        stats = Instantiate<Stats>(stats);
+
+        stats.Start();
+        stats.health.fallBelow += Die;
     }
 
     protected virtual void Update()
     {
+        stats.Update();
+
         Vector3 translation = CalculateMovement();
 
         HandleMovement(translation);
@@ -31,7 +41,8 @@ public abstract class CharaController : MonoBehaviour
     {
         animator.SetBool("isWalking", translation.magnitude > 0f);
         //! \bug when releasing the stick, the enemy defaults to left
-        spriteRenderer.flipX = translation.x > 0f;
+        DetectLookingDirection(translation.x);
+        spriteRenderer.flipX = isLookingRight;
         if (translation.magnitude > 0f)
         {
             animator.SetFloat("x", translation.x);
@@ -49,5 +60,33 @@ public abstract class CharaController : MonoBehaviour
         }
     }
 
+    protected void DetectLookingDirection(float x)
+    {
+        if (x > 0f)
+        {
+            isLookingRight = true;
+        }
+        else if (x < 0f)
+        {
+            isLookingRight = false;
+        }
+    }
+
     protected abstract Vector3 CalculateMovement();
+
+    public void TakeDamage(float attack)
+    {
+        Instantiate<GameObject>(bloodParticle, this.transform.position + new Vector3(boxCollider.offset.x, boxCollider.offset.y), Quaternion.identity );
+        stats.health -= attack;
+    }
+
+    protected virtual void Die()
+    {
+        Debug.Log("Ded");
+    }
+
+    protected void OnCollisionEnter2D(Collision2D coll)
+    {
+        Debug.Log("Collision!");
+    }
 }

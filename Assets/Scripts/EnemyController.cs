@@ -9,6 +9,8 @@ public class EnemyController : CharaController
     public float idleTime = 3f;
     public float targetDistance = 0.1f;
 
+    public bool corpseIsContainer;
+
     private CircleCollider2D aggroCollider;
 
     private bool isAggro = false;
@@ -94,6 +96,22 @@ public class EnemyController : CharaController
 
     private void OnDrawGizmosSelected()
     {
-        Gizmos.DrawWireSphere(startingPosition, tetherRange);
+        if (Application.isPlaying)
+        {
+            Gizmos.DrawWireSphere(startingPosition, tetherRange);
+        }
+        else
+        {
+            Gizmos.DrawWireSphere(transform.position, tetherRange);
+        }
+    }
+
+    protected override void Die()
+    {
+        base.Die();
+
+        Destroy(this.gameObject);
+        //Create container
+        //Container container = new Container();
     }
 }

@@ -327,7 +327,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 290345893}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 319, y: 309.5, z: 0}
+  m_LocalPosition: {x: 594, y: 309.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -467,7 +467,6 @@ GameObject:
   - component: {fileID: 455282230}
   - component: {fileID: 455282231}
   - component: {fileID: 455282232}
-  - component: {fileID: 455282233}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -527,9 +526,10 @@ Transform:
   m_GameObject: {fileID: 455282225}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children:
   - {fileID: 1124556318}
+  - {fileID: 922113627}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -544,7 +544,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 591db140862d280439cbf20d327d333b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stats: {fileID: 11400000, guid: 71dc1671cbf0a2e40b3e96e74c2564e4, type: 2}
+  bloodParticle: {fileID: 1102623789891546, guid: 122b81b47e1ed9c4db6a54a06dd509c4,
+    type: 2}
   target: {fileID: 1124556317}
+  attackCollider: {fileID: 922113626}
   inventory: {fileID: 0}
 --- !u!95 &455282229
 Animator:
@@ -595,7 +599,7 @@ Rigidbody2D:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 455282225}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -607,7 +611,7 @@ Rigidbody2D:
   m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 7
 --- !u!114 &455282232
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -622,37 +626,6 @@ MonoBehaviour:
   slotCount: 6
   slotSize: 20
   itemSlots: []
---- !u!114 &455282233
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 455282225}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67786850d3b013548b42a9cf3831a6c5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health:
-    max: 100
-    min: 0
-    value: 0
-  mana:
-    max: 0
-    min: 0
-    value: 0
-  healthRegen:
-    max: 0
-    min: 0
-    value: 0
-  manaRegen:
-    max: 0
-    min: 0
-    value: 0
-  speed: 2
-  runningSpeed: 3
-  targetingSpeed: 1
-  range: 3
 --- !u!1 &562499914
 GameObject:
   m_ObjectHideFlags: 0
@@ -665,6 +638,7 @@ GameObject:
   - component: {fileID: 562499919}
   - component: {fileID: 562499915}
   - component: {fileID: 562499916}
+  - component: {fileID: 562499921}
   - component: {fileID: 562499920}
   m_Layer: 0
   m_Name: Enemy
@@ -741,7 +715,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 562499914}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.69, y: 0.69, z: 0}
+  m_LocalPosition: {x: -8.85, y: 0.75, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -758,10 +732,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8dd4b160f5132d047b94f43090b7ff31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stats: {fileID: 11400000, guid: ce0ab895fe0fb1542ad73dae15aaa98c, type: 2}
+  bloodParticle: {fileID: 1102623789891546, guid: 122b81b47e1ed9c4db6a54a06dd509c4,
+    type: 2}
   isTethered: 1
   tetherRange: 5
   idleTime: 3
   targetDistance: 0.1
+  corpseIsContainer: 0
 --- !u!58 &562499919
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -777,37 +755,51 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0.25}
   serializedVersion: 2
   m_Radius: 0.34375
---- !u!114 &562499920
-MonoBehaviour:
+--- !u!50 &562499920
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 562499914}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 7
+--- !u!61 &562499921
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 562499914}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67786850d3b013548b42a9cf3831a6c5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health:
-    max: 0
-    min: 0
-    value: 0
-  mana:
-    max: 0
-    min: 0
-    value: 0
-  healthRegen:
-    max: 0
-    min: 0
-    value: 0
-  manaRegen:
-    max: 0
-    min: 0
-    value: 0
-  speed: 1.5
-  runningSpeed: 0
-  targetingSpeed: 0
-  range: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0.25}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0}
+    oldSize: {x: 0.6875, y: 0.5}
+    newSize: {x: 0.6875, y: 0.5}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.6875, y: 0.5}
+  m_EdgeRadius: 0
 --- !u!1001 &611589639
 Prefab:
   m_ObjectHideFlags: 0
@@ -912,6 +904,77 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &922113626
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 922113627}
+  - component: {fileID: 922113628}
+  - component: {fileID: 922113629}
+  m_Layer: 0
+  m_Name: AttackCollider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &922113627
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 922113626}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.421875, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 455282227}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!60 &922113628
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 922113626}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0, y: 0.6}
+      - {x: -0.42426, y: 0.42426}
+      - {x: -0.28284, y: 0.28284}
+      - {x: 0, y: 0.4}
+      - {x: 0.28284, y: 0.28284}
+      - {x: 0.42426, y: 0.42426}
+--- !u!114 &922113629
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 922113626}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c148c8fd319b684b91ef110351786da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1124556317
 GameObject:
   m_ObjectHideFlags: 0
@@ -935,7 +998,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1124556317}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.425, z: 0}
+  m_LocalPosition: {x: 0, y: 0.421875, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 455282227}

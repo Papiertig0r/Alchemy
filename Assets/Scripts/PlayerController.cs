@@ -2,13 +2,16 @@
 
 public class PlayerController : CharaController
 {
-    public GameObject target;
     public static PlayerController player;
+
+    public GameObject target;
+
+    public GameObject attackCollider;
+
+    public Inventory inventory;
 
     public delegate void OnInventoryDown();
     public OnInventoryDown onInventoryDown;
-
-    public Inventory inventory;
 
     private Vector3 targetOffset;
 
@@ -26,7 +29,9 @@ public class PlayerController : CharaController
         {
             Destroy(this.gameObject);
         }
-        
+
+        attackCollider.GetComponent<AttackCollider>().onHit += Hit;
+
         targetOffset = target.transform.localPosition;
     }
 
@@ -94,7 +99,7 @@ public class PlayerController : CharaController
         Vector3 translation = new Vector3(x, y, 0f);
 
         //! \bug when releasing the stick, the enemy defaults to left
-        spriteRenderer.flipX = translation.x > 0f;
+        DetectLookingDirection(translation.x);
         if (translation.magnitude > 0f)
         {
             animator.SetFloat("x", x);
@@ -111,6 +116,31 @@ public class PlayerController : CharaController
 
     private void MeleeAttack()
     {
-        Debug.Log("Melee attack");
+        float attack = Random.Range(0, animator.GetFloat("attackCount"));
+        animator.SetFloat("currentAttack", attack);
+        animator.SetTrigger("attack");
+
+        float x = animator.GetFloat("x");
+        float y = animator.GetFloat("y");
+
+        Vector3 direction = new Vector3(x, y, 0f);
+        float angle = Vector3.SignedAngle(Vector3.up, direction, Vector3.forward);
+        attackCollider.transform.SetPositionAndRotation(attackCollider.transform.position, Quaternion.Euler(0f, 0f, angle));
+        attackCollider.SetActive(true);
+        Invoke("DeactivateAttackCollider", 1f);
+    }
+
+    private void DeactivateAttackCollider()
+    {
+        attackCollider.SetActive(false);
+    }
+
+    public void Hit(Collision2D coll)
+    {
+        EnemyController enemy = coll.collider.GetComponent<EnemyController>();
+        if(enemy != null)
+        {
+            enemy.TakeDamage(stats.attack);
+        }
     }
 }

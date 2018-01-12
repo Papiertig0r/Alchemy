@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: f54c46f6c269bf54eb5eaef876cfd48f
-timeCreated: 1514832674
+timeCreated: 1515774254
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -32,6 +32,26 @@ TextureImporter:
     21300050: Stance_Up
     21300052: Stance_Left
     21300054: Stance_Right
+    21300056: Backflip0
+    21300058: Backflip1
+    21300060: Backflip2
+    21300062: Backflip3
+    21300064: Backflip4
+    21300066: Kick_Left0
+    21300068: Kick_Left1
+    21300070: Kick_Left2
+    21300072: Kick_Up0
+    21300074: Kick_Up1
+    21300076: Kick_Up2
+    21300078: Kick_Down0
+    21300080: Kick_Down1
+    21300082: Kick_Down2
+    21300084: Attack_Left
+    21300086: Attack_Up
+    21300088: Attack_Down
+    21300090: Popoi Sprite_3
+    21300092: Popoi Sprite_4
+    21300094: Popoi Sprite_5
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
@@ -125,8 +145,18 @@ TextureImporter:
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
+      outline:
+      - - {x: -11.5, y: 13}
+        - {x: -11.5, y: -13}
+        - {x: 9.5, y: -13}
+        - {x: 11.5, y: -12}
+        - {x: 11.5, y: 13}
+      physicsShape:
+      - - {x: -11.5, y: 13}
+        - {x: -11.5, y: -13}
+        - {x: 9.5, y: -13}
+        - {x: 11.5, y: -12}
+        - {x: 11.5, y: 13}
       tessellationDetail: 0
     - serializedVersion: 2
       name: Walking_Left1
@@ -139,8 +169,18 @@ TextureImporter:
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
+      outline:
+      - - {x: -10.5, y: 12.5}
+        - {x: -10.5, y: -12.5}
+        - {x: 8.5, y: -12.5}
+        - {x: 10.5, y: -11.5}
+        - {x: 10.5, y: 12.5}
+      physicsShape:
+      - - {x: -10.5, y: 12.5}
+        - {x: -10.5, y: -12.5}
+        - {x: 8.5, y: -12.5}
+        - {x: 10.5, y: -11.5}
+        - {x: 10.5, y: 12.5}
       tessellationDetail: 0
     - serializedVersion: 2
       name: Walking_Left2
@@ -153,8 +193,22 @@ TextureImporter:
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
+      outline:
+      - - {x: -9.5, y: 12}
+        - {x: -9.5, y: -11}
+        - {x: -8.5, y: -12}
+        - {x: 3.5, y: -12}
+        - {x: 6.5, y: -9}
+        - {x: 9.5, y: -5}
+        - {x: 9.5, y: 12}
+      physicsShape:
+      - - {x: -9.5, y: 12}
+        - {x: -9.5, y: -11}
+        - {x: -8.5, y: -12}
+        - {x: 3.5, y: -12}
+        - {x: 6.5, y: -9}
+        - {x: 9.5, y: -5}
+        - {x: 9.5, y: 12}
       tessellationDetail: 0
     - serializedVersion: 2
       name: Walking_Left3
@@ -167,8 +221,22 @@ TextureImporter:
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
+      outline:
+      - - {x: -10.5, y: 13.5}
+        - {x: -10.5, y: -6.5}
+        - {x: -6.5, y: -13.5}
+        - {x: 6.5, y: -13.5}
+        - {x: 10.5, y: -10.5}
+        - {x: 10.5, y: 11.5}
+        - {x: 9.5, y: 13.5}
+      physicsShape:
+      - - {x: -10.5, y: 13.5}
+        - {x: -10.5, y: -6.5}
+        - {x: -6.5, y: -13.5}
+        - {x: 6.5, y: -13.5}
+        - {x: 10.5, y: -10.5}
+        - {x: 10.5, y: 11.5}
+        - {x: 9.5, y: 13.5}
       tessellationDetail: 0
     - serializedVersion: 2
       name: Walking_Left4
@@ -181,8 +249,22 @@ TextureImporter:
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
+      outline:
+      - - {x: -9.5, y: 12}
+        - {x: -9.5, y: -11}
+        - {x: -8.5, y: -12}
+        - {x: 3.5, y: -12}
+        - {x: 6.5, y: -9}
+        - {x: 9.5, y: -5}
+        - {x: 9.5, y: 12}
+      physicsShape:
+      - - {x: -9.5, y: 12}
+        - {x: -9.5, y: -11}
+        - {x: -8.5, y: -12}
+        - {x: 3.5, y: -12}
+        - {x: 6.5, y: -9}
+        - {x: 9.5, y: -5}
+        - {x: 9.5, y: 12}
       tessellationDetail: 0
     - serializedVersion: 2
       name: Walking_Left5
@@ -195,8 +277,18 @@ TextureImporter:
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
+      outline:
+      - - {x: -10.5, y: 12.5}
+        - {x: -10.5, y: -12.5}
+        - {x: 8.5, y: -12.5}
+        - {x: 10.5, y: -11.5}
+        - {x: 10.5, y: 12.5}
+      physicsShape:
+      - - {x: -10.5, y: 12.5}
+        - {x: -10.5, y: -12.5}
+        - {x: 8.5, y: -12.5}
+        - {x: 10.5, y: -11.5}
+        - {x: 10.5, y: 12.5}
       tessellationDetail: 0
     - serializedVersion: 2
       name: Walking_Right0
@@ -209,8 +301,20 @@ TextureImporter:
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
+      outline:
+      - - {x: -11.5, y: 13}
+        - {x: -11.5, y: -12}
+        - {x: -10.5, y: -13}
+        - {x: 9.5, y: -13}
+        - {x: 11.5, y: -8}
+        - {x: 11.5, y: 13}
+      physicsShape:
+      - - {x: -11.5, y: 13}
+        - {x: -11.5, y: -12}
+        - {x: -10.5, y: -13}
+        - {x: 9.5, y: -13}
+        - {x: 11.5, y: -8}
+        - {x: 11.5, y: 13}
       tessellationDetail: 0
     - serializedVersion: 2
       name: Walking_Right1
@@ -223,8 +327,18 @@ TextureImporter:
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
+      outline:
+      - - {x: -10.5, y: 12.5}
+        - {x: -10.5, y: -8.5}
+        - {x: -7.5, y: -12.5}
+        - {x: 10.5, y: -12.5}
+        - {x: 10.5, y: 12.5}
+      physicsShape:
+      - - {x: -10.5, y: 12.5}
+        - {x: -10.5, y: -8.5}
+        - {x: -7.5, y: -12.5}
+        - {x: 10.5, y: -12.5}
+        - {x: 10.5, y: 12.5}
       tessellationDetail: 0
     - serializedVersion: 2
       name: Walking_Right2
@@ -237,8 +351,18 @@ TextureImporter:
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
+      outline:
+      - - {x: -9.5, y: 12}
+        - {x: -9.5, y: -8}
+        - {x: -6.5, y: -12}
+        - {x: 9.5, y: -12}
+        - {x: 9.5, y: 12}
+      physicsShape:
+      - - {x: -9.5, y: 12}
+        - {x: -9.5, y: -8}
+        - {x: -6.5, y: -12}
+        - {x: 9.5, y: -12}
+        - {x: 9.5, y: 12}
       tessellationDetail: 0
     - serializedVersion: 2
       name: Walking_Right3
@@ -251,8 +375,18 @@ TextureImporter:
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
+      outline:
+      - - {x: -9.5, y: 13.5}
+        - {x: -10.5, y: 12.5}
+        - {x: -10.5, y: -13.5}
+        - {x: 10.5, y: -13.5}
+        - {x: 10.5, y: 13.5}
+      physicsShape:
+      - - {x: -9.5, y: 13.5}
+        - {x: -10.5, y: 12.5}
+        - {x: -10.5, y: -13.5}
+        - {x: 10.5, y: -13.5}
+        - {x: 10.5, y: 13.5}
       tessellationDetail: 0
     - serializedVersion: 2
       name: Walking_Right4
@@ -265,8 +399,18 @@ TextureImporter:
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
+      outline:
+      - - {x: -9.5, y: 12}
+        - {x: -9.5, y: -8}
+        - {x: -6.5, y: -12}
+        - {x: 9.5, y: -12}
+        - {x: 9.5, y: 12}
+      physicsShape:
+      - - {x: -9.5, y: 12}
+        - {x: -9.5, y: -8}
+        - {x: -6.5, y: -12}
+        - {x: 9.5, y: -12}
+        - {x: 9.5, y: 12}
       tessellationDetail: 0
     - serializedVersion: 2
       name: Walking_Right5
@@ -279,8 +423,18 @@ TextureImporter:
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
+      outline:
+      - - {x: -10.5, y: 13}
+        - {x: -10.5, y: -5}
+        - {x: -7.5, y: -13}
+        - {x: 10.5, y: -13}
+        - {x: 10.5, y: 13}
+      physicsShape:
+      - - {x: -10.5, y: 13}
+        - {x: -10.5, y: -5}
+        - {x: -7.5, y: -13}
+        - {x: 10.5, y: -13}
+        - {x: 10.5, y: 13}
       tessellationDetail: 0
     - serializedVersion: 2
       name: Walking_Down0
@@ -293,8 +447,24 @@ TextureImporter:
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
+      outline:
+      - - {x: -9.5, y: 13.5}
+        - {x: -10.5, y: 12.5}
+        - {x: -10.5, y: -9.5}
+        - {x: -8.5, y: -13.5}
+        - {x: 6.5, y: -13.5}
+        - {x: 10.5, y: -7.5}
+        - {x: 10.5, y: 11.5}
+        - {x: 8.5, y: 13.5}
+      physicsShape:
+      - - {x: -9.5, y: 13.5}
+        - {x: -10.5, y: 12.5}
+        - {x: -10.5, y: -9.5}
+        - {x: -8.5, y: -13.5}
+        - {x: 6.5, y: -13.5}
+        - {x: 10.5, y: -7.5}
+        - {x: 10.5, y: 11.5}
+        - {x: 8.5, y: 13.5}
       tessellationDetail: 0
     - serializedVersion: 2
       name: Walking_Down1
@@ -307,8 +477,18 @@ TextureImporter:
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
+      outline:
+      - - {x: -11.5, y: 12}
+        - {x: -11.5, y: -12}
+        - {x: 7.5, y: -12}
+        - {x: 11.5, y: -5}
+        - {x: 11.5, y: 12}
+      physicsShape:
+      - - {x: -11.5, y: 12}
+        - {x: -11.5, y: -12}
+        - {x: 7.5, y: -12}
+        - {x: 11.5, y: -5}
+        - {x: 11.5, y: 12}
       tessellationDetail: 0
     - serializedVersion: 2
       name: Walking_Down2
@@ -321,8 +501,22 @@ TextureImporter:
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
+      outline:
+      - - {x: -11.5, y: 12}
+        - {x: -11.5, y: -7}
+        - {x: -9.5, y: -12}
+        - {x: 9.5, y: -12}
+        - {x: 10.5, y: -11}
+        - {x: 11.5, y: -9}
+        - {x: 11.5, y: 12}
+      physicsShape:
+      - - {x: -11.5, y: 12}
+        - {x: -11.5, y: -7}
+        - {x: -9.5, y: -12}
+        - {x: 9.5, y: -12}
+        - {x: 10.5, y: -11}
+        - {x: 11.5, y: -9}
+        - {x: 11.5, y: 12}
       tessellationDetail: 0
     - serializedVersion: 2
       name: Walking_Down3
@@ -335,8 +529,20 @@ TextureImporter:
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
+      outline:
+      - - {x: 10.5, y: 13.5}
+        - {x: -10.5, y: 13.5}
+        - {x: -10.5, y: -13.5}
+        - {x: 9.5, y: -13.5}
+        - {x: 9.5, y: -9.5}
+        - {x: 10.5, y: -5.5}
+      physicsShape:
+      - - {x: 10.5, y: 13.5}
+        - {x: -10.5, y: 13.5}
+        - {x: -10.5, y: -13.5}
+        - {x: 9.5, y: -13.5}
+        - {x: 9.5, y: -9.5}
+        - {x: 10.5, y: -5.5}
       tessellationDetail: 0
     - serializedVersion: 2
       name: Walking_Down4
@@ -349,8 +555,22 @@ TextureImporter:
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
+      outline:
+      - - {x: -11.5, y: 12}
+        - {x: -11.5, y: -7}
+        - {x: -9.5, y: -12}
+        - {x: 9.5, y: -12}
+        - {x: 10.5, y: -11}
+        - {x: 11.5, y: -9}
+        - {x: 11.5, y: 12}
+      physicsShape:
+      - - {x: -11.5, y: 12}
+        - {x: -11.5, y: -7}
+        - {x: -9.5, y: -12}
+        - {x: 9.5, y: -12}
+        - {x: 10.5, y: -11}
+        - {x: 11.5, y: -9}
+        - {x: 11.5, y: 12}
       tessellationDetail: 0
     - serializedVersion: 2
       name: Walking_Down5
@@ -363,8 +583,18 @@ TextureImporter:
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
+      outline:
+      - - {x: -11.5, y: 12}
+        - {x: -11.5, y: -12}
+        - {x: 7.5, y: -12}
+        - {x: 11.5, y: -5}
+        - {x: 11.5, y: 12}
+      physicsShape:
+      - - {x: -11.5, y: 12}
+        - {x: -11.5, y: -12}
+        - {x: 7.5, y: -12}
+        - {x: 11.5, y: -5}
+        - {x: 11.5, y: 12}
       tessellationDetail: 0
     - serializedVersion: 2
       name: Walking_Up0
@@ -377,8 +607,18 @@ TextureImporter:
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
+      outline:
+      - - {x: -10, y: 14}
+        - {x: -10, y: -13}
+        - {x: -9, y: -14}
+        - {x: 10, y: -14}
+        - {x: 10, y: 14}
+      physicsShape:
+      - - {x: -10, y: 14}
+        - {x: -10, y: -13}
+        - {x: -9, y: -14}
+        - {x: 10, y: -14}
+        - {x: 10, y: 14}
       tessellationDetail: 0
     - serializedVersion: 2
       name: Walking_Up1
@@ -391,8 +631,16 @@ TextureImporter:
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
+      outline:
+      - - {x: -10.5, y: 12.5}
+        - {x: -10.5, y: -12.5}
+        - {x: 10.5, y: -12.5}
+        - {x: 10.5, y: 12.5}
+      physicsShape:
+      - - {x: -10.5, y: 12.5}
+        - {x: -10.5, y: -12.5}
+        - {x: 10.5, y: -12.5}
+        - {x: 10.5, y: 12.5}
       tessellationDetail: 0
     - serializedVersion: 2
       name: Walking_Up2
@@ -405,8 +653,20 @@ TextureImporter:
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
+      outline:
+      - - {x: -10.5, y: 12.5}
+        - {x: -10.5, y: -8.5}
+        - {x: -9.5, y: -11.5}
+        - {x: -8.5, y: -12.5}
+        - {x: 10.5, y: -12.5}
+        - {x: 10.5, y: 12.5}
+      physicsShape:
+      - - {x: -10.5, y: 12.5}
+        - {x: -10.5, y: -8.5}
+        - {x: -9.5, y: -11.5}
+        - {x: -8.5, y: -12.5}
+        - {x: 10.5, y: -12.5}
+        - {x: 10.5, y: 12.5}
       tessellationDetail: 0
     - serializedVersion: 2
       name: Walking_Up3
@@ -419,8 +679,20 @@ TextureImporter:
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
+      outline:
+      - - {x: -10, y: 14}
+        - {x: -10, y: -10}
+        - {x: -9, y: -14}
+        - {x: 9, y: -14}
+        - {x: 10, y: -13}
+        - {x: 10, y: 14}
+      physicsShape:
+      - - {x: -10, y: 14}
+        - {x: -10, y: -10}
+        - {x: -9, y: -14}
+        - {x: 9, y: -14}
+        - {x: 10, y: -13}
+        - {x: 10, y: 14}
       tessellationDetail: 0
     - serializedVersion: 2
       name: Walking_Up4
@@ -433,8 +705,20 @@ TextureImporter:
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
+      outline:
+      - - {x: -10.5, y: 12.5}
+        - {x: -10.5, y: -8.5}
+        - {x: -9.5, y: -11.5}
+        - {x: -8.5, y: -12.5}
+        - {x: 10.5, y: -12.5}
+        - {x: 10.5, y: 12.5}
+      physicsShape:
+      - - {x: -10.5, y: 12.5}
+        - {x: -10.5, y: -8.5}
+        - {x: -9.5, y: -11.5}
+        - {x: -8.5, y: -12.5}
+        - {x: 10.5, y: -12.5}
+        - {x: 10.5, y: 12.5}
       tessellationDetail: 0
     - serializedVersion: 2
       name: Walking_Up5
@@ -447,8 +731,16 @@ TextureImporter:
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
+      outline:
+      - - {x: -10.5, y: 12.5}
+        - {x: -10.5, y: -12.5}
+        - {x: 10.5, y: -12.5}
+        - {x: 10.5, y: 12.5}
+      physicsShape:
+      - - {x: -10.5, y: 12.5}
+        - {x: -10.5, y: -12.5}
+        - {x: 10.5, y: -12.5}
+        - {x: 10.5, y: 12.5}
       tessellationDetail: 0
     - serializedVersion: 2
       name: Stance_Down
@@ -461,8 +753,16 @@ TextureImporter:
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
+      outline:
+      - - {x: -10, y: 12.5}
+        - {x: -10, y: -12.5}
+        - {x: 10, y: -12.5}
+        - {x: 10, y: 12.5}
+      physicsShape:
+      - - {x: -10, y: 12.5}
+        - {x: -10, y: -12.5}
+        - {x: 10, y: -12.5}
+        - {x: 10, y: 12.5}
       tessellationDetail: 0
     - serializedVersion: 2
       name: Stance_Up
@@ -475,8 +775,16 @@ TextureImporter:
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
+      outline:
+      - - {x: -10, y: 12}
+        - {x: -10, y: -12}
+        - {x: 10, y: -12}
+        - {x: 10, y: 12}
+      physicsShape:
+      - - {x: -10, y: 12}
+        - {x: -10, y: -12}
+        - {x: 10, y: -12}
+        - {x: 10, y: 12}
       tessellationDetail: 0
     - serializedVersion: 2
       name: Stance_Left
@@ -489,8 +797,22 @@ TextureImporter:
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
+      outline:
+      - - {x: -8.5, y: 13.5}
+        - {x: -9.5, y: 12.5}
+        - {x: -9.5, y: -13.5}
+        - {x: 5.5, y: -13.5}
+        - {x: 9.5, y: -9.5}
+        - {x: 9.5, y: 12.5}
+        - {x: 6.5, y: 13.5}
+      physicsShape:
+      - - {x: -8.5, y: 13.5}
+        - {x: -9.5, y: 12.5}
+        - {x: -9.5, y: -13.5}
+        - {x: 5.5, y: -13.5}
+        - {x: 9.5, y: -9.5}
+        - {x: 9.5, y: 12.5}
+        - {x: 6.5, y: 13.5}
       tessellationDetail: 0
     - serializedVersion: 2
       name: Stance_Right
@@ -502,6 +824,492 @@ TextureImporter:
         height: 27
       alignment: 7
       pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -9.5, y: 13.5}
+        - {x: -9.5, y: -10.5}
+        - {x: -6.5, y: -13.5}
+        - {x: 9.5, y: -13.5}
+        - {x: 9.5, y: 12.5}
+        - {x: 8.5, y: 13.5}
+      physicsShape:
+      - - {x: -9.5, y: 13.5}
+        - {x: -9.5, y: -10.5}
+        - {x: -6.5, y: -13.5}
+        - {x: 9.5, y: -13.5}
+        - {x: 9.5, y: 12.5}
+        - {x: 8.5, y: 13.5}
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Backflip0
+      rect:
+        serializedVersion: 2
+        x: 1122
+        y: 1143
+        width: 22
+        height: 28
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 4, y: 14}
+        - {x: -4, y: 14}
+        - {x: -11, y: 5}
+        - {x: -11, y: -14}
+        - {x: 10, y: -14}
+        - {x: 11, y: -13}
+        - {x: 11, y: 11}
+        - {x: 7, y: 13}
+      physicsShape:
+      - - {x: 4, y: 14}
+        - {x: -4, y: 14}
+        - {x: -11, y: 5}
+        - {x: -11, y: -14}
+        - {x: 10, y: -14}
+        - {x: 11, y: -13}
+        - {x: 11, y: 11}
+        - {x: 7, y: 13}
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Backflip1
+      rect:
+        serializedVersion: 2
+        x: 1153
+        y: 1143
+        width: 23
+        height: 29
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -10.5, y: 14.5}
+        - {x: -11.5, y: 12.5}
+        - {x: -11.5, y: -14.5}
+        - {x: 11.5, y: -14.5}
+        - {x: 11.5, y: -1.5}
+        - {x: 7.5, y: 14.5}
+      physicsShape:
+      - - {x: -10.5, y: 14.5}
+        - {x: -11.5, y: 12.5}
+        - {x: -11.5, y: -14.5}
+        - {x: 11.5, y: -14.5}
+        - {x: 11.5, y: -1.5}
+        - {x: 7.5, y: 14.5}
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Backflip2
+      rect:
+        serializedVersion: 2
+        x: 1184
+        y: 1143
+        width: 27
+        height: 18
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -13.5, y: 9}
+        - {x: -13.5, y: -9}
+        - {x: 13.5, y: -9}
+        - {x: 13.5, y: 9}
+      physicsShape:
+      - - {x: -13.5, y: 9}
+        - {x: -13.5, y: -9}
+        - {x: 13.5, y: -9}
+        - {x: 13.5, y: 9}
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Backflip3
+      rect:
+        serializedVersion: 2
+        x: 1224
+        y: 1143
+        width: 23
+        height: 34
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -10.5, y: 17}
+        - {x: -11.5, y: 16}
+        - {x: -11.5, y: -17}
+        - {x: 8.5, y: -17}
+        - {x: 11.5, y: -13}
+        - {x: 11.5, y: 12}
+        - {x: 6.5, y: 17}
+      physicsShape:
+      - - {x: -10.5, y: 17}
+        - {x: -11.5, y: 16}
+        - {x: -11.5, y: -17}
+        - {x: 8.5, y: -17}
+        - {x: 11.5, y: -13}
+        - {x: 11.5, y: 12}
+        - {x: 6.5, y: 17}
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Backflip4
+      rect:
+        serializedVersion: 2
+        x: 1259
+        y: 1143
+        width: 22
+        height: 26
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -11, y: -13}
+        - {x: 11, y: -13}
+        - {x: 11, y: 13}
+        - {x: -11, y: 13}
+      physicsShape:
+      - - {x: -11, y: -13}
+        - {x: 11, y: -13}
+        - {x: 11, y: 13}
+        - {x: -11, y: 13}
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Kick_Left0
+      rect:
+        serializedVersion: 2
+        x: 1408
+        y: 1015
+        width: 21
+        height: 29
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -8.5, y: 14.5}
+        - {x: -10.5, y: 11.5}
+        - {x: -10.5, y: -14.5}
+        - {x: 4.5, y: -14.5}
+        - {x: 10.5, y: -9.5}
+        - {x: 10.5, y: 14.5}
+      physicsShape:
+      - - {x: -8.5, y: 14.5}
+        - {x: -10.5, y: 11.5}
+        - {x: -10.5, y: -14.5}
+        - {x: 4.5, y: -14.5}
+        - {x: 10.5, y: -9.5}
+        - {x: 10.5, y: 14.5}
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Kick_Left1
+      rect:
+        serializedVersion: 2
+        x: 1435
+        y: 1015
+        width: 29
+        height: 33
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -3.5, y: -8.5}
+        - {x: -7.5, y: -12.5}
+        - {x: -7.5, y: -14.5}
+        - {x: -5.5, y: -16.5}
+        - {x: 7.5, y: -16.5}
+        - {x: 8.5, y: -15.5}
+        - {x: 8.5, y: -10.5}
+        - {x: 6.5, y: -8.5}
+      - - {x: -5.5, y: 16.5}
+        - {x: -14.5, y: 12.5}
+        - {x: -14.5, y: 3.5}
+        - {x: -8.5, y: -8.5}
+        - {x: 3.5, y: -8.5}
+        - {x: 14.5, y: -5.5}
+        - {x: 14.5, y: 14.5}
+        - {x: 11.5, y: 16.5}
+      physicsShape:
+      - - {x: -3.5, y: -8.5}
+        - {x: -7.5, y: -12.5}
+        - {x: -7.5, y: -14.5}
+        - {x: -5.5, y: -16.5}
+        - {x: 7.5, y: -16.5}
+        - {x: 8.5, y: -15.5}
+        - {x: 8.5, y: -10.5}
+        - {x: 6.5, y: -8.5}
+      - - {x: -5.5, y: 16.5}
+        - {x: -14.5, y: 12.5}
+        - {x: -14.5, y: 3.5}
+        - {x: -8.5, y: -8.5}
+        - {x: 3.5, y: -8.5}
+        - {x: 14.5, y: -5.5}
+        - {x: 14.5, y: 14.5}
+        - {x: 11.5, y: 16.5}
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Kick_Left2
+      rect:
+        serializedVersion: 2
+        x: 1472
+        y: 1015
+        width: 21
+        height: 29
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -8.5, y: 14.5}
+        - {x: -10.5, y: 11.5}
+        - {x: -10.5, y: -14.5}
+        - {x: 4.5, y: -14.5}
+        - {x: 10.5, y: -9.5}
+        - {x: 10.5, y: 14.5}
+      physicsShape:
+      - - {x: -8.5, y: 14.5}
+        - {x: -10.5, y: 11.5}
+        - {x: -10.5, y: -14.5}
+        - {x: 4.5, y: -14.5}
+        - {x: 10.5, y: -9.5}
+        - {x: 10.5, y: 14.5}
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Kick_Up0
+      rect:
+        serializedVersion: 2
+        x: 1509
+        y: 1015
+        width: 26
+        height: 27
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -13, y: 13.5}
+        - {x: -13, y: -0.5}
+        - {x: -8, y: -13.5}
+        - {x: 12, y: -13.5}
+        - {x: 13, y: -7.5}
+        - {x: 13, y: 10.5}
+        - {x: 10, y: 13.5}
+      physicsShape:
+      - - {x: -13, y: 13.5}
+        - {x: -13, y: -0.5}
+        - {x: -8, y: -13.5}
+        - {x: 12, y: -13.5}
+        - {x: 13, y: -7.5}
+        - {x: 13, y: 10.5}
+        - {x: 10, y: 13.5}
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Kick_Up1
+      rect:
+        serializedVersion: 2
+        x: 1540
+        y: 1015
+        width: 22
+        height: 35
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -7, y: 17.5}
+        - {x: -11, y: 7.5}
+        - {x: -11, y: -9.5}
+        - {x: -4, y: -17.5}
+        - {x: 11, y: -17.5}
+        - {x: 11, y: 13.5}
+        - {x: 8, y: 17.5}
+      physicsShape:
+      - - {x: -7, y: 17.5}
+        - {x: -11, y: 7.5}
+        - {x: -11, y: -9.5}
+        - {x: -4, y: -17.5}
+        - {x: 11, y: -17.5}
+        - {x: 11, y: 13.5}
+        - {x: 8, y: 17.5}
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Kick_Up2
+      rect:
+        serializedVersion: 2
+        x: 1570
+        y: 1015
+        width: 26
+        height: 27
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -13, y: 13.5}
+        - {x: -13, y: -0.5}
+        - {x: -8, y: -13.5}
+        - {x: 12, y: -13.5}
+        - {x: 13, y: -7.5}
+        - {x: 13, y: 10.5}
+        - {x: 10, y: 13.5}
+      physicsShape:
+      - - {x: -13, y: 13.5}
+        - {x: -13, y: -0.5}
+        - {x: -8, y: -13.5}
+        - {x: 12, y: -13.5}
+        - {x: 13, y: -7.5}
+        - {x: 13, y: 10.5}
+        - {x: 10, y: 13.5}
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Kick_Down0
+      rect:
+        serializedVersion: 2
+        x: 1610
+        y: 1015
+        width: 25
+        height: 28
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -11.5, y: 14}
+        - {x: -12.5, y: 12}
+        - {x: -12.5, y: -9}
+        - {x: -9.5, y: -14}
+        - {x: 10.5, y: -14}
+        - {x: 12.5, y: -6}
+        - {x: 12.5, y: 14}
+      physicsShape:
+      - - {x: -11.5, y: 14}
+        - {x: -12.5, y: 12}
+        - {x: -12.5, y: -9}
+        - {x: -9.5, y: -14}
+        - {x: 10.5, y: -14}
+        - {x: 12.5, y: -6}
+        - {x: 12.5, y: 14}
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Kick_Down1
+      rect:
+        serializedVersion: 2
+        x: 1643
+        y: 1014
+        width: 24
+        height: 27
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -12, y: 13.5}
+        - {x: -12, y: -11.5}
+        - {x: -11, y: -13.5}
+        - {x: 6, y: -13.5}
+        - {x: 12, y: -4.5}
+        - {x: 12, y: 13.5}
+      physicsShape:
+      - - {x: -12, y: 13.5}
+        - {x: -12, y: -11.5}
+        - {x: -11, y: -13.5}
+        - {x: 6, y: -13.5}
+        - {x: 12, y: -4.5}
+        - {x: 12, y: 13.5}
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Kick_Down2
+      rect:
+        serializedVersion: 2
+        x: 1673
+        y: 1015
+        width: 24
+        height: 28
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -12, y: 14}
+        - {x: -12, y: -8}
+        - {x: -10, y: -14}
+        - {x: 11, y: -14}
+        - {x: 12, y: -11}
+        - {x: 12, y: 14}
+      physicsShape:
+      - - {x: -12, y: 14}
+        - {x: -12, y: -8}
+        - {x: -10, y: -14}
+        - {x: 11, y: -14}
+        - {x: 12, y: -11}
+        - {x: 12, y: 14}
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack_Left
+      rect:
+        serializedVersion: 2
+        x: 1118
+        y: 1015
+        width: 28
+        height: 26
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack_Up
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 1015
+        width: 21
+        height: 30
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack_Down
+      rect:
+        serializedVersion: 2
+        x: 1180
+        y: 1014
+        width: 21
+        height: 27
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Popoi Sprite_3
+      rect:
+        serializedVersion: 2
+        x: 1213
+        y: 1015
+        width: 28
+        height: 25
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Popoi Sprite_4
+      rect:
+        serializedVersion: 2
+        x: 1249
+        y: 1015
+        width: 24
+        height: 33
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Popoi Sprite_5
+      rect:
+        serializedVersion: 2
+        x: 1279
+        y: 1014
+        width: 21
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []

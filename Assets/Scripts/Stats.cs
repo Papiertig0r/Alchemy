@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 
-public class Stats : MonoBehaviour
+[CreateAssetMenu(fileName = "New Stats", menuName = "Alchemy/Stats")]
+public class Stats : ScriptableObject
 {
     public Stat health;
     public Stat mana;
@@ -14,7 +15,16 @@ public class Stats : MonoBehaviour
 
     public float range;
 
-    private void Update()
+    public float attack;
+    public float defense;
+
+    public void Start()
+    {
+        health.Max();
+        mana.Max();
+    }
+
+    public void Update()
     {
         health += healthRegen * Time.deltaTime;
         mana += manaRegen * Time.deltaTime;

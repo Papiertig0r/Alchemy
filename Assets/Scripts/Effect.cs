@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-[CreateAssetMenu(fileName = "New Effect", menuName = "Effects")]
+[CreateAssetMenu(fileName = "New Effect", menuName = "Alchemy/Effect")]
 public class Effect : ScriptableObject
 {
     public new string name = "New Effect";

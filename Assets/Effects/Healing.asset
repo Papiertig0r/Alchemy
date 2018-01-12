@@ -17,7 +17,11 @@ MonoBehaviour:
   maxConc: 70
   bestConc: 50
   phaseMultiplier:
-  - 0
-  - 0
-  - 0
-  - 0
+  - type: 0
+    multiplier: 1.25
+  - type: 1
+    multiplier: 1.25
+  - type: 2
+    multiplier: 1.5
+  - type: 3
+    multiplier: 1
