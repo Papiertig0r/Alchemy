@@ -3,6 +3,8 @@
 [RequireComponent(typeof(CircleCollider2D))]
 public class EnemyController : CharaController
 {
+    public GameObject attackCollider;
+
     public bool isTethered;
     public float tetherRange;
 
@@ -11,9 +13,14 @@ public class EnemyController : CharaController
 
     public bool corpseIsContainer;
 
+    public float attackDelay = 0.5f;
+    public float attackRange = 0.1f;
+    public float attackCoolDown = 0.5f;
+
     private CircleCollider2D aggroCollider;
 
     private bool isAggro = false;
+    private bool attackCoolsDown = false;
 
     private Vector3 startingPosition;
     private Vector3 targetPosition;
@@ -27,6 +34,8 @@ public class EnemyController : CharaController
         aggroCollider.radius = stats.range;
         aggroCollider.isTrigger = true;
 
+        attackCollider.GetComponent<AttackCollider>().onHit += Hit;
+
         startingPosition = transform.position;
         SetTarget();
     }
@@ -34,33 +43,37 @@ public class EnemyController : CharaController
     // Maybe abstract to Character controller w/ protected keyword
     protected override void Update ()
     {
-        base.Update();
+        if((targetPosition - transform.position).magnitude < attackRange && isAggro)
+        {
+            Attack();
+        }
+        else if(!attackCoolsDown)
+        {
+            base.Update();
+        }
 
         if(!isTethered)
         {
             startingPosition = transform.position;
         }
+
+        if(isAggro)
+        {
+            targetPosition = PlayerController.player.transform.position;
+        }
     }
 
     protected override Vector3 CalculateMovement()
     {
-        Vector3 translation = new Vector3(0f, 0f, 0f);
-        if (isAggro)
+        Vector3 translation = targetPosition - transform.position;
+        if (translation.magnitude < targetDistance)
         {
-            translation = PlayerController.player.transform.position - transform.position;
-        }
-        else
-        {
-            translation = targetPosition - transform.position;
-            if (translation.magnitude < targetDistance)
+            if (!targetisGoingToBeSet)
             {
-                if (!targetisGoingToBeSet)
-                {
-                    targetisGoingToBeSet = true;
-                    Invoke("SetTarget", idleTime);
-                }
-                translation = Vector3.zero;
+                targetisGoingToBeSet = true;
+                Invoke("SetTarget", idleTime);
             }
+            translation = Vector3.zero;
         }
         return translation.normalized;
     }
@@ -79,6 +92,7 @@ public class EnemyController : CharaController
         if(player != null)
         {
             isAggro = true;
+            targetPosition = PlayerController.player.transform.position;
         }
     }
 
@@ -114,4 +128,52 @@ public class EnemyController : CharaController
         //Create container
         //Container container = new Container();
     }
+
+    public void Hit(Collision2D coll)
+    {
+        DeactivateAttackCollider();
+        PlayerController player = coll.collider.GetComponent<PlayerController>();
+        if(player != null)
+        {
+            player.TakeDamage(stats.attack);
+        }
+    }
+
+    private void Attack()
+    {
+        animator.SetBool("isWalking", false);
+        if (attackCoolsDown)
+        {
+            return;
+        }
+        attackCoolsDown = true;
+
+        Vector3 direction = targetPosition - transform.position;
+        DetectLookingDirection(direction.x);
+        spriteRenderer.flipX = isLookingRight;
+        float attack = Random.Range(0, animator.GetFloat("attackCount"));
+        animator.SetFloat("currentAttack", attack);
+
+        animator.SetFloat("x", direction.x);
+        animator.SetFloat("y", direction.y);
+
+        float angle = Vector3.SignedAngle(Vector3.up, direction, Vector3.forward);
+        attackCollider.transform.SetPositionAndRotation(attackCollider.transform.position, Quaternion.Euler(0f, 0f, angle));
+        Invoke("ActivateAttackCollider", attackDelay);
+    }
+
+    private void ActivateAttackCollider()
+    {
+        attackCollider.SetActive(true);
+        oneShotSource.PlayOneShot(hitClip);
+        animator.SetTrigger("attack");
+        Invoke("DeactivateAttackCollider", attackCoolDown);
+    }
+
+    private void DeactivateAttackCollider()
+    {
+        attackCollider.SetActive(false);
+        attackCoolsDown = false;
+    }
+
 }

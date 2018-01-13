@@ -16,9 +16,9 @@ MonoBehaviour:
     min: 0
     value: 40
   mana:
-    max: 40
+    max: 20
     min: 0
-    value: 40
+    value: 20
   healthRegen:
     max: 0
     min: 0
@@ -31,3 +31,5 @@ MonoBehaviour:
   runningSpeed: 0
   targetingSpeed: 0
   range: 3
+  attack: 7
+  defense: 0

@@ -4,6 +4,8 @@ public class PlayerController : CharaController
 {
     public static PlayerController player;
 
+    public AudioClip walking;
+
     public GameObject target;
 
     public GameObject attackCollider;
@@ -31,6 +33,7 @@ public class PlayerController : CharaController
         }
 
         attackCollider.GetComponent<AttackCollider>().onHit += Hit;
+        loopSource = GetComponent<AudioSource>();
 
         targetOffset = target.transform.localPosition;
     }
@@ -39,6 +42,17 @@ public class PlayerController : CharaController
     protected override void Update ()
     {
         base.Update();
+
+        if(CalculateMovement().magnitude > 0f && !loopSource.isPlaying)
+        {
+            loopSource.loop = true;
+            loopSource.clip = walking;
+            loopSource.Play();
+        }
+        else if(CalculateMovement().magnitude == 0f)
+        {
+            loopSource.Stop();
+        }
 
         if(target.activeSelf)
         {
@@ -116,6 +130,8 @@ public class PlayerController : CharaController
 
     private void MeleeAttack()
     {
+        oneShotSource.PlayOneShot(hitClip);
+
         float attack = Random.Range(0, animator.GetFloat("attackCount"));
         animator.SetFloat("currentAttack", attack);
         animator.SetTrigger("attack");
@@ -137,6 +153,7 @@ public class PlayerController : CharaController
 
     public void Hit(Collision2D coll)
     {
+        DeactivateAttackCollider();
         EnemyController enemy = coll.collider.GetComponent<EnemyController>();
         if(enemy != null)
         {

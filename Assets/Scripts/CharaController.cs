@@ -2,24 +2,33 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(BoxCollider2D))]
 [RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(BoxCollider2D))]
 [RequireComponent(typeof(SpriteRenderer))]
 public abstract class CharaController : MonoBehaviour
 {
     public Stats stats;
     public GameObject bloodParticle;
 
+    //Change this to a sound almanach
+    public AudioClip takeDamageClip;
+    public AudioClip hitClip;
+
     protected Animator animator;
+    protected AudioSource loopSource;
+    protected AudioSource oneShotSource;
     protected BoxCollider2D boxCollider;
     protected SpriteRenderer spriteRenderer;
     protected bool isTargeting = false;
+    // Running is not implemented yet!
     protected bool isRunning = false;
     protected bool isLookingRight = false;
 
     protected virtual void Start()
     {
         animator = GetComponent<Animator>();
+        loopSource = gameObject.AddComponent<AudioSource>();
+        oneShotSource = gameObject.AddComponent<AudioSource>();
         boxCollider = GetComponent<BoxCollider2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         stats = Instantiate<Stats>(stats);
@@ -74,19 +83,19 @@ public abstract class CharaController : MonoBehaviour
 
     protected abstract Vector3 CalculateMovement();
 
-    public void TakeDamage(float attack)
+    public virtual void TakeDamage(float attack)
     {
         Instantiate<GameObject>(bloodParticle, this.transform.position + new Vector3(boxCollider.offset.x, boxCollider.offset.y), Quaternion.identity );
+        oneShotSource.PlayOneShot(takeDamageClip);
+
         stats.health -= attack;
     }
 
     protected virtual void Die()
     {
-        Debug.Log("Ded");
     }
 
     protected void OnCollisionEnter2D(Collision2D coll)
     {
-        Debug.Log("Collision!");
     }
 }
