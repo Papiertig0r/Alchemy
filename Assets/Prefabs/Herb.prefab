@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 61264051884392796}
   - component: {fileID: 114418861396563968}
   - component: {fileID: 114910374100124286}
+  - component: {fileID: 114918105327694552}
   m_Layer: 0
   m_Name: Herb
   m_TagString: Untagged
@@ -52,7 +53,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -80,6 +81,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sprite: {fileID: 0}
+  stackSize: 2
 --- !u!114 &114910374100124286
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -118,6 +120,19 @@ MonoBehaviour:
     endProductSprite: {fileID: 0}
   effectList:
   - {fileID: 11400000, guid: e24e1c80f4791a848bd96347e7a6ce3c, type: 2}
+--- !u!114 &114918105327694552
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1985862277652182}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a73afb8b24d05541924d00413c9fe4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 10
+  rotation: {x: 0, y: 0, z: 15}
 --- !u!212 &212897857411883538
 SpriteRenderer:
   m_ObjectHideFlags: 1

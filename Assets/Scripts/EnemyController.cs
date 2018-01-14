@@ -1,9 +1,7 @@
 ﻿using UnityEngine;
 
-[RequireComponent(typeof(CircleCollider2D))]
 public class EnemyController : CharaController
 {
-    public GameObject attackCollider;
 
     public bool isTethered;
     public float tetherRange;
@@ -17,7 +15,9 @@ public class EnemyController : CharaController
     public float attackRange = 0.1f;
     public float attackCoolDown = 0.5f;
 
-    private CircleCollider2D aggroCollider;
+    private AggroCollider aggroCollider;
+    [SerializeField]
+    private GameObject attackCollider;
 
     private bool isAggro = false;
     private bool attackCoolsDown = false;
@@ -30,9 +30,10 @@ public class EnemyController : CharaController
     {
         base.Start();
 
-        aggroCollider = GetComponent<CircleCollider2D>();
-        aggroCollider.radius = stats.range;
-        aggroCollider.isTrigger = true;
+        aggroCollider = GetComponentInChildren<AggroCollider>();
+        aggroCollider.Setup(boxCollider.offset, stats.range);
+        aggroCollider.onAggro += OnAggro;
+        aggroCollider.onDeaggro += OnDeaggro;
 
         attackCollider.GetComponent<AttackCollider>().onHit += Hit;
 
@@ -86,7 +87,7 @@ public class EnemyController : CharaController
         targetisGoingToBeSet = false;
     }
 
-    private void OnTriggerEnter2D(Collider2D collider)
+    private void OnAggro(Collider2D collider)
     {
         PlayerController player = collider.GetComponent<PlayerController>();
         if(player != null)
@@ -96,7 +97,7 @@ public class EnemyController : CharaController
         }
     }
 
-    private void OnTriggerExit2D(Collider2D collider)
+    private void OnDeaggro(Collider2D collider)
     {
         PlayerController player = collider.GetComponent<PlayerController>();
 

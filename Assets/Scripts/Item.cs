@@ -1,14 +1,17 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Item : MonoBehaviour
 {
     public Sprite sprite;
+    public uint stackSize;
 
     public void Awake()
     {
         sprite = GetComponent<SpriteRenderer>().sprite;
+        if(stackSize <= 0)
+        {
+            stackSize = 1;
+        }
     }
 
     public bool Apply()
@@ -22,7 +25,7 @@ public class Item : MonoBehaviour
         PlayerController player = coll.GetComponent<PlayerController>();
         if (player)
         {
-            player.onInventoryDown += PickUp;
+            player.onActionButtonDown += PickUp;
         }
     }
 
@@ -31,7 +34,7 @@ public class Item : MonoBehaviour
         PlayerController player = coll.GetComponent<PlayerController>();
         if (coll.GetComponent<PlayerController>())
         {
-            player.onInventoryDown -= PickUp;
+            player.onActionButtonDown -= PickUp;
         }
     }
 

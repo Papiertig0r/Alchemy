@@ -18,6 +18,8 @@ public class Stats : ScriptableObject
     public float attack;
     public float defense;
 
+    public float accuracy;
+
     public void Start()
     {
         health.Max();

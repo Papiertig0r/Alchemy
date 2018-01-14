@@ -12,8 +12,8 @@ public class PlayerController : CharaController
 
     public Inventory inventory;
 
-    public delegate void OnInventoryDown();
-    public OnInventoryDown onInventoryDown;
+    public delegate void OnActioButtonDown();
+    public OnActioButtonDown onActionButtonDown;
 
     private Vector3 targetOffset;
 
@@ -72,7 +72,16 @@ public class PlayerController : CharaController
 
     private void HandleInput()
     {
-        if(Input.GetAxis("Target") != 0f)
+        HandleTargeting();
+
+        HandleAttacking();
+
+        HandleActions();
+    }
+
+    private void HandleTargeting()
+    {
+        if (Input.GetAxis("Target") != 0f)
         {
             target.SetActive(true);
             isTargeting = true;
@@ -83,10 +92,13 @@ public class PlayerController : CharaController
             isTargeting = false;
             target.transform.localPosition = Vector3.zero + targetOffset;
         }
+    }
 
-        if(Input.GetAxis("Attack") != 0f)
+    private void HandleAttacking()
+    {
+        if (Input.GetAxis("Attack") != 0f)
         {
-            if(!executedAttack)
+            if (!executedAttack)
             {
                 if (target.activeSelf)
                 {
@@ -102,6 +114,14 @@ public class PlayerController : CharaController
         else
         {
             executedAttack = false;
+        }
+    }
+
+    private void HandleActions()
+    {
+        if(Input.GetButtonDown("Action") && onActionButtonDown != null)
+        {
+            onActionButtonDown.Invoke();
         }
     }
 
@@ -125,7 +145,16 @@ public class PlayerController : CharaController
 
     private void RangedAttack()
     {
-        Debug.Log("Ranged attack");
+        Item item = inventory.GetHotbarItem();
+        if(item != null)
+        {
+            Throwable throwable = item.GetComponent<Throwable>();
+            throwable.Throw(target.transform.position, stats.accuracy);
+        }
+        else
+        {
+            Debug.Log("No item to throw");
+        }
     }
 
     private void MeleeAttack()

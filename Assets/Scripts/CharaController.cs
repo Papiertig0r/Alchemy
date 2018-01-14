@@ -14,6 +14,8 @@ public abstract class CharaController : MonoBehaviour
     public AudioClip takeDamageClip;
     public AudioClip hitClip;
 
+    public bool canMove = true;
+
     protected Animator animator;
     protected AudioSource loopSource;
     protected AudioSource oneShotSource;
@@ -43,7 +45,10 @@ public abstract class CharaController : MonoBehaviour
 
         Vector3 translation = CalculateMovement();
 
-        HandleMovement(translation);
+        if(canMove)
+        {
+            HandleMovement(translation);
+        }
     }
 
     private void HandleMovement(Vector3 translation)
