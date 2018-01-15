@@ -102,7 +102,7 @@ public class PlayerController : CharaController
             {
                 if (target.activeSelf)
                 {
-                    RangedAttack();
+                    CastRangedAttack();
                 }
                 else
                 {
@@ -143,17 +143,17 @@ public class PlayerController : CharaController
         target.transform.localPosition = translation * stats.range + targetOffset;
     }
 
-    private void RangedAttack()
+    public override void CastRangedAttack()
     {
         Item item = inventory.GetHotbarItem();
         if(item != null)
         {
-            Throwable throwable = item.GetComponent<Throwable>();
-            throwable.Throw(target.transform.position, stats.accuracy);
-        }
-        else
-        {
-            Debug.Log("No item to throw");
+            IRangedWeapon weapon = item.GetComponent<IRangedWeapon>();
+            if(weapon != null)
+            {
+                weapon.RangedAttack(target.transform.position, stats.accuracy, this);
+                inventory.RemoveItemForRangedAttack();
+            }
         }
     }
 

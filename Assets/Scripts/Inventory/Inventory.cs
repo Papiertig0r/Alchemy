@@ -96,9 +96,14 @@ public class Inventory : MonoBehaviour
         if(item != null)
         {
             item = Instantiate<Item>(item, this.transform);
-            RemoveItem(selectedHotbarSlot);
+            item.gameObject.name = item.name;
         }
         return item;
+    }
+
+    public void RemoveItemForRangedAttack()
+    {
+        RemoveItem(selectedHotbarSlot);
     }
 
     private void InitItemSlots()

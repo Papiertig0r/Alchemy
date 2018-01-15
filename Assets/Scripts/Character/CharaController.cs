@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(BoxCollider2D))]
 [RequireComponent(typeof(SpriteRenderer))]
-public abstract class CharaController : MonoBehaviour
+public abstract class CharaController : MonoBehaviour, IHittable, IRangedAttackCaster
 {
     public Stats stats;
     public GameObject bloodParticle;
@@ -102,5 +102,10 @@ public abstract class CharaController : MonoBehaviour
 
     protected void OnCollisionEnter2D(Collision2D coll)
     {
+    }
+
+    public virtual void CastRangedAttack()
+    {
+
     }
 }

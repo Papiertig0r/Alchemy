@@ -2,6 +2,7 @@
 
 public class Item : MonoBehaviour
 {
+    new public string name;
     public Sprite sprite;
     public uint stackSize;
 
@@ -38,7 +39,7 @@ public class Item : MonoBehaviour
         }
     }
 
-    private void PickUp()
+    public void PickUp()
     {
         PlayerController player = PlayerController.player;
         if (player.inventory.AddItem(this))
