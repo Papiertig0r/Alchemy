@@ -27,9 +27,12 @@ public class Ingredient : MonoBehaviour
 
     }
 
-    public void Apply()
+    public void Apply(CharaController target)
     {
-
+        foreach(Effect effect in effectList)
+        {
+            effect.Apply(target);
+        }
     }
 
     public void ChangeConcentration(float change)

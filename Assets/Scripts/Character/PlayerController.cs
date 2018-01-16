@@ -154,6 +154,10 @@ public class PlayerController : CharaController
                 weapon.RangedAttack(target.transform.position, stats.accuracy, this);
                 inventory.RemoveItemForRangedAttack();
             }
+            else
+            {
+                Destroy(item.gameObject);
+            }
         }
     }
 

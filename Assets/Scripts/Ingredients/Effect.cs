@@ -71,4 +71,8 @@ public class Effect : ScriptableObject
         }
         return multiplier;
     }
+
+    public void Apply(CharaController target)
+    {
+    }
 }

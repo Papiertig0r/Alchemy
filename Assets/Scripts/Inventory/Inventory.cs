@@ -7,14 +7,19 @@ public class Inventory : MonoBehaviour
     public int hotbarSize = 7;
     public int slotCount = 6;
     public int slotSize = 20;
-    public List<ItemSlot> itemSlots;
 
     [SerializeField]
     private int selectedHotbarSlot = 0;
+    [SerializeField]
+    public List<ItemSlot> itemSlots;
+
+    private void Awake()
+    {
+        InitItemSlots();
+    }
 
     private void Start()
     {
-        InitItemSlots();
     }
 
     private void Update()
@@ -82,11 +87,16 @@ public class Inventory : MonoBehaviour
 
     public void RemoveItem(int fromSlot)
     {
-        itemSlots[fromSlot].quantity--;
-        if(itemSlots[fromSlot].quantity == 0)
+        RemoveItemFromSlot(itemSlots[fromSlot]);
+    }
+
+    public void RemoveItemFromSlot(ItemSlot slot)
+    {
+        slot.quantity--;
+        if (slot.quantity == 0)
         {
-            DestroyObject(itemSlots[fromSlot].item.gameObject);
-            itemSlots[fromSlot].item = null;
+            DestroyObject(slot.item.gameObject);
+            slot.item = null;
         }
     }
 
