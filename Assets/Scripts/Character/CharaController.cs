@@ -16,11 +16,14 @@ public abstract class CharaController : MonoBehaviour, IHittable, IRangedAttackC
 
     public bool canMove = true;
 
+    public HealthSliderUI healthSliderUI;
+
     protected Animator animator;
     protected AudioSource loopSource;
     protected AudioSource oneShotSource;
     protected BoxCollider2D boxCollider;
     protected SpriteRenderer spriteRenderer;
+
     protected bool isTargeting = false;
     // Running is not implemented yet!
     protected bool isRunning = false;
@@ -37,6 +40,11 @@ public abstract class CharaController : MonoBehaviour, IHittable, IRangedAttackC
 
         stats.Start();
         stats.health.fallBelow += Die;
+
+        if (healthSliderUI != null)
+        {
+            stats.health.statChanged += healthSliderUI.UpdateHealth;
+        }
     }
 
     protected virtual void Update()

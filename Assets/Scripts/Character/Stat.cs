@@ -11,6 +11,14 @@ public class Stat
     public HandleOutOfRange exceed;
     public HandleOutOfRange fallBelow;
 
+    public delegate void OnChange(float value);
+    public OnChange valueChanged;
+    public OnChange maxChanged;
+    public OnChange minChanged;
+
+    public delegate void OnStatChange(Stat stat);
+    public OnStatChange statChanged;
+
     public Stat()
     {
         value = max;
@@ -39,6 +47,10 @@ public class Stat
     public void Max()
     {
         this.value = this.max;
+        if(valueChanged != null)
+        {
+            valueChanged.Invoke(this.value);
+        }
     }
 
     public Vector3 ToVector3()
@@ -51,6 +63,43 @@ public class Stat
         this.min = v.x;
         this.value = v.y;
         this.max = v.z;
+
+        ValueChanged();
+        MaxChanged();
+        MinChanged();
+        StatChanged();
+    }
+
+    public void ValueChanged()
+    {
+        if (valueChanged != null)
+        {
+            valueChanged.Invoke(this.value);
+        }
+    }
+
+    public void MaxChanged()
+    {
+        if (maxChanged != null)
+        {
+            maxChanged.Invoke(this.value);
+        }
+    }
+
+    public void MinChanged()
+    {
+        if (minChanged != null)
+        {
+            minChanged.Invoke(this.value);
+        }
+    }
+
+    public void StatChanged()
+    {
+        if (statChanged != null)
+        {
+            statChanged.Invoke(this);
+        }
     }
 
     public Vector3 Vector3
@@ -69,6 +118,7 @@ public class Stat
     #region operator
     public static Stat operator +(Stat s1, Stat s2)
     {
+        s1.ValueChanged();
         return s1 + s2.value;
     }
 
@@ -80,6 +130,8 @@ public class Stat
             s.exceed.Invoke();
         }
         s.value = Mathf.Clamp(s.value, s.min, s.max);
+        s.ValueChanged();
+        s.StatChanged();
         return s;
     }
 
@@ -90,6 +142,8 @@ public class Stat
 
     public static Stat operator -(Stat s1, Stat s2)
     {
+        s1.ValueChanged();
+        s1.StatChanged();
         return s1 - s2.value;
     }
 
@@ -101,6 +155,8 @@ public class Stat
             s.fallBelow.Invoke();
         }
         s.value = Mathf.Clamp(s.value, s.min, s.max);
+        s.ValueChanged();
+        s.StatChanged();
         return s;
     }
     #endregion

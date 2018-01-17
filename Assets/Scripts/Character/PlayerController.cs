@@ -12,12 +12,13 @@ public class PlayerController : CharaController
 
     public Inventory inventory;
 
+
     public delegate void OnActioButtonDown();
     public OnActioButtonDown onActionButtonDown;
 
     private Vector3 targetOffset;
-
     private bool executedAttack = false;
+
     // Use this for initialization
     protected override void Start ()
     {
