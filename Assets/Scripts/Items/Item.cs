@@ -3,12 +3,10 @@
 public class Item : MonoBehaviour
 {
     new public string name;
-    public Sprite sprite;
     public uint stackSize;
 
     public void Awake()
     {
-        sprite = GetComponent<SpriteRenderer>().sprite;
         if(stackSize <= 0)
         {
             stackSize = 1;
@@ -17,7 +15,6 @@ public class Item : MonoBehaviour
 
     public bool Apply()
     {
-        Debug.Log("Applied item " + name);
         return true;
     }
 

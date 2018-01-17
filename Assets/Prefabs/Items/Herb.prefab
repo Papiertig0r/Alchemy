@@ -81,7 +81,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   name: Herb
-  sprite: {fileID: 0}
   stackSize: 3
 --- !u!114 &114910374100124286
 MonoBehaviour:
@@ -95,7 +94,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   concentration: 40
-  ingredientType: 2
+  ingredientType: 0
   currentToolType: 0
   currentProgress: 0
   phaseTransition:
@@ -134,7 +133,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 10
   maxScaleMultiplier: 1
+  rotateTowardTarget: 0
+  scalesDuringThrow: 1
   rotation: {x: 0, y: 0, z: 15}
+  onHitEvent:
+    applyable: {fileID: 0}
+  onLandEvent:
+    applyable: {fileID: 0}
+    radius: 0
 --- !u!212 &212897857411883538
 SpriteRenderer:
   m_ObjectHideFlags: 1

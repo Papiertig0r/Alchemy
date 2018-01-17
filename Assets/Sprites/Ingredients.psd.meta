@@ -1,10 +1,14 @@
 fileFormatVersion: 2
 guid: bf9e36e871237cb449ea169ecea121b9
-timeCreated: 1514835146
+timeCreated: 1516214200
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
     21300000: Herb
+    21300002: Potato
+    21300004: Ingredients_0
+    21300006: HealingPaste
+    21300008: HealingPotion
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
@@ -95,6 +99,62 @@ TextureImporter:
         y: 456
         width: 14
         height: 23
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Potato
+      rect:
+        serializedVersion: 2
+        x: 27
+        y: 461
+        width: 12
+        height: 10
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Ingredients_0
+      rect:
+        serializedVersion: 2
+        x: 44
+        y: 460
+        width: 17
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HealingPaste
+      rect:
+        serializedVersion: 2
+        x: 65
+        y: 460
+        width: 17
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HealingPotion
+      rect:
+        serializedVersion: 2
+        x: 87
+        y: 460
+        width: 9
+        height: 12
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

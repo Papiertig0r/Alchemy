@@ -13,6 +13,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Healing
   description: Heals HP
+  buff: {fileID: 11400000, guid: f61c651eb6d8eae41a6c3b82ceb4f6cd, type: 2}
+  strength: 100
   minConc: 20
   maxConc: 70
   bestConc: 50

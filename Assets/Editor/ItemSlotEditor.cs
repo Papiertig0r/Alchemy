@@ -17,7 +17,7 @@ public class ItemSlotEditor : Editor
             {
                 continue;
             }
-            Consumable consumable = slot.item.GetComponent<Consumable>();
+            IConsumable consumable = slot.item.GetComponent<IConsumable>();
             if(consumable != null)
             {
                 if (GUILayout.Button("Consume " + slot.item.name))

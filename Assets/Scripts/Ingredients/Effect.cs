@@ -7,6 +7,10 @@ public class Effect : ScriptableObject
     public new string name = "New Effect";
     public string description = "Effect description";
 
+    public Buff buff;
+
+    public float strength;
+
     public float minConc;
     public float maxConc;
     public float bestConc;
@@ -72,7 +76,10 @@ public class Effect : ScriptableObject
         return multiplier;
     }
 
-    public void Apply(CharaController target)
+    public void Apply(CharaController target, float concentration, IngredientType ingredientType)
     {
+        float finalValue = GetPotency(concentration) * Tier() * PhaseMultiplier(ingredientType) * strength;
+        Debug.Log("Healed " + finalValue + " health");
+        buff.Apply(target, finalValue);
     }
 }

@@ -54,9 +54,13 @@ public abstract class CharaController : MonoBehaviour, IHittable, IRangedAttackC
     private void HandleMovement(Vector3 translation)
     {
         animator.SetBool("isWalking", translation.magnitude > 0f);
-        //! \bug when releasing the stick, the enemy defaults to left
-        DetectLookingDirection(translation.x);
         spriteRenderer.flipX = isLookingRight;
+
+        if(!isTargeting)
+        {
+            DetectLookingDirection(translation.x);
+        }
+
         if (translation.magnitude > 0f)
         {
             animator.SetFloat("x", translation.x);

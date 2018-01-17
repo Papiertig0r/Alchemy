@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Ingredient : MonoBehaviour
+public class Ingredient : Applyable, IConsumable
 {
     public static float maxProgress = 100f;
     public static float minProgress = 0f;
@@ -27,12 +27,13 @@ public class Ingredient : MonoBehaviour
 
     }
 
-    public void Apply(CharaController target)
+    public override void Apply(CharaController target)
     {
         foreach(Effect effect in effectList)
         {
-            effect.Apply(target);
+            effect.Apply(target, concentration, ingredientType);
         }
+        Destroy(this.gameObject);
     }
 
     public void ChangeConcentration(float change)
@@ -44,5 +45,10 @@ public class Ingredient : MonoBehaviour
     public void ChangeProgress(float change)
     {
 
+    }
+
+    public void Consume(CharaController target)
+    {
+        Apply(target);
     }
 }

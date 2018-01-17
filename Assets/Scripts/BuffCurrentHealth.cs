@@ -3,8 +3,8 @@
 [CreateAssetMenu(fileName = "New Buff", menuName = "Alchemy/Buffs/Current Health")]
 public class BuffCurrentHealth : Buff
 {
-    public override void Apply(Stats stat, float value)
+    protected override void ApplyBuff(CharaController target, float value)
     {
-        stat.health += value;
+        target.stats.health += value;
     }
 }

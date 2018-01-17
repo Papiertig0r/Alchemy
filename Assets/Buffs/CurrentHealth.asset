@@ -11,3 +11,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7a3f3f37da903442b1a3c914a38288a, type: 3}
   m_Name: CurrentHealth
   m_EditorClassIdentifier: 
+  particle: {fileID: 1477662682411566, guid: 43e2cf9a12d609a4b92dc54b505bcf65, type: 2}

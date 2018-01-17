@@ -6,7 +6,12 @@ public class Throwable : MonoBehaviour, IRangedWeapon
 {
     public float speed = 1f;
     public float maxScaleMultiplier = 1f;
+    public bool rotateTowardTarget = false;
+    public bool scalesDuringThrow = true;
     public Vector3 rotation;
+
+    public RangedAttackEffect onHitEvent;
+    public RangedAreaAttackEffect onLandEvent;
 
     protected Vector3 targetPosition;
     protected Quaternion originalRotation;
@@ -27,7 +32,10 @@ public class Throwable : MonoBehaviour, IRangedWeapon
             direction = targetPosition - transform.position;
 
             Rotate();
-            Scale(direction);
+            if(scalesDuringThrow)
+            {
+                Scale(direction);
+            }
 
             if (direction.magnitude < 0.1f)
             {
@@ -38,7 +46,16 @@ public class Throwable : MonoBehaviour, IRangedWeapon
 
     public virtual void Rotate()
     {
-        transform.Rotate(rotation, Space.Self);
+        if (rotateTowardTarget)
+        {
+            Vector3 direction = targetPosition - transform.position;
+            float angle = Vector3.SignedAngle(Vector3.up, direction, Vector3.forward);
+            transform.rotation = Quaternion.Euler(originalRotation.eulerAngles + new Vector3(0f, 0f, angle));
+        }
+        else
+        {
+            transform.Rotate(rotation, Space.Self);
+        }
     }
 
     public virtual void Scale(Vector3 direction)
@@ -66,6 +83,10 @@ public class Throwable : MonoBehaviour, IRangedWeapon
 
     private void Land()
     {
+        if(onLandEvent.applyable != null)
+        {
+            onLandEvent.Apply(transform.position);
+        }
         isThrown = false;
         transform.localScale = Vector3.one;
         transform.rotation = originalRotation;
@@ -79,6 +100,11 @@ public class Throwable : MonoBehaviour, IRangedWeapon
         if(isThrown && hittable != null && caster != originalCaster)
         {
             Hit(hittable);
+            CharaController chara = coll.GetComponent<CharaController>();
+            if(onHitEvent.applyable != null && chara != null)
+            {
+                onHitEvent.Apply(chara);
+            }
             Land();
         }
     }

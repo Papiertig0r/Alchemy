@@ -2,7 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Buff : ScriptableObject
+public class Buff : ScriptableObject
 {
-    public abstract void Apply(Stats stat, float value);
+    public GameObject particle;
+    public void Apply(CharaController target, float value)
+    {
+        ApplyBuff(target, value);
+        if (value > 0f)
+        {
+            Instantiate<GameObject>(particle, target.transform);
+        }
+    }
+
+    protected virtual void ApplyBuff(CharaController target, float value)
+    {
+
+    }
 }
