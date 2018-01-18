@@ -103,7 +103,12 @@ public class Inventory : MonoBehaviour
     public Item GetHotbarItem()
     {
         Item item = itemSlots[selectedHotbarSlot].item;
-        if(item != null)
+        return item;
+    }
+
+    public Item InstantiateItem(Item item)
+    {
+        if (item != null)
         {
             item = Instantiate<Item>(item, this.transform);
             item.gameObject.name = item.name;

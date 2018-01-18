@@ -7,6 +7,7 @@ public class PlayerController : CharaController
     public AudioClip walking;
 
     public GameObject target;
+    //public AreaEffect areaOfEffectDisplayer;
 
     public GameObject attackCollider;
 
@@ -18,6 +19,7 @@ public class PlayerController : CharaController
 
     private Vector3 targetOffset;
     private bool executedAttack = false;
+    private Vector3 velocity;
 
     // Use this for initialization
     protected override void Start ()
@@ -133,7 +135,8 @@ public class PlayerController : CharaController
 
         Vector3 translation = new Vector3(x, y, 0f);
 
-        //! \bug when releasing the stick, the enemy defaults to left
+        Vector3 smoothTranslation = Vector3.SmoothDamp(target.transform.localPosition, translation * stats.range + targetOffset, ref velocity, 0.1f);
+
         DetectLookingDirection(translation.x);
         if (translation.magnitude > 0f)
         {
@@ -141,7 +144,7 @@ public class PlayerController : CharaController
             animator.SetFloat("y", y);
         }
 
-        target.transform.localPosition = translation * stats.range + targetOffset;
+        target.transform.localPosition = smoothTranslation;
     }
 
     public override void CastRangedAttack()
@@ -152,6 +155,7 @@ public class PlayerController : CharaController
             IRangedWeapon weapon = item.GetComponent<IRangedWeapon>();
             if(weapon != null)
             {
+                weapon = inventory.InstantiateItem(item).GetComponent<IRangedWeapon>();
                 weapon.RangedAttack(target.transform.position, stats.accuracy, this);
                 inventory.RemoveItemForRangedAttack();
             }
