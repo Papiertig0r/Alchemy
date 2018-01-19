@@ -2,20 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Buff : ScriptableObject
+[System.Serializable]
+public class Buff
 {
-    public GameObject particle;
-    public void Apply(CharaController target, float value)
+    public float value;
+
+    public Buff(float value)
     {
-        ApplyBuff(target, value);
-        if (value > 0f)
-        {
-            Instantiate<GameObject>(particle, target.transform);
-        }
+        this.value = value;
+
+        Debug.Log("Created buff");
     }
 
-    protected virtual void ApplyBuff(CharaController target, float value)
+    public virtual void Apply(Stats stats, Stat stat)
     {
-
+        stat -= value;
+        Debug.Log("Applied buff");
     }
 }

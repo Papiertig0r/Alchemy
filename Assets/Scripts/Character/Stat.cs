@@ -1,80 +1,118 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 [System.Serializable]
 public class Stat
 {
-    public float max;
-    public float min;
-    public float value;
+    [HideInInspector]
+    public float max
+    {
+        get
+        {
+            float ret = _max;
+            foreach(Buff buff in buffMax)
+            {
+                ret += buff.value;
+            }
+            return ret;
+        }
+        set
+        {
+            _max = value;
+            MaxChanged();
+            StatChanged();
+        }
+    }
+
+    [HideInInspector]
+    public float min
+    {
+        get
+        {
+            float ret = _min;
+            foreach (Buff buff in buffMin)
+            {
+                ret += buff.value;
+            }
+            return ret;
+        }
+        set
+        {
+            _min = value;
+            MinChanged();
+            StatChanged();
+        }
+    }
+
+    public float current;
 
     public delegate void HandleOutOfRange();
     public HandleOutOfRange exceed;
     public HandleOutOfRange fallBelow;
 
     public delegate void OnChange(float value);
-    public OnChange valueChanged;
+    public OnChange currentChanged;
     public OnChange maxChanged;
     public OnChange minChanged;
 
     public delegate void OnStatChange(Stat stat);
     public OnStatChange statChanged;
 
+    public List<Buff> buffMax = new List<Buff>();
+    public List<Buff> buffMin = new List<Buff>();
+
+    [SerializeField]
+    private float _max;
+    [SerializeField]
+    private float _min;
+
     public Stat()
     {
-        value = max;
+        current = max;
     }
 
     public Stat(float value)
     {
         this.max = value;
-        this.value = value;
+        this.current = value;
     }
 
     public Stat(float min, float max)
     {
         this.min = min;
         this.max = max;
-        this.value = max;
+        this.current = max;
     }
 
     public Stat(float value, float min, float max)
     {
-        this.value = value;
+        this.current = value;
         this.min = min;
         this.max = max;
     }
 
     public void Max()
     {
-        this.value = this.max;
-        if(valueChanged != null)
-        {
-            valueChanged.Invoke(this.value);
-        }
+        this.current = this.max;
     }
 
     public Vector3 ToVector3()
     {
-        return new Vector3(this.min, this.value, this.max);
+        return new Vector3(this.min, this.current, this.max);
     }
 
     public void FromVector3(Vector3 v)
     {
         this.min = v.x;
-        this.value = v.y;
+        this.current = v.y;
         this.max = v.z;
-
-        ValueChanged();
-        MaxChanged();
-        MinChanged();
-        StatChanged();
     }
 
-    public void ValueChanged()
+    public void CurrentChanged()
     {
-        if (valueChanged != null)
+        if (currentChanged != null)
         {
-            valueChanged.Invoke(this.value);
+            currentChanged.Invoke(this.current);
         }
     }
 
@@ -82,7 +120,7 @@ public class Stat
     {
         if (maxChanged != null)
         {
-            maxChanged.Invoke(this.value);
+            maxChanged.Invoke(this.current);
         }
     }
 
@@ -90,7 +128,7 @@ public class Stat
     {
         if (minChanged != null)
         {
-            minChanged.Invoke(this.value);
+            minChanged.Invoke(this.current);
         }
     }
 
@@ -115,47 +153,52 @@ public class Stat
         }
     }
 
+    public void CheckOutOfBounds()
+    {
+        if (current >= max && exceed != null)
+        {
+            exceed.Invoke();
+        }
+        if (current <= min && fallBelow != null)
+        {
+            fallBelow.Invoke();
+        }
+    }
+
     #region operator
     public static Stat operator +(Stat s1, Stat s2)
     {
-        s1.ValueChanged();
-        return s1 + s2.value;
+        return s1 + s2.current;
     }
 
     public static Stat operator +(Stat s, float change)
     {
-        s.value += change;
-        if(s.value >= s.max && s.exceed != null)
-        {
-            s.exceed.Invoke();
-        }
-        s.value = Mathf.Clamp(s.value, s.min, s.max);
-        s.ValueChanged();
+        s.current += change;
+        s.CheckOutOfBounds();
+        s.current = Mathf.Clamp(s.current, s.min, s.max);
+
+        s.CurrentChanged();
         s.StatChanged();
         return s;
     }
 
     public static float operator *(Stat s, float multiplier)
     {
-        return s.value * multiplier;
+        return s.current * multiplier;
     }
 
     public static Stat operator -(Stat s1, Stat s2)
     {
-        s1.ValueChanged();
-        s1.StatChanged();
-        return s1 - s2.value;
+        return s1 - s2.current;
     }
 
     public static Stat operator -(Stat s, float change)
     {
-        s.value -= change;
-        if (s.value <= s.min && s.fallBelow != null)
-        {
-            s.fallBelow.Invoke();
-        }
-        s.value = Mathf.Clamp(s.value, s.min, s.max);
-        s.ValueChanged();
+        s.current -= change;
+        s.CheckOutOfBounds();
+        s.current = Mathf.Clamp(s.current, s.min, s.max);
+
+        s.CurrentChanged();
         s.StatChanged();
         return s;
     }

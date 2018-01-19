@@ -5,23 +5,6 @@ using UnityEditor;
 [CustomEditor(typeof(CharaController), true)]
 public class CharaEditor : Editor
 {
-    private float damage;
-
-    private void OnEnable()
-    {
-        if (EditorPrefs.HasKey("damage"))
-        {
-            damage = EditorPrefs.GetFloat("damage");
-        }
-    }
-
-    private void OnDisable()
-    {
-        if(!Application.isPlaying)
-        {
-            EditorPrefs.SetFloat("damage", damage);
-        }
-    }
 
     public override void OnInspectorGUI()
     {
@@ -32,10 +15,12 @@ public class CharaEditor : Editor
         EditorGUILayout.Space();
         EditorGUILayout.LabelField("Editor functionalites", EditorStyles.boldLabel);
 
-        damage = EditorGUILayout.FloatField("Damage", damage);
         if (GUILayout.Button("Take damage"))
         {
-            chara.TakeDamage(damage);
+            //RepeatTimedBuff rtb = new RepeatTimedBuff(-2f, 10f, 1f);
+            //rtb.Apply(chara.stats, chara.stats.health);
+            TimedBuff tb = new TimedBuff(-2f, 10f);
+            tb.Apply(chara.stats, chara.stats.healthRegen);
         }
     }
 }

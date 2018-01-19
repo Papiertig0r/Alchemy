@@ -16,7 +16,7 @@ public class HealthSliderUI : MonoBehaviour
     {
         slider.minValue = health.min;
         slider.maxValue = health.max;
-        slider.value = health.value;
-        slider.fillRect.GetComponent<Image>().color = Color.Lerp(Color.red, Color.green, health.value / health.max);
+        slider.value = health.current;
+        slider.fillRect.GetComponent<Image>().color = Color.Lerp(Color.red, Color.green, health.current / health.max);
     }
 }

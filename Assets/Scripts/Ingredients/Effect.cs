@@ -7,8 +7,6 @@ public class Effect : ScriptableObject
     public new string name = "New Effect";
     public string description = "Effect description";
 
-    public Buff buff;
-
     public float strength;
 
     public float minConc;
@@ -80,6 +78,5 @@ public class Effect : ScriptableObject
     {
         float finalValue = GetPotency(concentration) * Tier() * PhaseMultiplier(ingredientType) * strength;
         Debug.Log("Healed " + finalValue + " health");
-        buff.Apply(target, finalValue);
     }
 }

@@ -12,24 +12,34 @@ MonoBehaviour:
   m_Name: PogoPuschel
   m_EditorClassIdentifier: 
   health:
-    max: 40
-    min: 0
-    value: 40
+    current: 0
+    buffMax: []
+    buffMin: []
+    _max: 40
+    _min: 0
   mana:
-    max: 20
-    min: 0
-    value: 20
+    current: 0
+    buffMax: []
+    buffMin: []
+    _max: 40
+    _min: 0
   healthRegen:
-    max: 0
-    min: 0
-    value: 0
+    current: 0
+    buffMax: []
+    buffMin: []
+    _max: Infinity
+    _min: -Infinity
   manaRegen:
-    max: 0
-    min: 0
-    value: 1.5
+    current: 1
+    buffMax: []
+    buffMin: []
+    _max: Infinity
+    _min: -Infinity
   speed: 1.5
   runningSpeed: 0
   targetingSpeed: 0
   range: 3
   attack: 7
   defense: 0
+  accuracy: 0
+  activeBuffs: []
