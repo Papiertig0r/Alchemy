@@ -39,11 +39,11 @@ public abstract class CharaController : MonoBehaviour, IHittable, IRangedAttackC
         stats = Instantiate<Stats>(stats);
 
         stats.Start();
-        stats.health.fallBelow += Die;
+        stats.GetStat(StatType.HEALTH).fallBelow += Die;
 
         if (healthSliderUI != null)
         {
-            stats.health.statChanged += healthSliderUI.UpdateHealth;
+            stats.GetStat(StatType.HEALTH).statChanged += healthSliderUI.UpdateHealth;
         }
     }
 
@@ -73,14 +73,14 @@ public abstract class CharaController : MonoBehaviour, IHittable, IRangedAttackC
         {
             animator.SetFloat("x", translation.x);
             animator.SetFloat("y", translation.y);
-            float speed = stats.speed;
+            float speed = stats.GetStatValue(StatType.SPEED);
             if(isTargeting)
             {
-                speed = stats.targetingSpeed;
+                speed = stats.GetStatValue(StatType.SPEED_DURING_TARGETING);
             }
             else if(isRunning)
             {
-                speed = stats.runningSpeed;
+                speed = stats.GetStatValue(StatType.RUNNING_SPEED);
             }
             transform.Translate(translation * Time.deltaTime * speed);
         }
@@ -105,7 +105,7 @@ public abstract class CharaController : MonoBehaviour, IHittable, IRangedAttackC
         Instantiate<GameObject>(bloodParticle, this.transform.position + new Vector3(boxCollider.offset.x, boxCollider.offset.y), Quaternion.identity );
         oneShotSource.PlayOneShot(takeDamageClip);
 
-        stats.health -= attack;
+        stats.ModifyStat(StatType.HEALTH, -attack);
     }
 
     protected virtual void Die()

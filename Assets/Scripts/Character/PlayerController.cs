@@ -135,7 +135,7 @@ public class PlayerController : CharaController
 
         Vector3 translation = new Vector3(x, y, 0f);
 
-        Vector3 smoothTranslation = Vector3.SmoothDamp(target.transform.localPosition, translation * stats.range + targetOffset, ref velocity, 0.1f);
+        Vector3 smoothTranslation = Vector3.SmoothDamp(target.transform.localPosition, translation * stats.GetStatValue(StatType.RANGE) + targetOffset, ref velocity, 0.1f);
 
         DetectLookingDirection(translation.x);
         if (translation.magnitude > 0f)
@@ -156,7 +156,7 @@ public class PlayerController : CharaController
             if(weapon != null)
             {
                 weapon = inventory.InstantiateItem(item).GetComponent<IRangedWeapon>();
-                weapon.RangedAttack(target.transform.position, stats.accuracy, this);
+                weapon.RangedAttack(target.transform.position, stats.GetStatValue(StatType.ACCURACY), this);
                 inventory.RemoveItemForRangedAttack();
             }
             else
@@ -195,7 +195,7 @@ public class PlayerController : CharaController
         EnemyController enemy = coll.collider.GetComponent<EnemyController>();
         if(enemy != null)
         {
-            enemy.TakeDamage(stats.attack);
+            enemy.TakeDamage(stats.GetStatValue(StatType.ATTACK));
         }
     }
 }

@@ -4,6 +4,8 @@ using UnityEngine;
 [System.Serializable]
 public class Stat
 {
+    public StatType type;
+
     [HideInInspector]
     public float max
     {
@@ -71,6 +73,11 @@ public class Stat
         current = max;
     }
 
+    public Stat(StatType type)
+    {
+        this.type = type;
+    }
+
     public Stat(float value)
     {
         this.max = value;
@@ -81,7 +88,7 @@ public class Stat
     {
         this.min = min;
         this.max = max;
-        this.current = max;
+        this.current = min;
     }
 
     public Stat(float value, float min, float max)
@@ -89,6 +96,22 @@ public class Stat
         this.current = value;
         this.min = min;
         this.max = max;
+    }
+
+    public Stat(StatType type, float min, float max)
+    {
+        this.type = type;
+        this.min = min;
+        this.max = max;
+        this.current = min;
+    }
+
+    public Stat(Stat stat)
+    {
+        this.type = stat.type;
+        this.current = stat.current;
+        this._max = stat._max;
+        this._min = stat._min;
     }
 
     public void Max()

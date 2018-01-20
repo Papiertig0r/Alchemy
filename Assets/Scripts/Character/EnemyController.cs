@@ -31,7 +31,7 @@ public class EnemyController : CharaController
         base.Start();
 
         aggroCollider = GetComponentInChildren<AggroCollider>();
-        aggroCollider.Setup(boxCollider.offset, stats.range);
+        aggroCollider.Setup(boxCollider.offset, stats.GetStatValue(StatType.RANGE));
         aggroCollider.onAggro += OnAggro;
         aggroCollider.onDeaggro += OnDeaggro;
 
@@ -136,7 +136,7 @@ public class EnemyController : CharaController
         PlayerController player = coll.collider.GetComponent<PlayerController>();
         if(player != null)
         {
-            player.TakeDamage(stats.attack);
+            player.TakeDamage(stats.GetStatValue(StatType.ATTACK));
         }
     }
 

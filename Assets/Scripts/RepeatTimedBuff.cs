@@ -21,14 +21,12 @@ public class RepeatTimedBuff : TimedBuff
         {
             stat += value;
             _repeatRate = repeatRate;
-            Debug.Log("Applied buff");
         }
 
         if (duration < 0f)
         {
             stats.onUpdate -= OnUpdate;
             stats.activeBuffs.Remove(this);
-            Debug.Log("Destroyed buff");
         }
     }
 }

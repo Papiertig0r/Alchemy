@@ -1,0 +1,14 @@
+﻿public enum StatType
+{
+    HEALTH,
+    MANA,
+    HEALTH_REGEN,
+    MANA_REGEN,
+    SPEED,
+    RUNNING_SPEED,
+    SPEED_DURING_TARGETING,
+    RANGE,
+    ATTACK,
+    DEFENSE,
+    ACCURACY
+}

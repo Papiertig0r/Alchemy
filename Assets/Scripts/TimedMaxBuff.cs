@@ -2,15 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TimedBuff : Buff
+public class TimedMaxBuff : TimedBuff
 {
-    public float duration;
-    protected Stats stats;
-    protected Stat stat;
-
-    public TimedBuff(float value, float duration) : base(value)
+    public TimedMaxBuff(float value, float duration) : base(value, duration)
     {
-        this.duration = duration;
+
     }
 
     public override void Apply(Stats stats, Stat stat)
@@ -19,15 +15,15 @@ public class TimedBuff : Buff
         this.stat = stat;
         stats.activeBuffs.Add(this);
         stats.onUpdate += OnUpdate;
-        stat += value;
+        stat.buffMax.Add(this);
     }
 
-    public virtual void OnUpdate()
+    public override void OnUpdate()
     {
         duration -= Time.deltaTime;
         if (duration < 0f)
         {
-            stat -= value;
+            stat.buffMax.Remove(this);
             stats.onUpdate -= OnUpdate;
             stats.activeBuffs.Remove(this);
         }

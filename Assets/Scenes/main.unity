@@ -1071,7 +1071,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 591db140862d280439cbf20d327d333b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stats: {fileID: 11400000, guid: 71dc1671cbf0a2e40b3e96e74c2564e4, type: 2}
+  stats: {fileID: 11400000, guid: 59b95c163b5abc144af2ee320905bb1f, type: 2}
   bloodParticle: {fileID: 1102623789891546, guid: 122b81b47e1ed9c4db6a54a06dd509c4,
     type: 2}
   takeDamageClip: {fileID: 8300000, guid: 02b7e645b6c23ba4dbe216c890952095, type: 3}
@@ -1269,7 +1269,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8dd4b160f5132d047b94f43090b7ff31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stats: {fileID: 11400000, guid: ce0ab895fe0fb1542ad73dae15aaa98c, type: 2}
+  stats: {fileID: 11400000, guid: 3d84fee37721b8f4f84e676058062f84, type: 2}
   bloodParticle: {fileID: 1102623789891546, guid: 122b81b47e1ed9c4db6a54a06dd509c4,
     type: 2}
   takeDamageClip: {fileID: 0}
