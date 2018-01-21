@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[CreateAssetMenu(fileName = "New Buff", menuName = "Alchemy/Buffs/Buff")]
 [System.Serializable]
-public class Buff
+public class Buff : ScriptableObject
 {
-    public string name;
+    public new string name;
     public StatType type;
     public float value;
 
@@ -19,11 +20,6 @@ public class Buff
         this.name = name;
         this.type = type;
         this.value = value;
-    }
-
-    public virtual void Apply(Stats stats, Stat stat)
-    {
-        //
     }
 
     public virtual void Apply(Stats stats)

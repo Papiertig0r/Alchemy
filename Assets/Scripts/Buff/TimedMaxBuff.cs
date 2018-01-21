@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[CreateAssetMenu(fileName = "New Timed Max Buff", menuName = "Alchemy/Buffs/Timed Max Buff")]
 public class TimedMaxBuff : TimedBuff
 {
     public TimedMaxBuff(float value, float duration) : base(value, duration)
@@ -9,12 +10,11 @@ public class TimedMaxBuff : TimedBuff
 
     }
 
-    public override void Apply(Stats stats, Stat stat)
+    public override void Apply(Stats stats)
     {
         this.stats = stats;
-        this.stat = stat;
-        stats.activeBuffs.Add(this);
-        stats.onUpdate += OnUpdate;
+        Stat stat = stats.GetStat(type);
+        Register(stats);
         stat.buffMax.Add(this);
     }
 
@@ -23,9 +23,9 @@ public class TimedMaxBuff : TimedBuff
         duration -= Time.deltaTime;
         if (duration < 0f)
         {
+            Stat stat = stats.GetStat(type);
             stat.buffMax.Remove(this);
-            stats.onUpdate -= OnUpdate;
-            stats.activeBuffs.Remove(this);
+            Unregister();
         }
     }
 }

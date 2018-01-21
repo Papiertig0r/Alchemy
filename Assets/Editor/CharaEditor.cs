@@ -26,5 +26,11 @@ public class CharaEditor : Editor
             //TimedMaxBuff tmb = new TimedMaxBuff(10f, 10f);
             //tmb.Apply(chara.stats, chara.stats.health);
         }
+
+        if (GUILayout.Button("Apply Buff") && PlayerController.player.buff != null)
+        {
+            Buff buff = Instantiate(PlayerController.player.buff);
+            buff.Apply(PlayerController.player.stats);
+        }
     }
 }
