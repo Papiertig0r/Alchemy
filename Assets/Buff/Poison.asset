@@ -14,5 +14,9 @@ MonoBehaviour:
   name: Poison
   type: 0
   value: -2
-  duration: 10
+  duration: 7
+  minDuration: 3
+  maxDuration: 10
   repeatRate: 1
+  minRepeatRate: 0.7
+  maxRepeatRate: 2

@@ -7,6 +7,8 @@ public class Effect : ScriptableObject
     public new string name = "New Effect";
     public string description = "Effect description";
 
+    public Buff buff;
+
     public float strength;
 
     public float minConc;
@@ -14,8 +16,6 @@ public class Effect : ScriptableObject
     public float bestConc;
 
     public List<PhaseMultiplier> phaseMultiplier = new List<PhaseMultiplier>();
-
-    private int tier = 1;
 
     public float GetPotency(float concentration)
     {
@@ -53,16 +53,6 @@ public class Effect : ScriptableObject
         return 0f;
     }
 
-    public float Tier()
-    {
-        return 1/(1 + Mathf.Exp(-tier));
-    }
-
-    public void IncreaseTier(int tierChange)
-    {
-        tier += tierChange;
-    }
-
     public float PhaseMultiplier(IngredientType type)
     {
         float multiplier = 1f;
@@ -74,9 +64,11 @@ public class Effect : ScriptableObject
         return multiplier;
     }
 
-    public void Apply(CharaController target, float concentration, IngredientType ingredientType)
+    public void Apply(CharaController target, float concentration, float purity, float yield, IngredientType ingredientType)
     {
-        float finalValue = GetPotency(concentration) * Tier() * PhaseMultiplier(ingredientType) * strength;
-        Debug.Log("Healed " + finalValue + " health");
+        concentration = GetPotency(concentration) * PhaseMultiplier(ingredientType);
+        Buff newBuff = Instantiate(buff);
+        newBuff.Set(strength, concentration, purity, yield);
+        newBuff.Apply(target.stats);
     }
 }

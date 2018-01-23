@@ -9,8 +9,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3766b771fc6dd764c8d1446741ee9dc9, type: 3}
-  m_Name: Damage
+  m_Name: Health
   m_EditorClassIdentifier: 
-  name: Damage
+  name: Health
   type: 0
   value: -10

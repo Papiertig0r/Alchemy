@@ -13,8 +13,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Poison
   description: Does damage over time
-  buff: {fileID: 0}
-  strength: 5
+  buff: {fileID: 11400000, guid: 1308744845785634aacfd2f85fdf3985, type: 2}
+  strength: -5
   minConc: -10
   maxConc: 40
   bestConc: 10

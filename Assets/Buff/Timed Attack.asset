@@ -8,10 +8,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ecc3314057497a842b3dc8d316ba4870, type: 3}
-  m_Name: Bonus Health
+  m_Script: {fileID: 11500000, guid: 137156084e135d0468bb866eb3de9dc0, type: 3}
+  m_Name: Timed Attack
   m_EditorClassIdentifier: 
-  name: Additional Health
-  type: 0
+  name: Attack
+  type: 8
   value: 10
   duration: 10
+  minDuration: 3
+  maxDuration: 10

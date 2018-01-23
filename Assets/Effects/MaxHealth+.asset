@@ -9,21 +9,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4b676037e0149fb46b9203fee5f22077, type: 3}
-  m_Name: Healing
+  m_Name: MaxHealth+
   m_EditorClassIdentifier: 
-  name: Healing
-  description: Heals HP
-  buff: {fileID: 11400000, guid: 90623774cb49a2b4aba33907e68d3fa6, type: 2}
-  strength: 100
-  minConc: 20
-  maxConc: 70
+  name: Max Health+
+  description: Increases Health for a short time
+  buff: {fileID: 11400000, guid: 1964e05d160027d46a4926cf929370f9, type: 2}
+  strength: 15
+  minConc: 0
+  maxConc: 100
   bestConc: 50
   phaseMultiplier:
   - type: 0
-    multiplier: 1.25
+    multiplier: 1
   - type: 1
-    multiplier: 1.25
+    multiplier: 1
   - type: 2
-    multiplier: 1.5
+    multiplier: 1
   - type: 3
     multiplier: 1

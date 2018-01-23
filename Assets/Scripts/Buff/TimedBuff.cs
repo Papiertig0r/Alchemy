@@ -6,6 +6,8 @@ using UnityEngine;
 public class TimedBuff : Buff
 {
     public float duration;
+    public float minDuration;
+    public float maxDuration;
     protected Stats stats;
 
     public TimedBuff(float value, float duration) : base(value)
@@ -18,6 +20,22 @@ public class TimedBuff : Buff
         Register(stats);
         Stat stat = stats.GetStat(type);
         stat += value;
+
+    }
+
+    public override void Set(float baseValue, float concentration, float purity, float yield)
+    {
+        float finalBuff = concentration;
+        finalBuff += purity / 200f;
+        finalBuff *= baseValue;
+        value = finalBuff;
+
+        yield += purity / 200f;
+        float finalDuration = Buff.Map(yield, 0f, 100f, minDuration, maxDuration);
+        duration = finalDuration;
+
+        Debug.Log(value);
+        Debug.Log(duration);
     }
 
     public virtual void OnUpdate()

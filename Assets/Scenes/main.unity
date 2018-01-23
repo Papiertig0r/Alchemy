@@ -225,12 +225,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   concentration: 40
+  purity: 0
+  yield: 0
   ingredientType: 1
   currentToolType: 0
   currentProgress: 0
   phaseTransition: []
   effectList:
-  - {fileID: 11400000, guid: e24e1c80f4791a848bd96347e7a6ce3c, type: 2}
+  - {fileID: 11400000, guid: 1ef900aa2f97a1c448e506bf20489c74, type: 2}
 --- !u!114 &7736201
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -755,6 +757,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   concentration: 40
+  purity: 0
+  yield: 0
   ingredientType: 2
   currentToolType: 0
   currentProgress: 0
@@ -1082,6 +1086,7 @@ MonoBehaviour:
   target: {fileID: 1124556317}
   attackCollider: {fileID: 922113626}
   inventory: {fileID: 455282232}
+  buff: {fileID: 0}
 --- !u!95 &455282229
 Animator:
   serializedVersion: 3

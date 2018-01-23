@@ -6,12 +6,32 @@ using UnityEngine;
 public class RepeatTimedBuff : TimedBuff
 {
     public float repeatRate;
+
+    public float minRepeatRate;
+    public float maxRepeatRate;
     private float _repeatRate;
 
     public RepeatTimedBuff(float value, float duration, float repeatRate) : base(value, duration)
     {
         this.repeatRate = repeatRate;
         this._repeatRate = repeatRate;
+    }
+
+    public override void Set(float baseValue, float concentration, float purity, float yield)
+    {
+        float finalBuff = concentration;
+        finalBuff *= baseValue;
+        value = finalBuff;
+
+        float finalDuration = Buff.Map(yield, 0f, 100f, minDuration, maxDuration);
+        duration = finalDuration;
+
+        float finalRepeatRate = Buff.Map(purity, 0f, 100f, maxRepeatRate, minRepeatRate);
+        repeatRate = finalRepeatRate;
+
+        Debug.Log(value);
+        Debug.Log(duration);
+        Debug.Log(repeatRate);
     }
 
     public override void OnUpdate()

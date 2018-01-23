@@ -27,10 +27,11 @@ public class CharaEditor : Editor
             //tmb.Apply(chara.stats, chara.stats.health);
         }
 
-        if (GUILayout.Button("Apply Buff") && PlayerController.player.buff != null)
+        if (GUILayout.Button("Calculate Buff"))
         {
-            Buff buff = Instantiate(PlayerController.player.buff);
-            buff.Apply(PlayerController.player.stats);
+            //Buff buff = Instantiate(PlayerController.player.buff);
+            //buff.Apply(PlayerController.player.stats);
+            Debug.Log(Buff.Map(100f, 0f, 100f, 10f, 3f));
         }
     }
 }

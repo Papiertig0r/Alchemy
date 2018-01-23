@@ -8,6 +8,8 @@ public class Ingredient : Applyable, IConsumable
     public static float minProgress = 0f;
 
     public float concentration = 0f;
+    public float purity = 0f;
+    public float yield = 0f;
 
     //! would current phase be better?
     public IngredientType ingredientType;
@@ -31,7 +33,7 @@ public class Ingredient : Applyable, IConsumable
     {
         foreach(Effect effect in effectList)
         {
-            effect.Apply(target, concentration, ingredientType);
+            effect.Apply(target, concentration, purity, yield, ingredientType);
         }
         Destroy(this.gameObject);
     }
