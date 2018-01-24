@@ -5,7 +5,6 @@ using UnityEngine;
 public class Tool : MonoBehaviour
 {
     public Ingredient ingredient;
-    public IngredientType ingredientType;
     public ToolType toolType;
     public float efficiency;
 
@@ -31,8 +30,7 @@ public class Tool : MonoBehaviour
     private PhaseTransition FindSuitablePhaseTransition(Ingredient ingredient)
     {
         // Find all phase transitions using this tool type
-        List<PhaseTransition> phaseTransitions = ingredient.phaseTransition.FindAll(phase => phase.toolType == this.toolType);
-        PhaseTransition phaseTransition = phaseTransitions.Find(phase => phase.originalType == ingredient.ingredientType);
+        PhaseTransition phaseTransition = ingredient.phaseTransition.Find(phase => phase.toolType == this.toolType);
 
         return phaseTransition;
     }
@@ -41,7 +39,7 @@ public class Tool : MonoBehaviour
     {
         if(ingredient != null)
         {
-            ProcessIngredient();
+            //ProcessIngredient();
         }
     }
 
@@ -53,9 +51,18 @@ public class Tool : MonoBehaviour
         if (ingredient.currentProgress >= Ingredient.maxProgress)
         {
             ingredient.currentProgress = Ingredient.minProgress;
-            PhaseTransition phTr = FindSuitablePhaseTransition(ingredient);
-            ingredient.ingredientType = phTr.endType;
-            ingredient.name = phTr.endProductName;
+            AdvanceIngredient();
+        }
+    }
+
+    public void AdvanceIngredient()
+    {
+        PhaseTransition phTr = FindSuitablePhaseTransition(ingredient);
+        if (phTr != null)
+        {
+            Ingredient temp = Instantiate(phTr.endProduct, ingredient.transform.position, ingredient.transform.rotation);
+            Destroy(ingredient.gameObject);
+            ingredient = temp;
         }
     }
 }

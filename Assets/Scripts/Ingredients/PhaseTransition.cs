@@ -8,8 +8,5 @@
 public class PhaseTransition
 {
     public ToolType toolType;
-    public IngredientType originalType;
-    public IngredientType endType;
-    public string endProductName;
-    public Sprite endProductSprite;
+    public Ingredient endProduct;
 }

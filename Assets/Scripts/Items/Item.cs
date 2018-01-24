@@ -13,6 +13,14 @@ public class Item : MonoBehaviour
         }
     }
 
+    public void Start()
+    {
+        if (transform.parent != ItemPool.itemPool.transform)
+        {
+            transform.SetParent(ItemPool.itemPool.transform);
+        }
+    }
+
     public bool Apply()
     {
         return true;
