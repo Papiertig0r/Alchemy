@@ -5,6 +5,8 @@ public class Item : MonoBehaviour
     new public string name;
     public uint stackSize;
 
+    PlayerController.OnActioButtonDown savedAction;
+
     public void Awake()
     {
         if(stackSize <= 0)
@@ -31,7 +33,8 @@ public class Item : MonoBehaviour
         PlayerController player = coll.GetComponent<PlayerController>();
         if (player)
         {
-            player.onActionButtonDown += PickUp;
+            savedAction = player.onActionButtonDown;
+            player.onActionButtonDown = PickUp;
         }
     }
 
@@ -40,7 +43,7 @@ public class Item : MonoBehaviour
         PlayerController player = coll.GetComponent<PlayerController>();
         if (coll.GetComponent<PlayerController>())
         {
-            player.onActionButtonDown -= PickUp;
+            player.onActionButtonDown = savedAction;
         }
     }
 

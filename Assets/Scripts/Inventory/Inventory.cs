@@ -8,6 +8,8 @@ public class Inventory : MonoBehaviour
     public int slotCount = 6;
     public int slotSize = 20;
 
+    public HotbarUI hotbarUi;
+
     [SerializeField]
     private int selectedHotbarSlot = 0;
     [SerializeField]
@@ -20,6 +22,8 @@ public class Inventory : MonoBehaviour
 
     private void Start()
     {
+        hotbarSize = hotbarUi.GetHotbarSize();
+        InitItemSlots();
     }
 
     private void Update()
@@ -42,6 +46,8 @@ public class Inventory : MonoBehaviour
         {
             selectedHotbarSlot = 0;
         }
+
+        hotbarUi.SelectHotbar(selectedHotbarSlot);
     }
 
     public bool AddItem(Item itemToAdd)
@@ -54,6 +60,7 @@ public class Inventory : MonoBehaviour
             {
                 slotsWithItem[i].quantity++;
                 Destroy(itemToAdd.gameObject);
+                UpdateUi();
                 return true;
             }
         }
@@ -65,7 +72,7 @@ public class Inventory : MonoBehaviour
         }
         itemSlots[index].item = itemToAdd;
         itemSlots[index].quantity++;
-
+        UpdateUi();
         return true;
     }
 
@@ -98,6 +105,8 @@ public class Inventory : MonoBehaviour
             DestroyObject(slot.item.gameObject);
             slot.item = null;
         }
+
+        UpdateUi();
     }
 
     public Item GetHotbarItem()
@@ -128,5 +137,23 @@ public class Inventory : MonoBehaviour
         {
             itemSlots.Add(new ItemSlot());
         }
+    }
+
+    public void ConsumeHotbarItem()
+    {
+        if(itemSlots[selectedHotbarSlot].item != null)
+        {
+            IConsumable consumable = itemSlots[selectedHotbarSlot].item.GetComponent<IConsumable>();
+            if (consumable != null)
+            {
+                consumable.Consume(PlayerController.player);
+                RemoveItemFromSlot(itemSlots[selectedHotbarSlot]);
+            }
+        }
+    }
+
+    private void UpdateUi()
+    {
+        hotbarUi.UpdateUi(itemSlots.GetRange(0, hotbarSize));
     }
 }

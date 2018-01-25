@@ -28,10 +28,6 @@ public class RepeatTimedBuff : TimedBuff
 
         float finalRepeatRate = Buff.Map(purity, 0f, 100f, maxRepeatRate, minRepeatRate);
         repeatRate = finalRepeatRate;
-
-        Debug.Log(value);
-        Debug.Log(duration);
-        Debug.Log(repeatRate);
     }
 
     public override void OnUpdate()

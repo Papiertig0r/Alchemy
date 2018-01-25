@@ -33,9 +33,6 @@ public class TimedBuff : Buff
         yield += purity / 200f;
         float finalDuration = Buff.Map(yield, 0f, 100f, minDuration, maxDuration);
         duration = finalDuration;
-
-        Debug.Log(value);
-        Debug.Log(duration);
     }
 
     public virtual void OnUpdate()

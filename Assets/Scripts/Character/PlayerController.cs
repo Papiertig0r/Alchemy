@@ -37,6 +37,8 @@ public class PlayerController : CharaController
             Destroy(this.gameObject);
         }
 
+        onActionButtonDown = inventory.ConsumeHotbarItem;
+
         attackCollider.GetComponent<AttackCollider>().onHit += Hit;
         loopSource = GetComponent<AudioSource>();
 

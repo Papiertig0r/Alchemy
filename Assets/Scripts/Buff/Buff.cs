@@ -29,8 +29,6 @@ public class Buff : ScriptableObject
         finalBuff += yield / 100f;
         finalBuff *= baseValue;
         value = finalBuff;
-
-        Debug.Log(value);
     }
 
     public virtual void Apply(Stats stats)
