@@ -9,11 +9,16 @@ public class Inventory : MonoBehaviour
     public int slotSize = 20;
 
     public HotbarUI hotbarUi;
+    public InventoryUI inventoryUi;
 
     [SerializeField]
     private int selectedHotbarSlot = 0;
     [SerializeField]
+    private int selectedInventorySlot = 0;
+    [SerializeField]
     public List<ItemSlot> itemSlots;
+
+    private bool invWasPressed = false;
 
     private void Awake()
     {
@@ -23,21 +28,28 @@ public class Inventory : MonoBehaviour
     private void Start()
     {
         hotbarSize = hotbarUi.GetHotbarSize();
+        inventoryUi.InitInventoryUI(hotbarUi.GetSlotUi());
+        slotCount = inventoryUi.GetInventorySize();
         InitItemSlots();
     }
 
     private void Update()
     {
-        if(Input.GetButtonDown("SwitchLeft"))
-        {
-            selectedHotbarSlot--;
-        }
+        /*
+        float horizontalChange = Input.GetAxisRaw("InvHorizontal");
 
-        if (Input.GetButtonDown("SwitchRight"))
+        if (!invWasPressed)
         {
-            selectedHotbarSlot++;
+            selectedHotbarSlot += Mathf.FloorToInt(horizontalChange);
         }
-
+        invWasPressed = (horizontalChange != 0f) ? true : false;
+        
+        */
+        if (Input.GetButtonDown("Inventory"))
+        {
+            inventoryUi.Toggle();
+        }
+        /*
         if(selectedHotbarSlot < 0)
         {
             selectedHotbarSlot = hotbarSize - 1;
@@ -47,7 +59,7 @@ public class Inventory : MonoBehaviour
             selectedHotbarSlot = 0;
         }
 
-        hotbarUi.SelectHotbar(selectedHotbarSlot);
+        hotbarUi.SelectHotbar(selectedHotbarSlot);*/
     }
 
     public bool AddItem(Item itemToAdd)
@@ -154,6 +166,6 @@ public class Inventory : MonoBehaviour
 
     private void UpdateUi()
     {
-        hotbarUi.UpdateUi(itemSlots.GetRange(0, hotbarSize));
+        inventoryUi.UpdateUi(itemSlots);
     }
 }
