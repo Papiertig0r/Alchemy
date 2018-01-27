@@ -85,8 +85,8 @@ public class InventoryUI : MonoBehaviour
 
     public void SelectSlot(int id)
     {
-        id = Mathf.Clamp(id, 0, allInventorySlots.Count);
-        inventorySlotSelector.transform.SetParent(allInventorySlots[id].transform);
+        selectedInventorySlot = Mathf.Clamp(id, 0, allInventorySlots.Count);
+        inventorySlotSelector.transform.SetParent(allInventorySlots[selectedInventorySlot].transform);
         inventorySlotSelector.transform.localPosition = Vector3.zero;
     }
 

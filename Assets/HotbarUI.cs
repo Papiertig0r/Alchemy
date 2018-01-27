@@ -41,8 +41,8 @@ public class HotbarUI : MonoBehaviour
 
     public void SelectHotbar(int id)
     {
-        id = Mathf.Clamp(id, 0, itemSlots.Count);
-        selector.transform.SetParent(itemSlots[id].transform);
+        selectedHotbarSlot = Mathf.Clamp(id, 0, itemSlots.Count);
+        selector.transform.SetParent(itemSlots[selectedHotbarSlot].transform);
         selector.transform.localPosition = Vector3.zero;
     }
 
