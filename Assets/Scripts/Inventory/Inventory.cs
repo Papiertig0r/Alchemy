@@ -12,13 +12,7 @@ public class Inventory : MonoBehaviour
     public InventoryUI inventoryUi;
 
     [SerializeField]
-    private int selectedHotbarSlot = 0;
-    [SerializeField]
-    private int selectedInventorySlot = 0;
-    [SerializeField]
-    public List<ItemSlot> itemSlots;
-
-    private bool invWasPressed = false;
+    private List<ItemSlot> itemSlots;
 
     private void Awake()
     {
@@ -35,31 +29,10 @@ public class Inventory : MonoBehaviour
 
     private void Update()
     {
-        /*
-        float horizontalChange = Input.GetAxisRaw("InvHorizontal");
-
-        if (!invWasPressed)
-        {
-            selectedHotbarSlot += Mathf.FloorToInt(horizontalChange);
-        }
-        invWasPressed = (horizontalChange != 0f) ? true : false;
-        
-        */
         if (Input.GetButtonDown("Inventory"))
         {
             inventoryUi.Toggle();
         }
-        /*
-        if(selectedHotbarSlot < 0)
-        {
-            selectedHotbarSlot = hotbarSize - 1;
-        }
-        else if(selectedHotbarSlot == hotbarSize)
-        {
-            selectedHotbarSlot = 0;
-        }
-
-        hotbarUi.SelectHotbar(selectedHotbarSlot);*/
     }
 
     public bool AddItem(Item itemToAdd)
@@ -123,7 +96,7 @@ public class Inventory : MonoBehaviour
 
     public Item GetHotbarItem()
     {
-        Item item = itemSlots[selectedHotbarSlot].item;
+        Item item = itemSlots[hotbarUi.GetSelectedHotbar()].item;
         return item;
     }
 
@@ -139,7 +112,7 @@ public class Inventory : MonoBehaviour
 
     public void RemoveItemForRangedAttack()
     {
-        RemoveItem(selectedHotbarSlot);
+        RemoveItem(hotbarUi.GetSelectedHotbar());
     }
 
     private void InitItemSlots()
@@ -153,13 +126,13 @@ public class Inventory : MonoBehaviour
 
     public void ConsumeHotbarItem()
     {
-        if(itemSlots[selectedHotbarSlot].item != null)
+        if(itemSlots[hotbarUi.GetSelectedHotbar()].item != null)
         {
-            IConsumable consumable = itemSlots[selectedHotbarSlot].item.GetComponent<IConsumable>();
+            IConsumable consumable = itemSlots[hotbarUi.GetSelectedHotbar()].item.GetComponent<IConsumable>();
             if (consumable != null)
             {
                 consumable.Consume(PlayerController.player);
-                RemoveItemFromSlot(itemSlots[selectedHotbarSlot]);
+                RemoveItemFromSlot(itemSlots[hotbarUi.GetSelectedHotbar()]);
             }
         }
     }
