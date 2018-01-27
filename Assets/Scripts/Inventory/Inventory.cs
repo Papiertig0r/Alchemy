@@ -122,6 +122,7 @@ public class Inventory : MonoBehaviour
         {
             itemSlots.Add(new ItemSlot());
         }
+        UpdateUi();
     }
 
     public void ConsumeHotbarItem()

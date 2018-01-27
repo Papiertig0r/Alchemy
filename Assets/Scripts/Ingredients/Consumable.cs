@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Consumable : MonoBehaviour, IConsumable
+public class Consumable : MonoBehaviour, IConsumable, IShowable
 {
+    public string description;
     public float strength = 10f;
     public float concentration = 10f;
     public float purity = 10f;
@@ -18,5 +19,16 @@ public class Consumable : MonoBehaviour, IConsumable
             newBuff.Set(strength, concentration, purity, yield);
             newBuff.Apply(target.stats);
         }
+    }
+
+    public void DeactivateExtendedInfo()
+    {
+        InventoryUI.consumableInfoUi.Deactivate();
+    }
+
+    public void ShowExtendedInfo()
+    {
+        InventoryUI.consumableInfoUi.SetConsumable(this);
+        InventoryUI.consumableInfoUi.Activate();
     }
 }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Ingredient : Applyable, IConsumable
+public class Ingredient : Applyable, IConsumable, IShowable
 {
     public static float maxProgress = 100f;
     public static float minProgress = 0f;
@@ -52,5 +52,16 @@ public class Ingredient : Applyable, IConsumable
     public void Consume(CharaController target)
     {
         Apply(target);
+    }
+
+    public void DeactivateExtendedInfo()
+    {
+        InventoryUI.ingredientInfoUi.Deactivate();
+    }
+
+    public void ShowExtendedInfo()
+    {
+        InventoryUI.ingredientInfoUi.SetIngredient(this);
+        InventoryUI.ingredientInfoUi.Activate();
     }
 }

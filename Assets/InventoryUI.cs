@@ -5,14 +5,38 @@ using UnityEngine.UI;
 
 public class InventoryUI : MonoBehaviour
 {
+    public static IngredientInfoUI ingredientInfoUi;
+    public static ConsumableInfoUi consumableInfoUi;
+
     public GameObject inventorySlotSelector;
     public GameObject inventorySelector;
     public HotbarUI hotbar;
+
+    public ItemInfoUI itemInfoUi;
+
+    public IngredientInfoUI _ingredientInfoUi;
+    public ConsumableInfoUi _consumableInfoUi;
+
     private List<ItemSlotUI> inventorySlots = new List<ItemSlotUI>();
     private List<ItemSlotUI> allInventorySlots = new List<ItemSlotUI>();
+    private List<ItemSlot> inventory = new List<ItemSlot>();
 
     private int selectedInventorySlot = 0;
-    private bool invWasPressed = false;
+    private bool released = true;
+    private IShowable currentExtendenInfo;
+
+    private void Awake()
+    {
+        if(ingredientInfoUi == null)
+        {
+            ingredientInfoUi = _ingredientInfoUi;
+        }
+
+        if (consumableInfoUi == null)
+        {
+            consumableInfoUi = _consumableInfoUi;
+        }
+    }
 
     private void OnEnable()
     {
@@ -22,10 +46,12 @@ public class InventoryUI : MonoBehaviour
             SelectSlot(hotbar.GetSelectedHotbar());
         }
         inventorySlotSelector.SetActive(true);
+        HandleInfoUi();
     }
 
     private void OnDisable()
     {
+        itemInfoUi.Deactivate();
         inventorySlotSelector.SetActive(false);
         if(selectedInventorySlot < hotbar.GetHotbarSize())
         {
@@ -42,19 +68,22 @@ public class InventoryUI : MonoBehaviour
         // works only if inventory UI is same size as hotbar
         int x = selectedInventorySlot % hotbar.GetHotbarSize();
         int y = selectedInventorySlot / hotbar.GetHotbarSize();
-        if (!invWasPressed)
+        if ((horizontalChange != 0f || verticalChange != 0f) && released)
         {
+            released = false;
             x += Mathf.FloorToInt(horizontalChange);
             y += Mathf.FloorToInt(verticalChange);
             x = WrapAround(x, 0, hotbar.GetHotbarSize() - 1);
             y = WrapAround(y, 0, allInventorySlots.Count / hotbar.GetHotbarSize() - 1);
+
+            selectedInventorySlot = x + y * hotbar.GetHotbarSize();
+            SelectSlot(selectedInventorySlot);
+            HandleInfoUi();
         }
-
-        invWasPressed = (horizontalChange != 0f) ? true : false;
-        invWasPressed |= (verticalChange != 0f) ? true : false;
-
-        selectedInventorySlot = x + y * hotbar.GetHotbarSize();
-        SelectSlot(selectedInventorySlot);
+        else if(horizontalChange == 0f && verticalChange == 0f && ! released)
+        {
+            released = true;
+        }
     }
 
     public int GetInventorySize()
@@ -72,9 +101,14 @@ public class InventoryUI : MonoBehaviour
 
     public void UpdateUi(List<ItemSlot> inventory)
     {
+        this.inventory = inventory;
         for (int i = 0; i < allInventorySlots.Count; i++)
         {
             allInventorySlots[i].SetSlot(inventory[i]);
+        }
+        if (gameObject.activeSelf)
+        {
+            HandleInfoUi();
         }
     }
 
@@ -101,5 +135,34 @@ public class InventoryUI : MonoBehaviour
             value = min;
         }
         return value;
+    }
+
+    private void HandleInfoUi()
+    {
+        Item item = inventory[selectedInventorySlot].item;
+        if (item == null)
+        {
+            itemInfoUi.Deactivate();
+        }
+        else
+        {
+            itemInfoUi.SetItemName(item.name);
+            itemInfoUi.Activate();
+            IShowable showable = item.GetComponent<IShowable>();
+            HandleExtendedInfoUi(showable);
+        }
+    }
+
+    private void HandleExtendedInfoUi(IShowable showable)
+    {
+        if(currentExtendenInfo != null)
+        {
+            currentExtendenInfo.DeactivateExtendedInfo();
+        }
+        currentExtendenInfo = showable;
+        if (showable != null)
+        {
+            showable.ShowExtendedInfo();
+        }
     }
 }
