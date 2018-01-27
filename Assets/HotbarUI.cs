@@ -51,14 +51,6 @@ public class HotbarUI : MonoBehaviour
         return itemSlots.Count;
     }
 
-    public void UpdateUi(List<ItemSlot> hotbar)
-    {
-        for(int i = 0; i < itemSlots.Count; i++)
-        {
-            itemSlots[i].SetSlot(hotbar[i]);
-        }
-    }
-
     public List<ItemSlotUI> GetSlotUi()
     {
         return itemSlots;

@@ -13,11 +13,8 @@ public class PlayerController : CharaController
 
     public Inventory inventory;
 
-
     public delegate void OnActioButtonDown();
     public OnActioButtonDown onActionButtonDown;
-
-    public Buff buff;
 
     private Vector3 targetOffset;
     private bool executedAttack = false;
