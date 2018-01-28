@@ -23,12 +23,12 @@ public class Consumable : MonoBehaviour, IConsumable, IShowable
 
     public void DeactivateExtendedInfo()
     {
-        InventoryUI.consumableInfoUi.Deactivate();
+        UIManager.consumableInfoUi.Deactivate();
     }
 
     public void ShowExtendedInfo()
     {
-        InventoryUI.consumableInfoUi.SetConsumable(this);
-        InventoryUI.consumableInfoUi.Activate();
+        UIManager.consumableInfoUi.SetConsumable(this);
+        UIManager.consumableInfoUi.Activate();
     }
 }

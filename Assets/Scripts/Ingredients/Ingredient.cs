@@ -56,12 +56,12 @@ public class Ingredient : Applyable, IConsumable, IShowable
 
     public void DeactivateExtendedInfo()
     {
-        InventoryUI.ingredientInfoUi.Deactivate();
+        UIManager.ingredientInfoUi.Deactivate();
     }
 
     public void ShowExtendedInfo()
     {
-        InventoryUI.ingredientInfoUi.SetIngredient(this);
-        InventoryUI.ingredientInfoUi.Activate();
+        UIManager.ingredientInfoUi.SetIngredient(this);
+        UIManager.ingredientInfoUi.Activate();
     }
 }

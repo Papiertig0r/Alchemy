@@ -5,8 +5,6 @@ using UnityEngine.UI;
 
 public class InventoryUI : MonoBehaviour
 {
-    public static IngredientInfoUI ingredientInfoUi;
-    public static ConsumableInfoUi consumableInfoUi;
 
     public GameObject inventorySlotSelector;
     public GameObject inventorySelector;
@@ -14,8 +12,6 @@ public class InventoryUI : MonoBehaviour
 
     public ItemInfoUI itemInfoUi;
 
-    public IngredientInfoUI _ingredientInfoUi;
-    public ConsumableInfoUi _consumableInfoUi;
 
     private List<ItemSlotUI> inventorySlots = new List<ItemSlotUI>();
     private List<ItemSlotUI> allInventorySlots = new List<ItemSlotUI>();
@@ -24,19 +20,6 @@ public class InventoryUI : MonoBehaviour
     private int selectedInventorySlot = 0;
     private bool released = true;
     private IShowable currentExtendenInfo;
-
-    private void Awake()
-    {
-        if(ingredientInfoUi == null)
-        {
-            ingredientInfoUi = _ingredientInfoUi;
-        }
-
-        if (consumableInfoUi == null)
-        {
-            consumableInfoUi = _consumableInfoUi;
-        }
-    }
 
     private void OnEnable()
     {
