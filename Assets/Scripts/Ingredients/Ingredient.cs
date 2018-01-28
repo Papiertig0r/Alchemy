@@ -81,9 +81,9 @@ public class Ingredient : Applyable, IConsumable, IShowable, IComparable
         //! \todo check effects
         if (
             this.ingredientType != otherIngredient.ingredientType ||
-            this.concentration != otherIngredient.concentration ||
-            this.purity != otherIngredient.purity ||
-            this.yield != otherIngredient.yield
+            Mathf.RoundToInt(this.concentration) != Mathf.RoundToInt(otherIngredient.concentration) ||
+            Mathf.RoundToInt(this.purity) != Mathf.RoundToInt(otherIngredient.purity) ||
+            Mathf.RoundToInt(this.yield) != Mathf.RoundToInt(otherIngredient.yield)
             )
         {
             return false;
