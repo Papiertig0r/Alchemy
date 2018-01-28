@@ -5,8 +5,6 @@ public class Item : Interactable
     new public string name;
     public uint stackSize;
 
-    PlayerController.OnActioButtonDown savedAction;
-
     public void Awake()
     {
         if(stackSize <= 0)
@@ -27,26 +25,6 @@ public class Item : Interactable
     {
         return true;
     }
-
-    /*
-    private void OnTriggerEnter2D(Collider2D coll)
-    {
-        PlayerController player = coll.GetComponent<PlayerController>();
-        if (player)
-        {
-            savedAction = player.onActionButtonDown;
-            player.onActionButtonDown = Interact;
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D coll)
-    {
-        PlayerController player = coll.GetComponent<PlayerController>();
-        if (coll.GetComponent<PlayerController>())
-        {
-            player.onActionButtonDown = savedAction;
-        }
-    }*/
 
     public override void Interact()
     {
