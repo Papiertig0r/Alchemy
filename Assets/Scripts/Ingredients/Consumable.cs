@@ -5,10 +5,6 @@ using UnityEngine;
 public class Consumable : MonoBehaviour, IConsumable, IShowable, IComparable
 {
     public string description;
-    public float strength = 10f;
-    public float concentration = 10f;
-    public float purity = 10f;
-    public float yield = 10f;
     public List<Buff> buffs = new List<Buff>();
 
     public void Consume(CharaController target)
@@ -16,9 +12,9 @@ public class Consumable : MonoBehaviour, IConsumable, IShowable, IComparable
         foreach(Buff buff in buffs)
         {
             Buff newBuff = Instantiate(buff);
-            newBuff.Set(strength, concentration, purity, yield);
             newBuff.Apply(target.stats);
         }
+        Destroy(this.gameObject);
     }
 
     public void DeactivateExtendedInfo()
