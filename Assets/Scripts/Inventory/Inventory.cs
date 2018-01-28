@@ -94,19 +94,14 @@ public class Inventory : MonoBehaviour
         UpdateUi();
     }
 
+    public void RemoveSelectedHotbarItem()
+    {
+        RemoveItem(hotbarUi.GetSelectedHotbar());
+    }
+
     public Item GetHotbarItem()
     {
         Item item = itemSlots[hotbarUi.GetSelectedHotbar()].item;
-        return item;
-    }
-
-    public Item InstantiateItem(Item item)
-    {
-        if (item != null)
-        {
-            item = Instantiate<Item>(item, this.transform);
-            item.gameObject.name = item.name;
-        }
         return item;
     }
 
@@ -127,11 +122,13 @@ public class Inventory : MonoBehaviour
 
     public void ConsumeHotbarItem()
     {
-        if(itemSlots[hotbarUi.GetSelectedHotbar()].item != null)
+        Item item = itemSlots[hotbarUi.GetSelectedHotbar()].item;
+        if (item != null)
         {
-            IConsumable consumable = itemSlots[hotbarUi.GetSelectedHotbar()].item.GetComponent<IConsumable>();
+            IConsumable consumable = item.GetComponent<IConsumable>();
             if (consumable != null)
             {
+                consumable = InstantiateItem(item).GetComponent<IConsumable>();
                 consumable.Consume(PlayerController.player);
                 RemoveItemFromSlot(itemSlots[hotbarUi.GetSelectedHotbar()]);
             }
@@ -141,5 +138,20 @@ public class Inventory : MonoBehaviour
     private void UpdateUi()
     {
         inventoryUi.UpdateUi(itemSlots);
+    }
+
+    public Item InstantiateItem(Item item)
+    {
+        return InstantiateItem(item, this.transform);
+    }
+
+    public static Item InstantiateItem(Item item, Transform parent)
+    {
+        if (item != null)
+        {
+            item = Instantiate<Item>(item, parent);
+            item.gameObject.name = item.name;
+        }
+        return item;
     }
 }
