@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Item : MonoBehaviour
+public class Item : Interactable
 {
     new public string name;
     public uint stackSize;
@@ -28,13 +28,14 @@ public class Item : MonoBehaviour
         return true;
     }
 
+    /*
     private void OnTriggerEnter2D(Collider2D coll)
     {
         PlayerController player = coll.GetComponent<PlayerController>();
         if (player)
         {
             savedAction = player.onActionButtonDown;
-            player.onActionButtonDown = PickUp;
+            player.onActionButtonDown = Interact;
         }
     }
 
@@ -45,9 +46,9 @@ public class Item : MonoBehaviour
         {
             player.onActionButtonDown = savedAction;
         }
-    }
+    }*/
 
-    public void PickUp()
+    public override void Interact()
     {
         PlayerController player = PlayerController.player;
         if (player.inventory.AddItem(this))
