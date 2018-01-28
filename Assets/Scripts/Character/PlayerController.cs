@@ -13,9 +13,6 @@ public class PlayerController : CharaController
 
     public Inventory inventory;
 
-    public delegate void OnActioButtonDown();
-    public OnActioButtonDown onActionButtonDown;
-
     private Vector3 targetOffset;
     private bool executedAttack = false;
     private Vector3 velocity;
@@ -34,7 +31,7 @@ public class PlayerController : CharaController
             Destroy(this.gameObject);
         }
 
-        onActionButtonDown = inventory.ConsumeHotbarItem;
+        StateController.instance.worldAction = inventory.ConsumeHotbarItem;
 
         attackCollider.GetComponent<AttackCollider>().onHit += Hit;
         loopSource = GetComponent<AudioSource>();
@@ -79,8 +76,6 @@ public class PlayerController : CharaController
         HandleTargeting();
 
         HandleAttacking();
-
-        HandleActions();
     }
 
     private void HandleTargeting()
@@ -118,14 +113,6 @@ public class PlayerController : CharaController
         else
         {
             executedAttack = false;
-        }
-    }
-
-    private void HandleActions()
-    {
-        if(Input.GetButtonDown("Action") && onActionButtonDown != null)
-        {
-            onActionButtonDown.Invoke();
         }
     }
 

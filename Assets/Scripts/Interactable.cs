@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(BoxCollider2D))]
 public abstract class Interactable : MonoBehaviour
 {
-    private PlayerController.OnActioButtonDown savedAction;
+    private StateController.OnActionButtonDown savedAction;
 
     private void Awake()
     {
@@ -17,8 +17,8 @@ public abstract class Interactable : MonoBehaviour
         PlayerController player = coll.GetComponent<PlayerController>();
         if (player)
         {
-            savedAction = player.onActionButtonDown;
-            player.onActionButtonDown = Interact;
+            savedAction = StateController.instance.worldAction;
+            StateController.instance.worldAction = Interact;
             Entered();
         }
     }
@@ -28,7 +28,7 @@ public abstract class Interactable : MonoBehaviour
         PlayerController player = coll.GetComponent<PlayerController>();
         if (coll.GetComponent<PlayerController>())
         {
-            player.onActionButtonDown = savedAction;
+            StateController.instance.worldAction = savedAction;
             Left();
         }
     }

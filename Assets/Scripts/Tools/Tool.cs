@@ -5,9 +5,12 @@ using UnityEngine;
 
 public class Tool : Interactable
 {
+    public new string name;
     public Ingredient ingredient;
     public ToolType toolType;
     public float efficiency;
+
+    private bool isProcessable = false;
 
     public bool AddIngredient(Ingredient ingredient)
     {
@@ -17,14 +20,12 @@ public class Tool : Interactable
             return false;
         }
 
-        if(this.ingredient != null)
-        {
-            PlayerController.player.inventory.AddItem(ingredient.GetComponent<Item>());
-        }
-
         this.ingredient = ingredient;
         this.ingredient.currentProgress = 0f;
         this.ingredient.currentToolType = this.toolType;
+
+        UIManager.toolInfoUi.UpdateIngredient();
+        isProcessable = true;
         return true;
     }
 
@@ -38,9 +39,10 @@ public class Tool : Interactable
 
     private void Update()
     {
-        if(ingredient != null)
+        if(ingredient != null && isProcessable)
         {
-            //ProcessIngredient();
+            ProcessIngredient();
+            UpdateUi();
         }
     }
 
@@ -61,19 +63,86 @@ public class Tool : Interactable
         PhaseTransition phTr = FindSuitablePhaseTransition(ingredient);
         if (phTr != null)
         {
-            Ingredient temp = Instantiate(phTr.endProduct, ingredient.transform.position, ingredient.transform.rotation);
+            Ingredient temp = Instantiate(phTr.endProduct, ingredient.transform.position, ingredient.transform.rotation, this.transform);
             Destroy(ingredient.gameObject);
+            temp.gameObject.SetActive(false);
             ingredient = temp;
+
+            phTr = FindSuitablePhaseTransition(ingredient);
+            if (phTr == null)
+            {
+                isProcessable = false;
+            }
+
+            UIManager.toolInfoUi.UpdateIngredient();
         }
     }
 
     public override void Interact()
     {
-        UIManager.toolInfoUi.Toggle();
+        if (UIManager.toolInfoUi.IsActive())
+        {
+            Deactivate();
+        }
+        else
+        {
+            Activate();
+        }
+    }
+
+    private void Activate()
+    {
+        StateController.instance.toolUiAction += HandleItemSwitching;
+        UIManager.toolInfoUi.SetTool(this);
+        UIManager.toolInfoUi.Activate();
+        UpdateUi();
+    }
+
+    private void Deactivate()
+    {
+        StateController.instance.toolUiAction -= HandleItemSwitching;
+        UIManager.toolInfoUi.Deactivate();
     }
 
     protected override void Left()
     {
-        UIManager.toolInfoUi.Deactivate();
+        Deactivate();
+    }
+
+    //! \todo switched items should have the same slot
+    public void HandleItemSwitching()
+    {
+        if(ingredient != null)
+        {
+            if(PlayerController.player.inventory.AddItem(ingredient.GetComponent<Item>()))
+            {
+                RemoveIngredient();
+            }
+        }
+
+        Item item = PlayerController.player.inventory.GetHotbarItem();
+        if (item != null)
+        {
+            Ingredient toAdd = item.GetComponent<Ingredient>();
+            if(toAdd != null)
+            {
+                if(AddIngredient(toAdd))
+                {
+                    AddIngredient(Inventory.InstantiateItem(item, this.transform).GetComponent<Ingredient>());
+                    PlayerController.player.inventory.RemoveSelectedHotbarItem();
+                }
+            }
+        }
+    }
+
+    public void RemoveIngredient()
+    {
+        this.ingredient = null;
+        UIManager.toolInfoUi.RemoveIngredient();
+    }
+
+    private void UpdateUi()
+    {
+        UIManager.toolInfoUi.UpdateUi();
     }
 }

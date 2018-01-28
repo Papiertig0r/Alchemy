@@ -9,23 +9,48 @@ public class ToolInfoUI : MonoBehaviour
     public Slider progressSlider;
     public ItemSlotUI itemSlotUi;
 
+    private Tool tool;
+
     public void Deactivate()
     {
         gameObject.SetActive(false);
+        StateController.instance.Transition(State.WORLD);
     }
 
-    private void OnEnable()
+    public bool IsActive()
     {
-
+        return gameObject.activeSelf;
     }
 
-    private void OnDisable()
+    public void Activate()
     {
-
+        StateController.instance.Transition(State.TOOL_UI);
+        gameObject.SetActive(true);
     }
 
-    public void Toggle()
+    public void UpdateUi()
     {
-        gameObject.SetActive(!gameObject.activeSelf);
+        float progress = 0f;
+        if(tool != null && tool.ingredient != null)
+        {
+            progress = tool.ingredient.currentProgress;
+        }
+        progressSlider.value = progress;
+    }
+
+    public void UpdateIngredient()
+    {
+        itemSlotUi.SetSprite(tool.ingredient.GetComponent<SpriteRenderer>().sprite);
+    }
+
+    public void RemoveIngredient()
+    {
+        itemSlotUi.SetSprite(null);
+    }
+
+    public void SetTool(Tool tool)
+    {
+        this.tool = tool;
+        toolName.text = tool.name;
     }
 }
