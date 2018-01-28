@@ -35,4 +35,14 @@ public class Item : Interactable
             gameObject.transform.SetParent(player.transform);
         }
     }
+
+    public bool Compare(IComparable other)
+    {
+        IComparable comparable = GetComponent<IComparable>();
+        if(comparable == null)
+        {
+            return false;
+        }
+        return comparable.Compare(other);
+    }
 }

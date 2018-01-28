@@ -63,7 +63,8 @@ public class Inventory : MonoBehaviour
 
     public List<ItemSlot> FindSlotsWithItem(Item item)
     {
-        List<ItemSlot> foundSlots = itemSlots.FindAll(slots => slots.item != null && slots.item.name == item.name);
+        //List<ItemSlot> foundSlots = itemSlots.FindAll(slots => slots.item != null && slots.item.name == item.name);
+        List<ItemSlot> foundSlots = itemSlots.FindAll(slots => slots.item != null && slots.item.name == item.name &&slots.item.Compare(item.GetComponent<IComparable>()));
         return foundSlots;
     }
 

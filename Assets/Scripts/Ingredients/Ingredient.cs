@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Ingredient : Applyable, IConsumable, IShowable
+public class Ingredient : Applyable, IConsumable, IShowable, IComparable
 {
     public static float maxProgress = 100f;
     public static float minProgress = 0f;
@@ -63,5 +63,32 @@ public class Ingredient : Applyable, IConsumable, IShowable
     {
         UIManager.ingredientInfoUi.SetIngredient(this);
         UIManager.ingredientInfoUi.Activate();
+    }
+
+    public bool Compare(IComparable other)
+    {
+        if (other == null)
+        {
+            return false;
+        }
+
+        Ingredient otherIngredient = other as Ingredient;
+        if (otherIngredient == null)
+        {
+            return false;
+        }
+
+        //! \todo check effects
+        if (
+            this.ingredientType != otherIngredient.ingredientType ||
+            this.concentration != otherIngredient.concentration ||
+            this.purity != otherIngredient.purity ||
+            this.yield != otherIngredient.yield
+            )
+        {
+            return false;
+        }
+
+        return true;
     }
 }
