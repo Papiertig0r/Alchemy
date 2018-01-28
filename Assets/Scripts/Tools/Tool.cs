@@ -64,7 +64,13 @@ public class Tool : Interactable
         if (phTr != null)
         {
             Ingredient temp = Instantiate(phTr.endProduct, ingredient.transform.position, ingredient.transform.rotation, this.transform);
+            temp.concentration = ingredient.concentration;
+            temp.purity = ingredient.purity;
+            temp.yield = ingredient.yield;
+            //temp.effectList = ingredient.effectList;
+
             Destroy(ingredient.gameObject);
+
             temp.gameObject.SetActive(false);
             ingredient = temp;
 
