@@ -2,9 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(BoxCollider2D))]
 public abstract class Interactable : MonoBehaviour
 {
-    PlayerController.OnActioButtonDown savedAction;
+    private PlayerController.OnActioButtonDown savedAction;
+
+    private void Awake()
+    {
+        GetComponent<BoxCollider2D>().isTrigger = true;
+    }
 
     private void OnTriggerEnter2D(Collider2D coll)
     {
@@ -13,6 +19,7 @@ public abstract class Interactable : MonoBehaviour
         {
             savedAction = player.onActionButtonDown;
             player.onActionButtonDown = Interact;
+            Entered();
         }
     }
 
@@ -22,7 +29,18 @@ public abstract class Interactable : MonoBehaviour
         if (coll.GetComponent<PlayerController>())
         {
             player.onActionButtonDown = savedAction;
+            Left();
         }
+    }
+
+    protected virtual void Entered()
+    {
+
+    }
+
+    protected virtual void Left()
+    {
+
     }
 
     public abstract void Interact();

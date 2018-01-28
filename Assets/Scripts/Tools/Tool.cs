@@ -1,8 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Tool : MonoBehaviour
+public class Tool : Interactable
 {
     public Ingredient ingredient;
     public ToolType toolType;
@@ -64,5 +65,15 @@ public class Tool : MonoBehaviour
             Destroy(ingredient.gameObject);
             ingredient = temp;
         }
+    }
+
+    public override void Interact()
+    {
+        UIManager.toolInfoUi.Toggle();
+    }
+
+    protected override void Left()
+    {
+        UIManager.toolInfoUi.Deactivate();
     }
 }
