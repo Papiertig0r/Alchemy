@@ -14,8 +14,7 @@ public abstract class Interactable : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D coll)
     {
-        PlayerController player = coll.GetComponent<PlayerController>();
-        if (player)
+        if (coll.GetComponent<PlayerController>())
         {
             savedAction = StateController.instance.worldAction;
             StateController.instance.worldAction = Interact;
@@ -25,7 +24,6 @@ public abstract class Interactable : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D coll)
     {
-        PlayerController player = coll.GetComponent<PlayerController>();
         if (coll.GetComponent<PlayerController>())
         {
             StateController.instance.worldAction = savedAction;
