@@ -2,15 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(BoxCollider2D))]
+[RequireComponent(typeof(Collider2D))]
 public abstract class Interactable : MonoBehaviour
 {
     private StateController.OnActionButtonDown savedAction;
-
-    private void Awake()
-    {
-        GetComponent<BoxCollider2D>().isTrigger = true;
-    }
 
     private void OnTriggerEnter2D(Collider2D coll)
     {
@@ -31,6 +26,18 @@ public abstract class Interactable : MonoBehaviour
             StateController.instance.worldAction = savedAction;
             Left();
         }
+    }
+
+    private void OnCollisionEnter2D(Collision2D coll)
+    {
+        Debug.Log("Coll enter");
+        OnTriggerEnter2D(coll.collider);
+    }
+
+    private void OnCollisionExit2D(Collision2D coll)
+    {
+        Debug.Log("Coll exit");
+        OnTriggerExit2D(coll.collider);
     }
 
     protected virtual void Entered()

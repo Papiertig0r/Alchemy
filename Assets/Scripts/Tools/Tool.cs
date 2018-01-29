@@ -86,6 +86,7 @@ public class Tool : Interactable
 
     public override void Interact()
     {
+        Debug.Log("Interact");
         if (UIManager.toolInfoUi.IsActive())
         {
             Deactivate();

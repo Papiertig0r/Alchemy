@@ -36,7 +36,7 @@ public class Throwable : MonoBehaviour, IRangedWeapon
             {
                 Scale(direction);
             }
-
+            direction.z = 0f;
             if (direction.magnitude < 0.1f)
             {
                 Land();

@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 114328752238106466}
   - component: {fileID: 114380678637642768}
   - component: {fileID: 61023403245597316}
+  - component: {fileID: 114777298715970852}
   m_Layer: 0
   m_Name: ThrowingDagger
   m_TagString: Untagged
@@ -103,6 +104,17 @@ MonoBehaviour:
     applyable: {fileID: 0}
     radius: 0
   attackStrength: 10
+--- !u!114 &114777298715970852
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1385872330533154}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a43a3926dbcc3df45b9bcd9e507a0a0a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &212694004898939852
 SpriteRenderer:
   m_ObjectHideFlags: 1
