@@ -91,4 +91,47 @@ public class Ingredient : Applyable, IConsumable, IShowable, IComparable
 
         return true;
     }
+
+    public void Mix(Ingredient other)
+    {
+        //Check if mixable (e.g. two solids don't mix)
+        if(
+            (ingredientType == IngredientType.SOLID &&
+            other.ingredientType == IngredientType.SOLID)
+            )
+        {
+            return;
+        }
+
+        //Average concentration
+        concentration += other.concentration;
+        concentration /= 2f;
+
+        //Add yield
+        yield += other.yield;
+        yield = Mathf.Clamp(yield, 0f, 100f);
+
+        //take the lesser purity
+        purity = purity < other.purity ? purity : other.purity;
+
+        //Add effect if not already attached
+        foreach(Effect effect in other.effectList)
+        {
+            if (!effectList.Contains(effect))
+            {
+                effectList.Add(effect);
+            }
+        }
+
+        //Delete phase transitions
+        phaseTransition.Clear();
+
+        //Set name
+        string name = GetComponent<Item>().name;
+        string otherName = other.GetComponent<Item>().name;
+        name.Replace(" mix", "");
+        otherName.Replace(" mix", "");
+        name += "/" + otherName + " mix";
+        GetComponent<Item>().name = name;
+    }
 }
