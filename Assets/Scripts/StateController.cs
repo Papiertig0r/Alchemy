@@ -7,10 +7,8 @@ public class StateController : MonoBehaviour
     public static StateController instance;
     public delegate void OnActionButtonDown();
     public OnActionButtonDown worldAction;
-    public OnActionButtonDown inventoryUiAction;
-    public OnActionButtonDown toolUiAction;
 
-    private State state = State.WORLD;
+    private static State state = State.WORLD;
 
     private void Awake()
     {
@@ -22,64 +20,29 @@ public class StateController : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
-
-        //toolUiAction += Log;
     }
 
     private void Update()
     {
         if (Input.GetButtonDown("Action"))
         {
-            HandleActions();
-        }
-
-        if(Input.GetButtonDown("Dodge/Abort"))
-        {
-            HandleDodgeAbort();
+            Invoke(worldAction);
         }
     }
 
-    private void HandleActions()
+    public static void Transition(State state)
     {
-        switch (state)
-        {
-            default:
-            case State.WORLD:
-                Invoke(worldAction);
-                break;
-            case State.INVENTORY:
-                Invoke(inventoryUiAction);
-                break;
-            case State.TOOL_UI:
-                Invoke(toolUiAction);
-                break;
-            case State.INVENTORY_AND_TOOL:
-                break;
-        }
+        StateController.state = state;
     }
 
-    private void HandleDodgeAbort()
+    public static bool IsInState(State state)
     {
-        switch (state)
-        {
-            default:
-            case State.WORLD:
-                Debug.Log("Dodge");
-                break;
-            case State.INVENTORY:
-                
-                break;
-            case State.TOOL_UI:
-                Invoke(worldAction);
-                break;
-            case State.INVENTORY_AND_TOOL:
-                break;
-        }
+        return StateController.state == state;
     }
 
-    public void Transition(State state)
+    public static State GetState()
     {
-        this.state = state;
+        return StateController.state;
     }
 
     private void Invoke(OnActionButtonDown del)
@@ -88,10 +51,5 @@ public class StateController : MonoBehaviour
         {
             del.Invoke();
         }
-    }
-
-    private void Log()
-    {
-        Debug.Log("Action on tool ui");
     }
 }

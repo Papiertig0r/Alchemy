@@ -45,6 +45,11 @@ public class InventoryUI : MonoBehaviour
 
     private void Update()
     {
+        if(!StateController.IsInState(State.INVENTORY))
+        {
+            return;
+        }
+
         float horizontalChange = Input.GetAxisRaw("InvHorizontal");
         float verticalChange = Input.GetAxisRaw("InvVertical");
 
@@ -66,6 +71,11 @@ public class InventoryUI : MonoBehaviour
         else if(horizontalChange == 0f && verticalChange == 0f && ! released)
         {
             released = true;
+        }
+
+        if (Input.GetButtonDown("Action"))
+        {
+            //Open inventory submenu
         }
     }
 
@@ -98,6 +108,14 @@ public class InventoryUI : MonoBehaviour
     public void Toggle()
     {
         gameObject.SetActive(!gameObject.activeSelf);
+        if(gameObject.activeSelf)
+        {
+            StateController.Transition(State.INVENTORY);
+        }
+        else
+        {
+            StateController.Transition(State.WORLD);
+        }
     }
 
     public void SelectSlot(int id)

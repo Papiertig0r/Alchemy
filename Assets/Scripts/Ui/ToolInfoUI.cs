@@ -14,7 +14,7 @@ public class ToolInfoUI : MonoBehaviour
     public void Deactivate()
     {
         gameObject.SetActive(false);
-        StateController.instance.Transition(State.WORLD);
+        StateController.Transition(State.WORLD);
     }
 
     public bool IsActive()
@@ -24,7 +24,7 @@ public class ToolInfoUI : MonoBehaviour
 
     public void Activate()
     {
-        StateController.instance.Transition(State.TOOL_UI);
+        StateController.Transition(State.TOOL_UI);
         gameObject.SetActive(true);
     }
 

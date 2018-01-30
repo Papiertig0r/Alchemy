@@ -6,9 +6,7 @@ public class HotbarUI : MonoBehaviour
 {
     public GameObject selector;
     private List<ItemSlotUI> itemSlots = new List<ItemSlotUI>();
-    private bool invWasPressed;
     private int selectedHotbarSlot = 0;
-    private bool activated = true;
 
     private void Awake()
     {
@@ -22,17 +20,12 @@ public class HotbarUI : MonoBehaviour
 
     private void Update()
     {
-        if(activated)
+        if(StateController.IsInState(State.WORLD))
         {
-            float horizontalChange = Input.GetAxisRaw("InvHorizontal");
+            int change = Input.GetButtonDown("SwitchLeft") ? -1 : 0;
+            change += Input.GetButtonDown("SwitchRight") ? 1 : 0;
 
-            if (!invWasPressed)
-            {
-                selectedHotbarSlot += Mathf.FloorToInt(horizontalChange);
-            }
-
-            invWasPressed = (horizontalChange != 0f) ? true : false;
-
+            selectedHotbarSlot += change;
             selectedHotbarSlot = InventoryUI.WrapAround(selectedHotbarSlot, 0, itemSlots.Count - 1);
 
             SelectHotbar(selectedHotbarSlot);
@@ -58,13 +51,11 @@ public class HotbarUI : MonoBehaviour
 
     public void Deactivate()
     {
-        activated = false;
         selector.SetActive(false);
     }
 
     public void Activate()
     {
-        activated = true;
         selector.SetActive(true);
     }
 

@@ -44,6 +44,21 @@ public class Tool : Interactable
             ProcessIngredient();
             UpdateUi();
         }
+
+        if(!StateController.IsInState(State.TOOL_UI))
+        {
+            return;
+        }
+
+        if(Input.GetButtonDown("Action"))
+        {
+            HandleItemSwitching();
+        }
+
+        if (Input.GetButtonDown("Dodge/Abort"))
+        {
+            Deactivate();
+        }
     }
 
     private void ProcessIngredient()
@@ -98,7 +113,6 @@ public class Tool : Interactable
 
     private void Activate()
     {
-        StateController.instance.toolUiAction += HandleItemSwitching;
         UIManager.toolInfoUi.SetTool(this);
         UIManager.toolInfoUi.Activate();
         UpdateUi();
@@ -106,7 +120,6 @@ public class Tool : Interactable
 
     private void Deactivate()
     {
-        StateController.instance.toolUiAction -= HandleItemSwitching;
         UIManager.toolInfoUi.Deactivate();
     }
 
