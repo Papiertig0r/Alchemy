@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class InventoryUI : MonoBehaviour
 {
-
     public GameObject inventorySlotSelector;
     public GameObject inventorySelector;
     public HotbarUI hotbar;
@@ -73,9 +72,10 @@ public class InventoryUI : MonoBehaviour
             released = true;
         }
 
-        if (Input.GetButtonDown("Action"))
+        Item item = inventory[selectedInventorySlot].item;
+        if (Input.GetButtonDown("Action") && item != null)
         {
-            //Open inventory submenu
+            UIManager.inventorySubmenuUi.SetUp(item);
         }
     }
 
@@ -165,5 +165,10 @@ public class InventoryUI : MonoBehaviour
         {
             showable.ShowExtendedInfo();
         }
+    }
+
+    public int GetSelectedSlot()
+    {
+        return selectedInventorySlot;
     }
 }

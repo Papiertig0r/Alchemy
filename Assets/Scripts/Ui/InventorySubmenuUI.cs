@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class InventorySubmenuUI : MonoBehaviour
 {
     public Button consume;
     public Button mix;
+    public Button apply;
     public Button equip;
     public Button discard;
 
@@ -19,6 +21,7 @@ public class InventorySubmenuUI : MonoBehaviour
     {
         selectedButton = 0;
         activeButtons.Clear();
+
         IConsumable consumable = item.GetComponent<IConsumable>();
         if(consumable != null)
         {
@@ -33,6 +36,13 @@ public class InventorySubmenuUI : MonoBehaviour
             mix.gameObject.SetActive(true);
         }
 
+        IApplyable applyable = item.GetComponent<IApplyable>();
+        if(applyable != null)
+        {
+            activeButtons.Add(apply);
+            apply.gameObject.SetActive(true);
+        }
+
         IEquippable equipment = item.GetComponent<IEquippable>();
         if(equipment != null)
         {
@@ -40,16 +50,24 @@ public class InventorySubmenuUI : MonoBehaviour
             equip.gameObject.SetActive(true);
         }
 
+        gameObject.SetActive(true);
         activeButtons.Add(discard);
         activeButtons[selectedButton].Select();
+
+        StateController.Transition(State.INVENTORY_SUBMENU);
     }
 
     public void Leave()
     {
         item = null;
+
+        EventSystem.current.SetSelectedGameObject(null);
+
         consume.gameObject.SetActive(false);
         mix.gameObject.SetActive(false);
         equip.gameObject.SetActive(false);
+
+        gameObject.SetActive(false);
 
         StateController.Transition(State.INVENTORY);
     }
@@ -80,7 +98,7 @@ public class InventorySubmenuUI : MonoBehaviour
             activeButtons[selectedButton].onClick.Invoke();
         }
 
-        if(Input.GetButtonDown("Dodge/Abort"))
+        if(Input.GetButtonDown("Dodge/Abort") || Input.GetButtonDown("Inventory"))
         {
             Leave();
         }
@@ -104,6 +122,12 @@ public class InventorySubmenuUI : MonoBehaviour
         Debug.Log("Clicked Mix");
     }
 
+    public void Apply()
+    {
+        // Apply item (e.g. poison to a weapon)
+        Debug.Log("Clicked Apply");
+    }
+
     public void Equip()
     {
         //Equip item
@@ -112,7 +136,7 @@ public class InventorySubmenuUI : MonoBehaviour
 
     public void Discard()
     {
-        //Discard item
-        Debug.Log("Clicked discard");
+        //! \todo detect long presses for stackwise discarding
+        Inventory.instance.RemoveItem(Inventory.instance.inventoryUi.GetSelectedSlot());
     }
 }

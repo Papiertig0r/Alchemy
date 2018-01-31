@@ -24,7 +24,7 @@ public class StateController : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetButtonDown("Action"))
+        if (Input.GetButtonDown("Action") && state == State.WORLD)
         {
             Invoke(worldAction);
         }

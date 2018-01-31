@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
+    public static Inventory instance = null;
+
     public int hotbarSize = 7;
     public int slotCount = 6;
     public int slotSize = 20;
@@ -16,6 +18,16 @@ public class Inventory : MonoBehaviour
 
     private void Awake()
     {
+        if(instance == null)
+        {
+            instance = this;
+        }
+
+        if(instance != this)
+        {
+            Destroy(this.gameObject);
+        }
+
         InitItemSlots();
     }
 
@@ -90,6 +102,7 @@ public class Inventory : MonoBehaviour
         {
             DestroyObject(slot.item.gameObject);
             slot.item = null;
+            UIManager.inventorySubmenuUi.Leave();
         }
 
         UpdateUi();
