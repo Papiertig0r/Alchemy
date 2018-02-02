@@ -59,6 +59,10 @@ public class InventorySubmenuUI : MonoBehaviour
 
     public void Leave()
     {
+        if(!StateController.IsInState(State.INVENTORY_SUBMENU))
+        {
+            return;
+        }
         item = null;
 
         EventSystem.current.SetSelectedGameObject(null);

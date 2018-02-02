@@ -125,7 +125,10 @@ public class Tool : Interactable
 
     protected override void Left()
     {
-        Deactivate();
+        if (UIManager.toolInfoUi.IsActive())
+        {
+            Deactivate();
+        }
     }
 
     //! \todo switched items should have the same slot

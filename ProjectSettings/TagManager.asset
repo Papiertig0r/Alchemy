@@ -44,6 +44,15 @@ TagManager:
   - name: Ground
     uniqueID: 907646027
     locked: 0
+  - name: Base
+    uniqueID: 2322447809
+    locked: 0
   - name: Objects
     uniqueID: 1908301821
+    locked: 0
+  - name: Character
+    uniqueID: 1058350869
+    locked: 0
+  - name: Overlay
+    uniqueID: 3294113239
     locked: 0

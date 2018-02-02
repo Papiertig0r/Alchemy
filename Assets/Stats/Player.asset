@@ -37,13 +37,13 @@ MonoBehaviour:
     _max: Infinity
     _min: -Infinity
   - type: 4
-    current: 2
+    current: 5
     buffMax: []
     buffMin: []
     _max: Infinity
     _min: 0
   - type: 5
-    current: 4
+    current: 5
     buffMax: []
     buffMin: []
     _max: Infinity

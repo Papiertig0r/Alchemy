@@ -17,6 +17,7 @@ public class PlayerController : CharaController
     private bool executedAttack = false;
     private Vector3 velocity;
 
+
     // Use this for initialization
     protected override void Start ()
     {
@@ -30,6 +31,7 @@ public class PlayerController : CharaController
         {
             Destroy(this.gameObject);
         }
+
 
         StateController.instance.worldAction = inventory.ConsumeHotbarItem;
 

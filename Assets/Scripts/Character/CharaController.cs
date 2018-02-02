@@ -29,6 +29,9 @@ public abstract class CharaController : MonoBehaviour, IHittable, IRangedAttackC
     protected bool isRunning = false;
     protected bool isLookingRight = false;
 
+
+    protected Rigidbody2D rb;
+
     protected virtual void Start()
     {
         animator = GetComponent<Animator>();
@@ -37,6 +40,8 @@ public abstract class CharaController : MonoBehaviour, IHittable, IRangedAttackC
         boxCollider = GetComponent<BoxCollider2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         stats = Instantiate<Stats>(stats);
+
+        rb = GetComponent<Rigidbody2D>();
 
         stats.Start();
         stats.GetStat(StatType.HEALTH).fallBelow += Die;
@@ -51,9 +56,14 @@ public abstract class CharaController : MonoBehaviour, IHittable, IRangedAttackC
     {
         stats.Update();
 
+        
+    }
+
+    protected virtual void FixedUpdate()
+    {
         Vector3 translation = CalculateMovement();
 
-        if(canMove)
+        if (canMove)
         {
             HandleMovement(translation);
         }
@@ -82,7 +92,10 @@ public abstract class CharaController : MonoBehaviour, IHittable, IRangedAttackC
             {
                 speed = stats.GetStatValue(StatType.RUNNING_SPEED);
             }
-            transform.Translate(translation * Time.deltaTime * speed);
+            //transform.Translate(translation * Time.deltaTime * speed);
+            Vector2 translation2D = new Vector2(translation.x, translation.y);
+            Vector2 pos = new Vector2(transform.position.x, transform.position.y);
+            rb.MovePosition(pos + translation2D * Time.deltaTime * speed);
         }
     }
 
