@@ -11,7 +11,6 @@ public class InventoryUI : MonoBehaviour
 
     public ItemInfoUI itemInfoUi;
 
-
     private List<ItemSlotUI> inventorySlots = new List<ItemSlotUI>();
     private List<ItemSlotUI> allInventorySlots = new List<ItemSlotUI>();
     private List<ItemSlot> inventory = new List<ItemSlot>();
@@ -44,7 +43,10 @@ public class InventoryUI : MonoBehaviour
 
     private void Update()
     {
-        if(!StateController.IsInState(State.INVENTORY))
+        if(!(
+            StateController.IsInState(State.INVENTORY) ||
+            StateController.IsInState(State.MIXING)
+            ))
         {
             return;
         }
@@ -75,7 +77,16 @@ public class InventoryUI : MonoBehaviour
         Item item = inventory[selectedInventorySlot].item;
         if (Input.GetButtonDown("Action") && item != null)
         {
-            UIManager.inventorySubmenuUi.SetUp(item);
+            switch(StateController.GetState())
+            {
+                case State.INVENTORY:
+                    UIManager.inventorySubmenuUi.SetUp(item);
+                    break;
+
+                case State.MIXING:
+                    //TryToMix();
+                    break;
+            }
         }
     }
 
@@ -92,17 +103,52 @@ public class InventoryUI : MonoBehaviour
         allInventorySlots.AddRange(inventorySlots);
     }
 
-    public void UpdateUi(List<ItemSlot> inventory)
+    public void UpdateUi(List<ItemSlot> inventory, ItemSlot slot)
     {
         this.inventory = inventory;
         for (int i = 0; i < allInventorySlots.Count; i++)
         {
-            allInventorySlots[i].SetSlot(inventory[i]);
+            bool isActive = !CheckForCompatability(slot, i);
+            allInventorySlots[i].SetSlot(inventory[i], isActive);
         }
         if (gameObject.activeSelf)
         {
             HandleInfoUi();
         }
+    }
+
+    private bool CheckForCompatability(ItemSlot slot, int currentIndex)
+    {
+        if(slot == null)
+        {
+            return false;
+        }
+        bool isActive = true;
+
+        Ingredient ingredient = null;
+        if (slot != null)
+        {
+            if (slot == inventory[currentIndex] && inventory[currentIndex].quantity <= 1)
+            {
+                isActive = false;
+            }
+        }
+
+        if (inventory[currentIndex].item != null)
+        {
+            ingredient = inventory[currentIndex].item.GetComponent<Ingredient>();
+        }
+
+        if (ingredient == null)
+        {
+            isActive = true;
+        }
+        else
+        {
+            isActive = !ingredient.IsCompatible(slot.item.GetComponent<Ingredient>());
+        }
+
+        return isActive;
     }
 
     public void Toggle()

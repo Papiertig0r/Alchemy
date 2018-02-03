@@ -72,8 +72,6 @@ public class InventorySubmenuUI : MonoBehaviour
         equip.gameObject.SetActive(false);
 
         gameObject.SetActive(false);
-
-        StateController.Transition(State.INVENTORY);
     }
 
     private void Update()
@@ -105,6 +103,7 @@ public class InventorySubmenuUI : MonoBehaviour
         if(Input.GetButtonDown("Dodge/Abort") || Input.GetButtonDown("Inventory"))
         {
             Leave();
+            StateController.Transition(State.INVENTORY);
         }
     }
 
@@ -124,6 +123,8 @@ public class InventorySubmenuUI : MonoBehaviour
         //Abort with "Dodge/Abort"
         //If other ingredient is selected, mix ingredients
         Debug.Log("Clicked Mix");
+        Leave();
+        Inventory.instance.StartMixing();
     }
 
     public void Apply()

@@ -16,12 +16,13 @@ public class ItemSlotUI : MonoBehaviour
         text.gameObject.SetActive(sprite != null);
     }
 
-    public void SetSlot(ItemSlot slot)
+    public void SetSlot(ItemSlot slot, bool isActive = true)
     {
         if(slot.item != null)
         {
             text.text = slot.quantity.ToString();
             SetSprite(slot.item.GetComponent<SpriteRenderer>().sprite);
+            image.material = isActive ? Inventory.instance.defaultMaterial : Inventory.instance.greyscaleMaterial;
         }
         else
         {

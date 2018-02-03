@@ -94,11 +94,7 @@ public class Ingredient : Applyable, IConsumable, IShowable, IComparable
 
     public void Mix(Ingredient other)
     {
-        //Check if mixable (e.g. two solids don't mix)
-        if(
-            (ingredientType == IngredientType.SOLID &&
-            other.ingredientType == IngredientType.SOLID)
-            )
+        if(!IsCompatible(other))
         {
             return;
         }
@@ -133,5 +129,18 @@ public class Ingredient : Applyable, IConsumable, IShowable, IComparable
         otherName.Replace(" mix", "");
         name += "/" + otherName + " mix";
         GetComponent<Item>().name = name;
+    }
+
+    public bool IsCompatible(Ingredient other)
+    {
+        //Check if mixable (e.g. two solids don't mix)
+        if (
+            (ingredientType == IngredientType.SOLID &&
+            other.ingredientType == IngredientType.SOLID)
+            )
+        {
+            return false;
+        }
+        return true;
     }
 }

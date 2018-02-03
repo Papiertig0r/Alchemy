@@ -13,6 +13,9 @@ public class Inventory : MonoBehaviour
     public HotbarUI hotbarUi;
     public InventoryUI inventoryUi;
 
+    public Material defaultMaterial;
+    public Material greyscaleMaterial;
+
     [SerializeField]
     private List<ItemSlot> itemSlots;
 
@@ -45,6 +48,27 @@ public class Inventory : MonoBehaviour
         {
             inventoryUi.Toggle();
         }
+
+        if(Input.GetButtonDown("Dodge/Abort") && StateController.IsInState(State.MIXING))
+        {
+            EndMixing();
+        }
+    }
+
+    public void StartMixing()
+    {
+        StateController.Transition(State.MIXING);
+        // Search through inventory if items are mixable
+        // Grey out items that are not
+        UpdateUi(itemSlots[inventoryUi.GetSelectedSlot()]);
+    }
+
+    public void EndMixing()
+    {
+        //restore all items to original color
+
+        UpdateUi();
+        StateController.Transition(State.INVENTORY);
     }
 
     public bool AddItem(Item itemToAdd)
@@ -103,6 +127,7 @@ public class Inventory : MonoBehaviour
             DestroyObject(slot.item.gameObject);
             slot.item = null;
             UIManager.inventorySubmenuUi.Leave();
+            StateController.Transition(State.INVENTORY);
         }
 
         UpdateUi();
@@ -149,9 +174,9 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    private void UpdateUi()
+    private void UpdateUi(ItemSlot itemSlot = null)
     {
-        inventoryUi.UpdateUi(itemSlots);
+        inventoryUi.UpdateUi(itemSlots, itemSlot);
     }
 
     public Item InstantiateItem(Item item)

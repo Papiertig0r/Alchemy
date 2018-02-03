@@ -32,6 +32,7 @@ public class StateController : MonoBehaviour
 
     public static void Transition(State state)
     {
+        Debug.Log(state.ToString());
         StateController.state = state;
     }
 
