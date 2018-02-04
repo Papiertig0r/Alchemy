@@ -49,9 +49,17 @@ public class Inventory : MonoBehaviour
             inventoryUi.Toggle();
         }
 
-        if(Input.GetButtonDown("Dodge/Abort") && StateController.IsInState(State.MIXING))
+        if(Input.GetButtonDown("Dodge/Abort"))
         {
-            EndMixing();
+            switch(StateController.GetState())
+            {
+                case State.INVENTORY:
+                    inventoryUi.Toggle();
+                    break;
+                case State.MIXING:
+                    EndMixing();
+                    break;
+            }
         }
     }
 
