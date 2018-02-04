@@ -21,6 +21,7 @@ public class InventorySubmenuUI : MonoBehaviour
     {
         selectedButton = 0;
         activeButtons.Clear();
+        this.item = item;
 
         IConsumable consumable = item.GetComponent<IConsumable>();
         if(consumable != null)
@@ -109,9 +110,11 @@ public class InventorySubmenuUI : MonoBehaviour
 
     public void Consume()
     {
-        //IConsumable consumable = item.GetComponent<IConsumable>();
-        //consumable.Consume(PlayerController.player);
-        Debug.Log("Clicked Consume");
+        Inventory inv = Inventory.instance;
+        Item item = inv.InstantiateItem(this.item);
+        IConsumable consumable = item.GetComponent<IConsumable>();
+        consumable.Consume(PlayerController.player);
+        inv.RemoveItem(inv.inventoryUi.GetSelectedSlot());
     }
 
     public void Mix()
