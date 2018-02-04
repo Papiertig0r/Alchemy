@@ -58,4 +58,15 @@ public class TimedBuff : Buff
         stats.onUpdate -= OnUpdate;
         stats.activeBuffs.Remove(this);
     }
+
+    public override string ToString(float baseValue, float concentration, float purity, float yield)
+    {
+        Set(baseValue, concentration, purity, yield);
+        string identifier = "Increases";
+        if (value < 0)
+        {
+            identifier = "Decreases";
+        }
+        return identifier + " " + type.ToString() + " by " + Mathf.Abs(value).ToString("F0") + " for " + duration.ToString("F1") + "s";
+    }
 }
