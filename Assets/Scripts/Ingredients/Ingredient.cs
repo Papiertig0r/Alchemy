@@ -127,7 +127,10 @@ public class Ingredient : Applyable, IConsumable, IShowable, IComparable
         string otherName = other.GetComponent<Item>().name;
         name.Replace(" mix", "");
         otherName.Replace(" mix", "");
-        name += "/" + otherName + " mix";
+        if(name != otherName)
+        {
+            name += "/" + otherName + " mix";
+        }
         GetComponent<Item>().name = name;
     }
 
