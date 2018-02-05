@@ -12,7 +12,7 @@ public class InventorySubmenuUI : MonoBehaviour
     public Button equip;
     public Button discard;
 
-    Item item;
+    private Item item;
     private List<Button> activeButtons = new List<Button>();
     private int selectedButton = 0;
     private bool released = true;
@@ -114,7 +114,7 @@ public class InventorySubmenuUI : MonoBehaviour
         Item item = inv.InstantiateItem(this.item);
         IConsumable consumable = item.GetComponent<IConsumable>();
         consumable.Consume(PlayerController.player);
-        inv.RemoveItem(inv.inventoryUi.GetSelectedSlot());
+        inv.RemoveItem(inv.inventoryUi.GetSelectedSlotNumber());
     }
 
     public void Mix()
@@ -125,9 +125,9 @@ public class InventorySubmenuUI : MonoBehaviour
         //Grey all non selectable
         //Abort with "Dodge/Abort"
         //If other ingredient is selected, mix ingredients
-        Debug.Log("Clicked Mix");
+        Inventory.instance.inventoryUi.MarkMixingItem();
         Leave();
-        Inventory.instance.StartMixing();
+        Inventory.instance.inventoryUi.StartMixing();
     }
 
     public void Apply()

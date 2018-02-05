@@ -19,6 +19,8 @@ public class InventoryUI : MonoBehaviour
     private bool released = true;
     private IShowable currentExtendenInfo;
 
+    private ItemSlot mixingItem = null;
+
     private void OnEnable()
     {
         hotbar.Deactivate();
@@ -84,10 +86,73 @@ public class InventoryUI : MonoBehaviour
                     break;
 
                 case State.MIXING:
-                    //TryToMix();
+                    TryToMix();
                     break;
             }
         }
+
+        if(Input.GetButtonDown("Dodge/Abort") && StateController.IsInState(State.MIXING))
+        {
+            EndMixing();
+        }
+    }
+
+    private void TryToMix()
+    {
+        Debug.Log("mixing...");
+        ItemSlot slot = inventory[selectedInventorySlot];
+        if (slot == null)
+        {
+            return;
+        }
+
+        Debug.Log("there is a slot...");
+        Item item = slot.item;
+        if(item == null || slot.quantity <= 1)
+        {
+            return;
+        }
+        Debug.Log("there is an item...");
+
+        Ingredient ingredient = item.GetComponent<Ingredient>();
+        if(ingredient == null)
+        {
+            return;
+        }
+        Debug.Log("there is an ingredient...");
+
+        Item otherItem = mixingItem.item;
+        Ingredient otherIngredient = otherItem.GetComponent<Ingredient>();
+        if (ingredient.IsCompatible(otherIngredient))
+        {
+            Debug.Log("Mixing");
+            Item mixedItem = Inventory.instance.InstantiateItem(item);
+            ingredient = mixedItem.GetComponent<Ingredient>();
+            ingredient.Mix(otherIngredient);
+
+            Inventory.instance.RemoveItemFromSlot(inventory[selectedInventorySlot]);
+            Inventory.instance.RemoveItemFromSlot(mixingItem);
+            Inventory.instance.AddItem(mixedItem);
+            EndMixing();
+        }
+    }
+
+    public void MarkMixingItem()
+    {
+        mixingItem = inventory[GetSelectedSlotNumber()];
+    }
+
+    public void StartMixing()
+    {
+        StateController.Transition(State.MIXING);
+        UpdateUi(mixingItem);
+    }
+
+    public void EndMixing()
+    {
+        mixingItem = null;
+        UpdateUi();
+        StateController.Transition(State.INVENTORY);
     }
 
     public int GetInventorySize()
@@ -106,6 +171,11 @@ public class InventoryUI : MonoBehaviour
     public void UpdateUi(List<ItemSlot> inventory, ItemSlot slot)
     {
         this.inventory = inventory;
+        UpdateUi(slot);
+    }
+
+    public void UpdateUi(ItemSlot slot = null)
+    {
         for (int i = 0; i < allInventorySlots.Count; i++)
         {
             bool isActive = !CheckForCompatability(slot, i);
@@ -122,6 +192,11 @@ public class InventoryUI : MonoBehaviour
         if(slot == null)
         {
             return false;
+        }
+        if(slot.quantity < 2)
+        {
+            Debug.Log(slot.item.name + " less than 2");
+            return true;
         }
         bool isActive = true;
 

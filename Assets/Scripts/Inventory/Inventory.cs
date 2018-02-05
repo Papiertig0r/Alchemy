@@ -55,22 +55,6 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    public void StartMixing()
-    {
-        StateController.Transition(State.MIXING);
-        // Search through inventory if items are mixable
-        // Grey out items that are not
-        UpdateUi(itemSlots[inventoryUi.GetSelectedSlot()]);
-    }
-
-    public void EndMixing()
-    {
-        //restore all items to original color
-
-        UpdateUi();
-        StateController.Transition(State.INVENTORY);
-    }
-
     public bool AddItem(Item itemToAdd)
     {
         List<ItemSlot> slotsWithItem = FindSlotsWithItem(itemToAdd);
