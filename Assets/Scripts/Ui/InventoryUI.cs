@@ -160,6 +160,7 @@ public class InventoryUI : MonoBehaviour
         }
         else
         {
+            UIManager.inventorySubmenuUi.Leave();
             StateController.Transition(State.WORLD);
         }
     }
