@@ -49,17 +49,9 @@ public class Inventory : MonoBehaviour
             inventoryUi.Toggle();
         }
 
-        if(Input.GetButtonDown("Dodge/Abort"))
+        if(Input.GetButtonDown("Dodge/Abort") && StateController.IsInState(State.INVENTORY))
         {
-            switch(StateController.GetState())
-            {
-                case State.INVENTORY:
-                    inventoryUi.Toggle();
-                    break;
-                case State.MIXING:
-                    EndMixing();
-                    break;
-            }
+            inventoryUi.Toggle();
         }
     }
 
@@ -134,8 +126,6 @@ public class Inventory : MonoBehaviour
         {
             DestroyObject(slot.item.gameObject);
             slot.item = null;
-            UIManager.inventorySubmenuUi.Leave();
-            StateController.Transition(State.INVENTORY);
         }
 
         UpdateUi();

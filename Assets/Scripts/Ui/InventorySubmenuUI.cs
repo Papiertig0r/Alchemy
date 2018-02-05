@@ -145,6 +145,12 @@ public class InventorySubmenuUI : MonoBehaviour
     public void Discard()
     {
         //! \todo detect long presses for stackwise discarding
-        Inventory.instance.RemoveItem(Inventory.instance.inventoryUi.GetSelectedSlot());
+        Inventory.instance.RemoveItem(Inventory.instance.inventoryUi.GetSelectedSlotNumber());
+        Debug.Log(Inventory.instance.inventoryUi.GetSelectedSlot());
+        if (Inventory.instance.inventoryUi.GetSelectedSlot().item == null)
+        {
+            UIManager.inventorySubmenuUi.Leave();
+            StateController.Transition(State.INVENTORY);
+        }
     }
 }

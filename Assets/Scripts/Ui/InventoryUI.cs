@@ -214,8 +214,20 @@ public class InventoryUI : MonoBehaviour
         }
     }
 
-    public int GetSelectedSlot()
+    public int GetSelectedSlotNumber()
     {
         return selectedInventorySlot;
+    }
+
+    public ItemSlot GetSelectedSlot()
+    {
+        if (StateController.IsInState(State.WORLD))
+        {
+            return inventory[hotbar.GetSelectedHotbar()];
+        }
+        else
+        {
+            return inventory[selectedInventorySlot];
+        }
     }
 }
