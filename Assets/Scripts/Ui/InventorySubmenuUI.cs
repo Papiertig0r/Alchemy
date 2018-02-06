@@ -17,7 +17,7 @@ public class InventorySubmenuUI : MonoBehaviour
     private int selectedButton = 0;
     private bool released = true;
 
-    public void SetUp(Item item)
+    public void SetUp(Item item, ItemSlotUI ui)
     {
         selectedButton = 0;
         activeButtons.Clear();
@@ -51,11 +51,30 @@ public class InventorySubmenuUI : MonoBehaviour
             equip.gameObject.SetActive(true);
         }
 
-        gameObject.SetActive(true);
+
         activeButtons.Add(discard);
+
+        gameObject.SetActive(true);
+
+        SetPosition(ui);
+
         activeButtons[selectedButton].Select();
 
         StateController.Transition(State.INVENTORY_SUBMENU);
+    }
+
+    public void SetPosition(ItemSlotUI ui)
+    {
+        RectTransform rect = GetComponent<RectTransform>();
+        rect.position = ui.GetComponent<RectTransform>().position;
+
+        float buttonHeight = discard.GetComponent<RectTransform>().sizeDelta.y;
+        float submenuHeight = activeButtons.Count * buttonHeight;
+        if (rect.position.y - submenuHeight - buttonHeight < 0)
+        {
+            Vector3 offset = new Vector2(0f, submenuHeight);
+            rect.position += offset;
+        }
     }
 
     public void Leave()

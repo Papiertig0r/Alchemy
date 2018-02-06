@@ -82,7 +82,7 @@ public class InventoryUI : MonoBehaviour
             switch(StateController.GetState())
             {
                 case State.INVENTORY:
-                    UIManager.inventorySubmenuUi.SetUp(item);
+                    UIManager.inventorySubmenuUi.SetUp(item, allInventorySlots[selectedInventorySlot]);
                     break;
 
                 case State.MIXING:
