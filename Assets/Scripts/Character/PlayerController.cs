@@ -11,7 +11,7 @@ public class PlayerController : CharaController
 
     public GameObject attackCollider;
 
-    public Inventory inventory;
+    public PlayerInventory inventory;
 
     private Vector3 targetOffset;
     private bool executedAttack = false;

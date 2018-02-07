@@ -9,11 +9,13 @@ public class UIManager : MonoBehaviour
     public static ConsumableInfoUi consumableInfoUi;
     public static ToolInfoUI toolInfoUi;
     public static InventorySubmenuUI inventorySubmenuUi;
+    public static ContainerUI containerUI;
 
     public IngredientInfoUI _ingredientInfoUi;
     public ConsumableInfoUi _consumableInfoUi;
     public ToolInfoUI _toolInfoUi;
     public InventorySubmenuUI _inventorySubmenuUi;
+    public ContainerUI _containerUI;
 
     void Start ()
     {
@@ -35,6 +37,11 @@ public class UIManager : MonoBehaviour
         if (inventorySubmenuUi == null)
         {
             inventorySubmenuUi = _inventorySubmenuUi;
+        }
+
+        if (containerUI == null)
+        {
+            containerUI = _containerUI;
         }
     }
 }

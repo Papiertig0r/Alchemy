@@ -4,55 +4,17 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
-    public static Inventory instance = null;
-
-    public int hotbarSize = 7;
-    public int slotCount = 6;
+    public int numberOfSlots = 6;
     public int slotSize = 20;
 
-    public HotbarUI hotbarUi;
-    public InventoryUI inventoryUi;
-
-    public Material defaultMaterial;
-    public Material greyscaleMaterial;
+    public PlayerInventoryUI inventoryUi;
 
     [SerializeField]
-    private List<ItemSlot> itemSlots;
+    protected List<ItemSlot> itemSlots;
 
-    private void Awake()
+    protected virtual void Start()
     {
-        if(instance == null)
-        {
-            instance = this;
-        }
-
-        if(instance != this)
-        {
-            Destroy(this.gameObject);
-        }
-
-        InitItemSlots();
-    }
-
-    private void Start()
-    {
-        hotbarSize = hotbarUi.GetHotbarSize();
-        inventoryUi.InitInventoryUI(hotbarUi.GetSlotUi());
-        slotCount = inventoryUi.GetInventorySize();
-        InitItemSlots();
-    }
-
-    private void Update()
-    {
-        if (Input.GetButtonDown("Inventory"))
-        {
-            inventoryUi.Toggle();
-        }
-
-        if(Input.GetButtonDown("Dodge/Abort") && StateController.IsInState(State.INVENTORY))
-        {
-            inventoryUi.Toggle();
-        }
+        InitItemSlots(numberOfSlots);
     }
 
     public bool AddItem(Item itemToAdd)
@@ -115,25 +77,9 @@ public class Inventory : MonoBehaviour
         UpdateUi();
     }
 
-    public void RemoveSelectedHotbarItem()
+    protected void InitItemSlots(int numberOfSlots)
     {
-        RemoveItem(hotbarUi.GetSelectedHotbar());
-    }
-
-    public Item GetHotbarItem()
-    {
-        Item item = itemSlots[hotbarUi.GetSelectedHotbar()].item;
-        return item;
-    }
-
-    public void RemoveItemForRangedAttack()
-    {
-        RemoveItem(hotbarUi.GetSelectedHotbar());
-    }
-
-    private void InitItemSlots()
-    {
-        itemSlots = new List<ItemSlot>(hotbarSize + slotCount);
+        itemSlots = new List<ItemSlot>(numberOfSlots);
         for (int i = 0; i < itemSlots.Capacity; i++)
         {
             itemSlots.Add(new ItemSlot());
@@ -141,22 +87,7 @@ public class Inventory : MonoBehaviour
         UpdateUi();
     }
 
-    public void ConsumeHotbarItem()
-    {
-        Item item = itemSlots[hotbarUi.GetSelectedHotbar()].item;
-        if (item != null)
-        {
-            IConsumable consumable = item.GetComponent<IConsumable>();
-            if (consumable != null)
-            {
-                consumable = InstantiateItem(item).GetComponent<IConsumable>();
-                consumable.Consume(PlayerController.player);
-                RemoveItemFromSlot(itemSlots[hotbarUi.GetSelectedHotbar()]);
-            }
-        }
-    }
-
-    private void UpdateUi(ItemSlot itemSlot = null)
+    protected void UpdateUi(ItemSlot itemSlot = null)
     {
         inventoryUi.UpdateUi(itemSlots, itemSlot);
     }

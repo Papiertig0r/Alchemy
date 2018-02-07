@@ -129,7 +129,7 @@ public class InventorySubmenuUI : MonoBehaviour
 
     public void Consume()
     {
-        Inventory inv = Inventory.instance;
+        Inventory inv = PlayerInventory.instance;
         Item item = inv.InstantiateItem(this.item);
         IConsumable consumable = item.GetComponent<IConsumable>();
         consumable.Consume(PlayerController.player);
@@ -144,9 +144,9 @@ public class InventorySubmenuUI : MonoBehaviour
         //Grey all non selectable
         //Abort with "Dodge/Abort"
         //If other ingredient is selected, mix ingredients
-        Inventory.instance.inventoryUi.MarkMixingItem();
+        PlayerInventory.instance.inventoryUi.MarkMixingItem();
         Leave();
-        Inventory.instance.inventoryUi.StartMixing();
+        PlayerInventory.instance.inventoryUi.StartMixing();
     }
 
     public void Apply()
@@ -164,9 +164,9 @@ public class InventorySubmenuUI : MonoBehaviour
     public void Discard()
     {
         //! \todo detect long presses for stackwise discarding
-        Inventory.instance.RemoveItem(Inventory.instance.inventoryUi.GetSelectedSlotNumber());
-        Debug.Log(Inventory.instance.inventoryUi.GetSelectedSlot());
-        if (Inventory.instance.inventoryUi.GetSelectedSlot().item == null)
+        PlayerInventory.instance.RemoveItem(PlayerInventory.instance.inventoryUi.GetSelectedSlotNumber());
+        Debug.Log(PlayerInventory.instance.inventoryUi.GetSelectedSlot());
+        if (PlayerInventory.instance.inventoryUi.GetSelectedSlot().item == null)
         {
             UIManager.inventorySubmenuUi.Leave();
             StateController.Transition(State.INVENTORY);

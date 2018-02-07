@@ -22,7 +22,8 @@ public class ItemSlotUI : MonoBehaviour
         {
             text.text = slot.quantity.ToString();
             SetSprite(slot.item.GetComponent<SpriteRenderer>().sprite);
-            image.material = isActive ? Inventory.instance.defaultMaterial : Inventory.instance.greyscaleMaterial;
+            PlayerInventory inv = PlayerInventory.instance;
+            image.material = isActive ? inv.defaultMaterial : inv.greyscaleMaterial;
         }
         else
         {
