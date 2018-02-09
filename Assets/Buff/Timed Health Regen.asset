@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Name: Timed Health Regen
   m_EditorClassIdentifier: 
   name: Health Regen
-  type: 2
+  statType: 0
   value: 2
+  buffType: 1
   duration: 10
   minDuration: 3
   maxDuration: 10

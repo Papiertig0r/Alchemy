@@ -18,7 +18,7 @@ public class TimedBuff : Buff
     public override void Apply(Stats stats)
     {
         Register(stats);
-        Stat stat = stats.GetStat(type);
+        Stat stat = stats.GetStat(statType);
         stat += value;
 
     }
@@ -40,7 +40,7 @@ public class TimedBuff : Buff
         duration -= Time.deltaTime;
         if (duration < 0f)
         {
-            Stat stat = stats.GetStat(type);
+            Stat stat = stats.GetStat(statType);
             stat -= value;
             Unregister();
         }
@@ -59,14 +59,8 @@ public class TimedBuff : Buff
         stats.activeBuffs.Remove(this);
     }
 
-    public override string ToString(float baseValue, float concentration, float purity, float yield)
+    public override string ToString()
     {
-        Set(baseValue, concentration, purity, yield);
-        string identifier = "Increases";
-        if (value < 0)
-        {
-            identifier = "Decreases";
-        }
-        return identifier + " " + type.ToString() + " by " + Mathf.Abs(value).ToString("F0") + " for " + duration.ToString("F1") + "s";
+        return buffType.ToString() + "S " + statType.ToString() + " by " + Mathf.Abs(value).ToString("F0") + " for " + duration.ToString("F1") + "s";
     }
 }

@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Name: Health
   m_EditorClassIdentifier: 
   name: Health
-  type: 0
-  value: -10
+  statType: 0
+  value: 69.81209
+  buffType: 1

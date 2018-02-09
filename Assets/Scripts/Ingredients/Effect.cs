@@ -71,4 +71,11 @@ public class Effect : ScriptableObject
         newBuff.Set(strength, concentration, purity, yield);
         newBuff.Apply(target.stats);
     }
+
+    public string ToString(Ingredient ingredient)
+    {
+        float concentration = GetPotency(ingredient.concentration) * PhaseMultiplier(ingredient.ingredientType);
+        buff.Set(strength, concentration, ingredient.purity, ingredient.yield);
+        return buff.ToString();
+    }
 }

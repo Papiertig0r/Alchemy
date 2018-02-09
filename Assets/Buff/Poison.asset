@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Name: Poison
   m_EditorClassIdentifier: 
   name: Poison
-  type: 0
-  value: -2
-  duration: 7
+  statType: 0
+  value: -0
+  buffType: -1
+  duration: 5.94
   minDuration: 3
   maxDuration: 10
-  repeatRate: 1
+  repeatRate: 1.727
   minRepeatRate: 0.7
   maxRepeatRate: 2

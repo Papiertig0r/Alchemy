@@ -36,7 +36,7 @@ public class RepeatTimedBuff : TimedBuff
         _repeatRate -= Time.deltaTime;
         if(_repeatRate < 0f)
         {
-            Stat stat = stats.GetStat(type);
+            Stat stat = stats.GetStat(statType);
             stat += value;
             _repeatRate = repeatRate;
         }
@@ -47,14 +47,8 @@ public class RepeatTimedBuff : TimedBuff
         }
     }
 
-    public override string ToString(float baseValue, float concentration, float purity, float yield)
+    public override string ToString()
     {
-        Set(baseValue, concentration, purity, yield);
-        string identifier = "Increases";
-        if (value < 0)
-        {
-            identifier = "Decreases";
-        }
-        return identifier + " " + type.ToString() + " by " + Mathf.Abs(value).ToString("F0") + " every " + repeatRate.ToString("F1") + "s for " + duration.ToString("F1") + "s";
+        return buffType.ToString() + "S " + statType.ToString() + " by " + Mathf.Abs(value).ToString("F0") + " every " + repeatRate.ToString("F1") + "s for " + duration.ToString("F1") + "s";
     }
 }

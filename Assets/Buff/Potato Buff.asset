@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Name: Potato Buff
   m_EditorClassIdentifier: 
   name: Potato Buff
-  type: 0
+  statType: 0
   value: 10
+  buffType: 1

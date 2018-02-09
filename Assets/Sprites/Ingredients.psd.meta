@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: bf9e36e871237cb449ea169ecea121b9
-timeCreated: 1516214200
+timeCreated: 1518110526
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -9,6 +9,8 @@ TextureImporter:
     21300004: Ingredients_0
     21300006: HealingPaste
     21300008: HealingPotion
+    21300010: fly_amanita
+    21300012: bleeding_tooth
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
@@ -128,7 +130,7 @@ TextureImporter:
         width: 17
         height: 10
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -142,7 +144,7 @@ TextureImporter:
         width: 17
         height: 10
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -155,6 +157,34 @@ TextureImporter:
         y: 460
         width: 9
         height: 12
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: fly_amanita
+      rect:
+        serializedVersion: 2
+        x: 103
+        y: 461
+        width: 9
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: bleeding_tooth
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 460
+        width: 12
+        height: 11
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

@@ -13,7 +13,7 @@ public class TimedMaxBuff : TimedBuff
     public override void Apply(Stats stats)
     {
         this.stats = stats;
-        Stat stat = stats.GetStat(type);
+        Stat stat = stats.GetStat(statType);
         Register(stats);
         stat.buffMax.Add(this);
     }
@@ -23,20 +23,14 @@ public class TimedMaxBuff : TimedBuff
         duration -= Time.deltaTime;
         if (duration < 0f)
         {
-            Stat stat = stats.GetStat(type);
+            Stat stat = stats.GetStat(statType);
             stat.buffMax.Remove(this);
             Unregister();
         }
     }
 
-    public override string ToString(float baseValue, float concentration, float purity, float yield)
+    public override string ToString()
     {
-        Set(baseValue, concentration, purity, yield);
-        string identifier = "Increases";
-        if (value < 0)
-        {
-            identifier = "Decreases";
-        }
-        return identifier + " maximum " + type.ToString() + " by " + Mathf.Abs(value).ToString("F0") + " for " + duration.ToString("F1") + "s";
+        return buffType.ToString() + "S maximum " + statType.ToString() + " by " + Mathf.Abs(value).ToString("F0") + " for " + duration.ToString("F1") + "s";
     }
 }

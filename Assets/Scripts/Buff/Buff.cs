@@ -7,8 +7,9 @@ using UnityEngine;
 public class Buff : ScriptableObject
 {
     public new string name;
-    public StatType type;
+    public StatType statType;
     public float value;
+    public BuffType buffType;
 
     public Buff(float value)
     {
@@ -18,7 +19,7 @@ public class Buff : ScriptableObject
     public Buff(string name, StatType type, float value)
     {
         this.name = name;
-        this.type = type;
+        this.statType = type;
         this.value = value;
     }
 
@@ -33,8 +34,8 @@ public class Buff : ScriptableObject
 
     public virtual void Apply(Stats stats)
     {
-        Stat stat2 = stats.GetStat(type);
-        stat2 += value;
+        Stat stat = stats.GetStat(statType);
+        stat += value;
     }
 
     public static float Map(float value, float start, float stop, float newStart, float newStop)
@@ -46,14 +47,8 @@ public class Buff : ScriptableObject
         return newValue;
     }
 
-    public virtual string ToString(float baseValue, float concentration, float purity, float yield)
+    public override string ToString()
     {
-        Set(baseValue, concentration, purity, yield);
-        string identifier = "Increases";
-        if(value < 0)
-        {
-            identifier = "Decreases";
-        }
-        return identifier + " " + type.ToString() + " by " + Mathf.Abs(value).ToString("F0");
+        return buffType.ToString() + "S " + statType.ToString() + " by " + Mathf.Abs(value).ToString("F0");
     }
 }
