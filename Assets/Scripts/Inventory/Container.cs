@@ -4,11 +4,21 @@ using UnityEngine;
 
 public class Container : Interactable
 {
+    public List<Item> items;
+    [SerializeField]
     private Inventory inventory;
 
-    private void Awake()
+    private void Start()
     {
         inventory = GetComponent<Inventory>();
+        inventory.SetUi(UIManager.containerUI);
+        inventory.InitItemSlots();
+        Debug.Log("Awake");
+        foreach (Item item in items)
+        {
+            Item newItem = Inventory.InstantiateItem(item, transform);
+            Debug.Log(inventory.AddItem(newItem));
+        }
     }
 
     public override void Interact()
@@ -19,6 +29,7 @@ public class Container : Interactable
     private void Open()
     {
         UIManager.containerUI.SetUp(inventory.numberOfSlots);
+        inventory.UpdateUi();
         UIManager.containerUI.Activate();
     }
 

@@ -17,7 +17,7 @@ public class UIManager : MonoBehaviour
     public InventorySubmenuUI _inventorySubmenuUi;
     public ContainerUI _containerUI;
 
-    void Start ()
+    void Awake ()
     {
         if (ingredientInfoUi == null)
         {

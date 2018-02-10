@@ -7,7 +7,8 @@ public class Inventory : MonoBehaviour
     public int numberOfSlots = 6;
     public int slotSize = 20;
 
-    public PlayerInventoryUI inventoryUi;
+    [SerializeField]
+    private InventoryUI inventoryUi;
 
     [SerializeField]
     protected List<ItemSlot> itemSlots;
@@ -17,8 +18,14 @@ public class Inventory : MonoBehaviour
         InitItemSlots(numberOfSlots);
     }
 
+    public void SetUi(InventoryUI inventoryUi)
+    {
+        this.inventoryUi = inventoryUi;
+    }
+
     public bool AddItem(Item itemToAdd)
     {
+        Debug.Log(itemToAdd);
         List<ItemSlot> slotsWithItem = FindSlotsWithItem(itemToAdd);
 
         for(int i = 0; i < slotsWithItem.Count; i++)
@@ -39,6 +46,8 @@ public class Inventory : MonoBehaviour
         }
         itemSlots[index].item = itemToAdd;
         itemSlots[index].quantity++;
+        itemToAdd.transform.SetParent(transform);
+        itemToAdd.gameObject.SetActive(false);
         UpdateUi();
         return true;
     }
@@ -77,8 +86,12 @@ public class Inventory : MonoBehaviour
         UpdateUi();
     }
 
-    protected void InitItemSlots(int numberOfSlots)
+    public void InitItemSlots(int numberOfSlots = 0)
     {
+        if(numberOfSlots == 0)
+        {
+            numberOfSlots = this.numberOfSlots;
+        }
         itemSlots = new List<ItemSlot>(numberOfSlots);
         for (int i = 0; i < itemSlots.Capacity; i++)
         {
@@ -87,9 +100,12 @@ public class Inventory : MonoBehaviour
         UpdateUi();
     }
 
-    protected void UpdateUi(ItemSlot itemSlot = null)
+    public void UpdateUi(ItemSlot itemSlot = null)
     {
-        inventoryUi.UpdateUi(itemSlots, itemSlot);
+        if(inventoryUi != null)
+        {
+            inventoryUi.UpdateUi(itemSlots, itemSlot);
+        }
     }
 
     public Item InstantiateItem(Item item)

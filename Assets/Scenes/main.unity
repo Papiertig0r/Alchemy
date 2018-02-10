@@ -18003,7 +18003,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 290345893}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 333.5, y: 296.5, z: 0}
+  m_LocalPosition: {x: 415.5, y: 304, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1479080512}
@@ -19664,10 +19664,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   numberOfSlots: 6
   slotSize: 20
-  inventoryUi: {fileID: 647251611}
+  inventoryUi: {fileID: 0}
   itemSlots: []
   hotbarSize: 7
   hotbarUi: {fileID: 1479080513}
+  playerInventoryUi: {fileID: 647251611}
   defaultMaterial: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   greyscaleMaterial: {fileID: 2100000, guid: cdad8a68cf943e942922f638bb898b6e, type: 2}
 --- !u!1001 &493530609
@@ -20909,6 +20910,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ab521bea7ed473408ad5d331899e3dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inventorySlots: []
   inventorySlotSelector: {fileID: 748563461}
   inventorySelector: {fileID: 905240232}
   hotbar: {fileID: 1479080513}
@@ -22882,7 +22884,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1181607012}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 50.5, y: 109.5, z: 0}
+  m_LocalPosition: {x: -31.5, y: 117, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 793695426}
@@ -23361,6 +23363,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7aa83daf3d5d22440ae14f66c350622e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  items: []
+  inventory: {fileID: 0}
 --- !u!61 &1317332791
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -23752,7 +23756,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1479080511}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -266.5, z: 0}
+  m_LocalPosition: {x: 0, y: -274, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1972625774}
@@ -23888,6 +23892,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7410281264b7634784a98f1bfc740db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inventorySlots: []
   prefab: {fileID: 114785169596418220, guid: d8eb017c190b81948a2cead7d7eda6d4, type: 2}
   panel: {fileID: 1189371831}
 --- !u!114 &1494715225
@@ -26814,7 +26819,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2025488984}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 117, y: 240.615, z: 0}
+  m_LocalPosition: {x: 117, y: 248.115, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1524924111}
@@ -27231,6 +27236,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7aa83daf3d5d22440ae14f66c350622e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  items:
+  - {fileID: 114152742224760972, guid: 54ca900181f2ff641bcabbaaa2fabfa6, type: 2}
+  - {fileID: 114152742224760972, guid: 54ca900181f2ff641bcabbaaa2fabfa6, type: 2}
+  - {fileID: 114518820336447722, guid: 1dba5ed80b579d443b1b184f4dd6cff5, type: 2}
+  inventory: {fileID: 0}
 --- !u!1 &2099809472
 GameObject:
   m_ObjectHideFlags: 0

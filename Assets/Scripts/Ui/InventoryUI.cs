@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class InventoryUI : MonoBehaviour
 {
+    [SerializeField]
     protected List<ItemSlotUI> inventorySlots = new List<ItemSlotUI>();
 
     protected int selectedInventorySlot = 0;
@@ -19,6 +20,26 @@ public class InventoryUI : MonoBehaviour
     public void Deactivate()
     {
         gameObject.SetActive(false);
+    }
+
+    public virtual void Toggle()
+    {
+
+    }
+
+    public virtual void SetUp(int numberOfSlots)
+    {
+
+    }
+
+    public virtual void UpdateUi(List<ItemSlot> inventory, ItemSlot slot)
+    {
+
+    }
+
+    public int GetInventorySize()
+    {
+        return inventorySlots.Count;
     }
 
     protected Vector2 HandleNavigation()

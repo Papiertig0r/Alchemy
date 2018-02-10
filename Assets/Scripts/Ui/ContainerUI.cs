@@ -8,7 +8,7 @@ public class ContainerUI : InventoryUI
     public ItemSlotUI prefab;
     public Transform panel;
 
-    public void SetUp(int numberOfSlots)
+    public override void SetUp(int numberOfSlots)
     {
         if (numberOfSlots > inventorySlots.Count)
         {
@@ -27,5 +27,22 @@ public class ContainerUI : InventoryUI
 
         int columns = Mathf.Clamp(numberOfSlots / 2, numberOfSlots % 4, 6);
         panel.GetComponent<GridLayoutGroup>().constraintCount = columns;
+    }
+
+    public override void UpdateUi(List<ItemSlot> inventory, ItemSlot slot)
+    {
+        for (int i = 0; i < inventorySlots.Count && i < inventory.Count; i++)
+        {
+            bool isActive = true;
+            inventorySlots[i].SetSlot(inventory[i], isActive);
+        }
+    }
+
+    private void Update()
+    {
+        if(Input.GetButtonDown("Dodge/Abort"))
+        {
+            Deactivate();
+        }
     }
 }

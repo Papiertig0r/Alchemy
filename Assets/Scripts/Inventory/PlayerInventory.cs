@@ -10,6 +10,8 @@ public class PlayerInventory : Inventory
 
     public HotbarUI hotbarUi;
 
+    public PlayerInventoryUI playerInventoryUi;
+
     public Material defaultMaterial;
     public Material greyscaleMaterial;
 
@@ -31,8 +33,8 @@ public class PlayerInventory : Inventory
     protected override void Start()
     {
         hotbarSize = hotbarUi.GetHotbarSize();
-        inventoryUi.InitInventoryUI(hotbarUi.GetSlotUi());
-        numberOfSlots = inventoryUi.GetInventorySize();
+        playerInventoryUi.InitInventoryUI(hotbarUi.GetSlotUi());
+        numberOfSlots = playerInventoryUi.GetInventorySize();
 
         InitItemSlots(hotbarSize + numberOfSlots);
     }
@@ -72,12 +74,12 @@ public class PlayerInventory : Inventory
     {
         if (Input.GetButtonDown("Inventory"))
         {
-            inventoryUi.Toggle();
+            playerInventoryUi.Toggle();
         }
 
         if (Input.GetButtonDown("Dodge/Abort") && StateController.IsInState(State.INVENTORY))
         {
-            inventoryUi.Toggle();
+            playerInventoryUi.Toggle();
         }
     }
 }

@@ -88,7 +88,7 @@ public class PlayerInventoryUI : InventoryUI
         HandleInfoUi();
     }
 
-    public void UpdateUi(List<ItemSlot> inventory, ItemSlot slot)
+    public override void UpdateUi(List<ItemSlot> inventory, ItemSlot slot)
     {
         this.inventory = inventory;
         UpdateUi(slot);
@@ -166,11 +166,6 @@ public class PlayerInventoryUI : InventoryUI
         StateController.Transition(State.INVENTORY);
     }
 
-    public int GetInventorySize()
-    {
-        return inventorySlots.Count;
-    }
-
     public void InitInventoryUI(List<ItemSlotUI> hotbarSlots)
     {
         inventorySlots.AddRange(GetComponentsInChildren<ItemSlotUI>());
@@ -218,7 +213,7 @@ public class PlayerInventoryUI : InventoryUI
         return isActive;
     }
 
-    public void Toggle()
+    public override void Toggle()
     {
         gameObject.SetActive(!gameObject.activeSelf);
         if (gameObject.activeSelf)
