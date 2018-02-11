@@ -19664,7 +19664,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   numberOfSlots: 6
   slotSize: 20
-  inventoryUi: {fileID: 0}
+  inventoryUi: {fileID: 647251611}
   itemSlots: []
   hotbarSize: 7
   hotbarUi: {fileID: 1479080513}
