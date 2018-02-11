@@ -25,7 +25,6 @@ public class Inventory : MonoBehaviour
 
     public bool AddItem(Item itemToAdd)
     {
-        Debug.Log(itemToAdd);
         List<ItemSlot> slotsWithItem = FindSlotsWithItem(itemToAdd);
 
         for(int i = 0; i < slotsWithItem.Count; i++)

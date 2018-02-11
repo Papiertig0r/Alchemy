@@ -13,11 +13,10 @@ public class Container : Interactable
         inventory = GetComponent<Inventory>();
         inventory.SetUi(UIManager.containerUI);
         inventory.InitItemSlots();
-        Debug.Log("Awake");
         foreach (Item item in items)
         {
             Item newItem = Inventory.InstantiateItem(item, transform);
-            Debug.Log(inventory.AddItem(newItem));
+            inventory.AddItem(newItem);
         }
     }
 
