@@ -4,12 +4,15 @@ using UnityEngine;
 
 public class UIManager : MonoBehaviour
 {
-
+    public static UIManager instance = null;
     public static IngredientInfoUI ingredientInfoUi;
     public static ConsumableInfoUi consumableInfoUi;
     public static ToolInfoUI toolInfoUi;
     public static InventorySubmenuUI inventorySubmenuUi;
     public static ContainerUI containerUI;
+
+    public List<InventoryUI> activeUis = new List<InventoryUI>();
+    public int activeUi;
 
     public IngredientInfoUI _ingredientInfoUi;
     public ConsumableInfoUi _consumableInfoUi;
@@ -19,6 +22,15 @@ public class UIManager : MonoBehaviour
 
     void Awake ()
     {
+        if(instance == null)
+        {
+            instance = this;
+        }
+        if(instance != this)
+        {
+            Destroy(this);
+        }
+
         if (ingredientInfoUi == null)
         {
             ingredientInfoUi = _ingredientInfoUi;
@@ -43,5 +55,51 @@ public class UIManager : MonoBehaviour
         {
             containerUI = _containerUI;
         }
+    }
+
+    public void Update()
+    {
+        if(activeUis.Count <= 1)
+        {
+            return;
+        }
+        int change = Input.GetButtonDown("SwitchLeft") ? -1 : 0;
+        change += Input.GetButtonDown("SwitchRight") ? 1 : 0;
+
+        if(change != 0)
+        {
+            activeUi += change;
+            activeUi = InventoryUI.WrapAround(activeUi, 0, activeUis.Count - 1);
+
+            Select();
+        }
+    }
+
+    public void Register(InventoryUI inventoryUi)
+    {
+        activeUis.Add(inventoryUi);
+        activeUi = activeUis.Count - 1;
+        Select();
+    }
+
+    public void Unregister(InventoryUI inventoryUi)
+    {
+        activeUis.Remove(inventoryUi);
+        activeUi = activeUis.Count - 1;
+        Select();
+    }
+
+    public void Select()
+    {
+        if(activeUis.Count == 0)
+        {
+            return;
+        }
+        for(int i = 0; i < activeUis.Count; i++)
+        {
+            activeUis[i].Unselect();
+        }
+
+        activeUis[activeUi].Select(activeUis.Count > 1);
     }
 }

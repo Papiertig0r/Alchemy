@@ -25,10 +25,13 @@ public class HotbarUI : MonoBehaviour
             int change = Input.GetButtonDown("SwitchLeft") ? -1 : 0;
             change += Input.GetButtonDown("SwitchRight") ? 1 : 0;
 
-            selectedHotbarSlot += change;
-            selectedHotbarSlot = InventoryUI.WrapAround(selectedHotbarSlot, 0, itemSlots.Count - 1);
+            if(change != 0)
+            {
+                selectedHotbarSlot += change;
+                selectedHotbarSlot = InventoryUI.WrapAround(selectedHotbarSlot, 0, itemSlots.Count - 1);
 
-            SelectHotbar(selectedHotbarSlot);
+                SelectHotbar(selectedHotbarSlot);
+            }
         }
     }
 

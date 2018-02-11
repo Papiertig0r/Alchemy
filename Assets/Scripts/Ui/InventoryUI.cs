@@ -5,21 +5,26 @@ using UnityEngine.UI;
 
 public class InventoryUI : MonoBehaviour
 {
+    public GameObject inventorySelector;
+
     [SerializeField]
     protected List<ItemSlotUI> inventorySlots = new List<ItemSlotUI>();
 
     protected int selectedInventorySlot = 0;
 
     private bool released = true;
+    private bool isSelected = false;
 
     public void Activate()
     {
         gameObject.SetActive(true);
+        UIManager.instance.Register(this);
     }
 
     public void Deactivate()
     {
         gameObject.SetActive(false);
+        UIManager.instance.Unregister(this);
     }
 
     public virtual void Toggle()
@@ -40,6 +45,18 @@ public class InventoryUI : MonoBehaviour
     public int GetInventorySize()
     {
         return inventorySlots.Count;
+    }
+
+    public void Select(bool showSelector = false)
+    {
+        inventorySelector.SetActive(showSelector);
+        isSelected = true;
+    }
+
+    public void Unselect()
+    {
+        inventorySelector.SetActive(false);
+        isSelected = false;
     }
 
     protected Vector2 HandleNavigation()

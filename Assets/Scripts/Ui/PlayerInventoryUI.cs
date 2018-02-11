@@ -5,7 +5,6 @@ using UnityEngine;
 public class PlayerInventoryUI : InventoryUI
 {
     public GameObject inventorySlotSelector;
-    public GameObject inventorySelector;
     public HotbarUI hotbar;
 
     public ItemInfoUI itemInfoUi;
@@ -215,15 +214,16 @@ public class PlayerInventoryUI : InventoryUI
 
     public override void Toggle()
     {
-        gameObject.SetActive(!gameObject.activeSelf);
         if (gameObject.activeSelf)
         {
-            StateController.Transition(State.INVENTORY);
+            Deactivate();
+            UIManager.inventorySubmenuUi.Leave();
+            StateController.Transition(State.WORLD);
         }
         else
         {
-            UIManager.inventorySubmenuUi.Leave();
-            StateController.Transition(State.WORLD);
+            Activate();
+            StateController.Transition(State.INVENTORY);
         }
     }
 
