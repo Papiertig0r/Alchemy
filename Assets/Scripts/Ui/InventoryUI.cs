@@ -61,6 +61,10 @@ public class InventoryUI : MonoBehaviour
 
     protected Vector2 HandleNavigation()
     {
+        if(!isSelected)
+        {
+            return new Vector2(0f, 0f);
+        }
         float horizontalChange = Input.GetAxisRaw("InvHorizontal");
         float verticalChange = Input.GetAxisRaw("InvVertical");
         Vector2 change = new Vector2(horizontalChange, verticalChange);
