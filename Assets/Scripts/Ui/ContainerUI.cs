@@ -8,6 +8,10 @@ public class ContainerUI : InventoryUI
     public ItemSlotUI prefab;
     public Transform panel;
 
+    public RectTransform actualBorders;
+
+    private bool needsResizing = false;
+
     public override void SetUp(int numberOfSlots)
     {
         if (numberOfSlots > inventorySlots.Count)
@@ -38,11 +42,27 @@ public class ContainerUI : InventoryUI
         }
     }
 
+    public override void Select(bool showSelector = false)
+    {
+        base.Select(showSelector);
+        needsResizing = true;
+    }
+
     private void Update()
     {
         if(Input.GetButtonDown("Dodge/Abort"))
         {
             Deactivate();
+        }
+    }
+
+    private void LateUpdate()
+    {
+        if(needsResizing)
+        {
+            RectTransform inv = inventorySelector.GetComponent<RectTransform>();
+            inv.sizeDelta = actualBorders.sizeDelta;
+            needsResizing = false;
         }
     }
 }

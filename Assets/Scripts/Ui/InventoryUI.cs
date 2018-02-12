@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class InventoryUI : MonoBehaviour
 {
     public GameObject inventorySelector;
+    public GameObject inventorySlotSelector;
 
     [SerializeField]
     protected List<ItemSlotUI> inventorySlots = new List<ItemSlotUI>();
@@ -47,7 +48,7 @@ public class InventoryUI : MonoBehaviour
         return inventorySlots.Count;
     }
 
-    public void Select(bool showSelector = false)
+    public virtual void Select(bool showSelector = false)
     {
         inventorySelector.SetActive(showSelector);
         isSelected = true;

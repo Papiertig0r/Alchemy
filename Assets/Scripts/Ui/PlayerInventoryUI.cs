@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PlayerInventoryUI : InventoryUI
 {
-    public GameObject inventorySlotSelector;
     public HotbarUI hotbar;
 
     public ItemInfoUI itemInfoUi;
