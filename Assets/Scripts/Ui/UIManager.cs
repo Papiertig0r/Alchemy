@@ -77,7 +77,10 @@ public class UIManager : MonoBehaviour
 
     public void Register(InventoryUI inventoryUi)
     {
-        activeUis.Add(inventoryUi);
+        if(!activeUis.Contains(inventoryUi))
+        {
+            activeUis.Add(inventoryUi);
+        }
         activeUi = activeUis.Count - 1;
         Select();
     }
