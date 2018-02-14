@@ -38,7 +38,7 @@ public class PlayerInventoryUI : InventoryUI
         hotbar.Activate();
     }
 
-    private void Update()
+    protected override void Update()
     {
         if (!(
             StateController.IsInState(State.INVENTORY) ||
@@ -48,7 +48,7 @@ public class PlayerInventoryUI : InventoryUI
             return;
         }
 
-        HandleNavigation();
+        base.Update();
 
         Item item = inventory[selectedInventorySlot].item;
         if (Input.GetButtonDown("Action") && item != null)
@@ -83,6 +83,7 @@ public class PlayerInventoryUI : InventoryUI
 
         selectedInventorySlot = x + y * hotbar.GetHotbarSize();
         SelectSlot(selectedInventorySlot);
+
         HandleInfoUi();
     }
 
@@ -228,9 +229,7 @@ public class PlayerInventoryUI : InventoryUI
 
     public void SelectSlot(int id)
     {
-        selectedInventorySlot = Mathf.Clamp(id, 0, allInventorySlots.Count);
-        inventorySlotSelector.transform.SetParent(allInventorySlots[selectedInventorySlot].transform);
-        inventorySlotSelector.transform.localPosition = Vector3.zero;
+        SelectSlot(id, allInventorySlots);
     }
 
     private void HandleInfoUi()

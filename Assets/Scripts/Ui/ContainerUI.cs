@@ -11,6 +11,7 @@ public class ContainerUI : InventoryUI
     public RectTransform actualBorders;
 
     private bool needsResizing = false;
+    private int columns;
 
     public override void SetUp(int numberOfSlots)
     {
@@ -29,8 +30,11 @@ public class ContainerUI : InventoryUI
             inventorySlots[i].gameObject.SetActive(isActive);
         }
 
-        int columns = Mathf.Clamp(numberOfSlots / 2, numberOfSlots % 4, 6);
+        columns = Mathf.Clamp(numberOfSlots / 2, numberOfSlots % 4, 6);
         panel.GetComponent<GridLayoutGroup>().constraintCount = columns;
+
+        selectedInventorySlot = 0;
+        SelectSlot(selectedInventorySlot, inventorySlots);
     }
 
     public override void UpdateUi(List<ItemSlot> inventory, ItemSlot slot)
@@ -48,12 +52,20 @@ public class ContainerUI : InventoryUI
         needsResizing = true;
     }
 
-    private void Update()
+    protected override void Update()
     {
+        base.Update();
+
         if(Input.GetButtonDown("Dodge/Abort"))
         {
             Deactivate();
         }
+    }
+
+    protected override void OnPress(Vector2 input)
+    {
+        HandleSelection(input, columns, inventorySlots.Count / columns);
+        SelectSlot(selectedInventorySlot, inventorySlots);
     }
 
     private void LateUpdate()

@@ -60,6 +60,18 @@ public class InventoryUI : MonoBehaviour
         isSelected = false;
     }
 
+    public virtual void SelectSlot(int id, List<ItemSlotUI> slots)
+    {
+        selectedInventorySlot = Mathf.Clamp(id, 0, slots.Count);
+        inventorySlotSelector.transform.SetParent(slots[selectedInventorySlot].transform);
+        inventorySlotSelector.transform.localPosition = Vector3.zero;
+    }
+
+    protected virtual void Update()
+    {
+        HandleNavigation();
+    }
+
     protected Vector2 HandleNavigation()
     {
         if(!isSelected)
@@ -85,7 +97,19 @@ public class InventoryUI : MonoBehaviour
 
     protected virtual void OnPress(Vector2 input)
     {
+    }
 
+    protected virtual void HandleSelection(Vector2 input, int columns, int rows)
+    {
+        int x = selectedInventorySlot % columns;
+        int y = selectedInventorySlot / columns;
+
+        x += Mathf.FloorToInt(input.x);
+        y += Mathf.FloorToInt(input.y);
+        x = InventoryUI.WrapAround(x, 0, columns - 1);
+        y = InventoryUI.WrapAround(y, 0, rows - 1);
+
+        selectedInventorySlot = x + y * columns;
     }
 
     protected virtual void OnRelease()
