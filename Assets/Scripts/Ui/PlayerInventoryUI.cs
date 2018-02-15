@@ -8,7 +8,6 @@ public class PlayerInventoryUI : InventoryUI
 
     public ItemInfoUI itemInfoUi;
 
-    private List<ItemSlotUI> allInventorySlots = new List<ItemSlotUI>();
     private List<ItemSlot> inventory = new List<ItemSlot>();
 
     //private bool released = true;
@@ -56,7 +55,7 @@ public class PlayerInventoryUI : InventoryUI
             switch (StateController.GetState())
             {
                 case State.INVENTORY:
-                    UIManager.inventorySubmenuUi.SetUp(item, allInventorySlots[selectedInventorySlot]);
+                    UIManager.inventorySubmenuUi.SetUp(item, inventorySlots[selectedInventorySlot]);
                     break;
 
                 case State.MIXING:
@@ -79,7 +78,7 @@ public class PlayerInventoryUI : InventoryUI
         x += Mathf.FloorToInt(input.x);
         y += Mathf.FloorToInt(input.y);
         x = InventoryUI.WrapAround(x, 0, hotbar.GetHotbarSize() - 1);
-        y = InventoryUI.WrapAround(y, 0, allInventorySlots.Count / hotbar.GetHotbarSize() - 1);
+        y = InventoryUI.WrapAround(y, 0, inventorySlots.Count / hotbar.GetHotbarSize() - 1);
 
         selectedInventorySlot = x + y * hotbar.GetHotbarSize();
         SelectSlot(selectedInventorySlot);
@@ -95,10 +94,10 @@ public class PlayerInventoryUI : InventoryUI
 
     public void UpdateUi(ItemSlot slot = null)
     {
-        for (int i = 0; i < allInventorySlots.Count; i++)
+        for (int i = 0; i < inventorySlots.Count; i++)
         {
             bool isActive = !CheckForCompatability(slot, i);
-            allInventorySlots[i].SetSlot(inventory[i], isActive);
+            inventorySlots[i].SetSlot(inventory[i], isActive);
         }
         if (gameObject.activeSelf)
         {
@@ -167,10 +166,8 @@ public class PlayerInventoryUI : InventoryUI
 
     public void InitInventoryUI(List<ItemSlotUI> hotbarSlots)
     {
+        inventorySlots.AddRange(hotbar.GetSlotUi());
         inventorySlots.AddRange(GetComponentsInChildren<ItemSlotUI>());
-
-        allInventorySlots.AddRange(hotbar.GetSlotUi());
-        allInventorySlots.AddRange(inventorySlots);
     }
 
     private bool CheckForCompatability(ItemSlot slot, int currentIndex)
@@ -229,7 +226,7 @@ public class PlayerInventoryUI : InventoryUI
 
     public void SelectSlot(int id)
     {
-        SelectSlot(id, allInventorySlots);
+        SelectSlot(id, inventorySlots);
     }
 
     private void HandleInfoUi()
