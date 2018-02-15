@@ -72,17 +72,7 @@ public class PlayerInventoryUI : InventoryUI
 
     protected override void OnPress(Vector2 input)
     {
-        int x = selectedInventorySlot % hotbar.GetHotbarSize();
-        int y = selectedInventorySlot / hotbar.GetHotbarSize();
-
-        x += Mathf.FloorToInt(input.x);
-        y += Mathf.FloorToInt(input.y);
-        x = InventoryUI.WrapAround(x, 0, hotbar.GetHotbarSize() - 1);
-        y = InventoryUI.WrapAround(y, 0, inventorySlots.Count / hotbar.GetHotbarSize() - 1);
-
-        selectedInventorySlot = x + y * hotbar.GetHotbarSize();
-        SelectSlot(selectedInventorySlot);
-
+        base.OnPress(input);
         HandleInfoUi();
     }
 
@@ -168,6 +158,9 @@ public class PlayerInventoryUI : InventoryUI
     {
         inventorySlots.AddRange(hotbar.GetSlotUi());
         inventorySlots.AddRange(GetComponentsInChildren<ItemSlotUI>());
+
+        columns = hotbar.GetHotbarSize();
+        rows = inventorySlots.Count / columns;
     }
 
     private bool CheckForCompatability(ItemSlot slot, int currentIndex)
@@ -209,7 +202,7 @@ public class PlayerInventoryUI : InventoryUI
         return isActive;
     }
 
-    public override void Toggle()
+    public void Toggle()
     {
         if (gameObject.activeSelf)
         {
@@ -222,11 +215,6 @@ public class PlayerInventoryUI : InventoryUI
             Activate();
             StateController.Transition(State.INVENTORY);
         }
-    }
-
-    public void SelectSlot(int id)
-    {
-        SelectSlot(id, inventorySlots);
     }
 
     private void HandleInfoUi()

@@ -12,6 +12,8 @@ public class InventoryUI : MonoBehaviour
     protected List<ItemSlotUI> inventorySlots = new List<ItemSlotUI>();
 
     protected int selectedInventorySlot = 0;
+    protected int columns;
+    protected int rows;
 
     private bool released = true;
     private bool isSelected = false;
@@ -26,16 +28,6 @@ public class InventoryUI : MonoBehaviour
     {
         gameObject.SetActive(false);
         UIManager.instance.Unregister(this);
-    }
-
-    public virtual void Toggle()
-    {
-
-    }
-
-    public virtual void SetUp(int numberOfSlots)
-    {
-
     }
 
     public virtual void UpdateUi(List<ItemSlot> inventory, ItemSlot slot)
@@ -60,10 +52,10 @@ public class InventoryUI : MonoBehaviour
         isSelected = false;
     }
 
-    public virtual void SelectSlot(int id, List<ItemSlotUI> slots)
+    public virtual void SelectSlot(int id)
     {
-        selectedInventorySlot = Mathf.Clamp(id, 0, slots.Count);
-        inventorySlotSelector.transform.SetParent(slots[selectedInventorySlot].transform);
+        selectedInventorySlot = Mathf.Clamp(id, 0, inventorySlots.Count);
+        inventorySlotSelector.transform.SetParent(inventorySlots[selectedInventorySlot].transform);
         inventorySlotSelector.transform.localPosition = Vector3.zero;
     }
 
@@ -97,9 +89,11 @@ public class InventoryUI : MonoBehaviour
 
     protected virtual void OnPress(Vector2 input)
     {
+        int id = HandleSelection(input);
+        SelectSlot(id);
     }
 
-    protected virtual void HandleSelection(Vector2 input, int columns, int rows)
+    protected virtual int HandleSelection(Vector2 input)
     {
         int x = selectedInventorySlot % columns;
         int y = selectedInventorySlot / columns;
@@ -109,7 +103,7 @@ public class InventoryUI : MonoBehaviour
         x = InventoryUI.WrapAround(x, 0, columns - 1);
         y = InventoryUI.WrapAround(y, 0, rows - 1);
 
-        selectedInventorySlot = x + y * columns;
+        return x + y * columns;
     }
 
     protected virtual void OnRelease()

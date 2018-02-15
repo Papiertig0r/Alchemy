@@ -11,9 +11,8 @@ public class ContainerUI : InventoryUI
     public RectTransform actualBorders;
 
     private bool needsResizing = false;
-    private int columns;
 
-    public override void SetUp(int numberOfSlots)
+    public void SetUp(int numberOfSlots)
     {
         if (numberOfSlots > inventorySlots.Count)
         {
@@ -31,10 +30,10 @@ public class ContainerUI : InventoryUI
         }
 
         columns = Mathf.Clamp(numberOfSlots / 2, numberOfSlots % 4, 6);
+        rows = numberOfSlots / columns;
         panel.GetComponent<GridLayoutGroup>().constraintCount = columns;
 
-        selectedInventorySlot = 0;
-        SelectSlot(selectedInventorySlot, inventorySlots);
+        SelectSlot(0);
     }
 
     public override void UpdateUi(List<ItemSlot> inventory, ItemSlot slot)
@@ -60,12 +59,6 @@ public class ContainerUI : InventoryUI
         {
             Deactivate();
         }
-    }
-
-    protected override void OnPress(Vector2 input)
-    {
-        HandleSelection(input, columns, inventorySlots.Count / columns);
-        SelectSlot(selectedInventorySlot, inventorySlots);
     }
 
     private void LateUpdate()
