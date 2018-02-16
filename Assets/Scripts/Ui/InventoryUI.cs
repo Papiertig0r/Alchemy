@@ -9,7 +9,9 @@ public class InventoryUI : MonoBehaviour
     public GameObject inventorySlotSelector;
 
     [SerializeField]
-    protected List<ItemSlotUI> inventorySlots = new List<ItemSlotUI>();
+    protected List<ItemSlotUI> inventorySlots;
+    protected Inventory inv;
+    protected List<ItemSlot> inventory = new List<ItemSlot>();
 
     protected int selectedInventorySlot = 0;
     protected int columns;

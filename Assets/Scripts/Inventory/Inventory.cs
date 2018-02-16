@@ -11,7 +11,7 @@ public class Inventory : MonoBehaviour
     private InventoryUI inventoryUi;
 
     [SerializeField]
-    protected List<ItemSlot> itemSlots;
+    public List<ItemSlot> itemSlots;
 
     protected virtual void Start()
     {
@@ -66,6 +66,15 @@ public class Inventory : MonoBehaviour
     public int FindSlotsWithCapacity(List<ItemSlot> slots)
     {
         return itemSlots.FindIndex(slot => slot.quantity < slot.item.stackSize);
+    }
+
+    public Item GetItem(int id)
+    {
+        if(itemSlots[id].item == null)
+        {
+            return null;
+        }
+        return InstantiateItem( itemSlots[id].item);
     }
 
     public void RemoveItem(int fromSlot)

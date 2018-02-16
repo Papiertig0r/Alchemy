@@ -13,7 +13,7 @@ public class ContainerEditor : Editor
         if (GUILayout.Button("Add slots"))
         {
             ContainerUI containerUi = (ContainerUI)target;
-            containerUi.SetUp(1);
+            //containerUi.SetUp(1);
         }
     }
 }

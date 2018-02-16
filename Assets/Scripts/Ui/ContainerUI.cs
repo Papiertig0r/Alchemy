@@ -12,8 +12,11 @@ public class ContainerUI : InventoryUI
 
     private bool needsResizing = false;
 
-    public void SetUp(int numberOfSlots)
+    public void SetUp(Inventory inv)
     {
+        this.inv = inv;
+        inventory = inv.itemSlots;
+        int numberOfSlots = inventory.Count;
         if (numberOfSlots > inventorySlots.Count)
         {
             int diff = numberOfSlots - inventorySlots.Count;
@@ -55,10 +58,29 @@ public class ContainerUI : InventoryUI
     {
         base.Update();
 
+        Item item = inv.GetItem(selectedInventorySlot);
+        if (Input.GetButtonDown("Action") && item != null)
+        {
+            if(PlayerInventory.instance.AddItem(item))
+            {
+                inv.RemoveItem(selectedInventorySlot);
+            }
+        }
+
         if(Input.GetButtonDown("Dodge/Abort"))
         {
             Deactivate();
         }
+    }
+
+    private void OnEnable()
+    {
+        UIManager.state |= UIStates.CONTAINER;
+    }
+
+    private void OnDisable()
+    {
+        UIManager.state &= ~UIStates.CONTAINER;
     }
 
     private void LateUpdate()

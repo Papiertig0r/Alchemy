@@ -11,6 +11,8 @@ public class UIManager : MonoBehaviour
     public static InventorySubmenuUI inventorySubmenuUi;
     public static ContainerUI containerUI;
 
+    public static UIStates state = UIStates.NONE;
+
     public List<InventoryUI> activeUis = new List<InventoryUI>();
     public int activeUi;
 

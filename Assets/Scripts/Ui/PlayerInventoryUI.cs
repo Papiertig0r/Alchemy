@@ -8,8 +8,6 @@ public class PlayerInventoryUI : InventoryUI
 
     public ItemInfoUI itemInfoUi;
 
-    private List<ItemSlot> inventory = new List<ItemSlot>();
-
     //private bool released = true;
     private IShowable currentExtendedInfo;
 
@@ -24,6 +22,7 @@ public class PlayerInventoryUI : InventoryUI
         }
         inventorySlotSelector.SetActive(true);
         HandleInfoUi();
+        UIManager.state |= UIStates.INVENTORY;
     }
 
     private void OnDisable()
@@ -35,6 +34,7 @@ public class PlayerInventoryUI : InventoryUI
             hotbar.SelectHotbar(selectedInventorySlot);
         }
         hotbar.Activate();
+        UIManager.state &= ~UIStates.INVENTORY;
     }
 
     protected override void Update()
@@ -49,7 +49,7 @@ public class PlayerInventoryUI : InventoryUI
 
         base.Update();
 
-        Item item = inventory[selectedInventorySlot].item;
+        Item item = inv.itemSlots[selectedInventorySlot].item;
         if (Input.GetButtonDown("Action") && item != null)
         {
             switch (StateController.GetState())
@@ -124,7 +124,6 @@ public class PlayerInventoryUI : InventoryUI
         if (ingredient.IsCompatible(otherIngredient))
         {
             Debug.Log("Mixing");
-            PlayerInventory inv = PlayerInventory.instance;
             Item mixedItem = inv.InstantiateItem(item);
             ingredient = mixedItem.GetComponent<Ingredient>();
             ingredient.Mix(otherIngredient);
@@ -161,6 +160,7 @@ public class PlayerInventoryUI : InventoryUI
 
         columns = hotbar.GetHotbarSize();
         rows = inventorySlots.Count / columns;
+        inv = PlayerInventory.instance;
     }
 
     private bool CheckForCompatability(ItemSlot slot, int currentIndex)
@@ -179,7 +179,7 @@ public class PlayerInventoryUI : InventoryUI
         Ingredient ingredient = null;
         if (slot != null)
         {
-            if (slot == inventory[currentIndex] && inventory[currentIndex].quantity <= 1)
+            if (slot == inv.itemSlots[currentIndex] && inv.itemSlots[currentIndex].quantity <= 1)
             {
                 isActive = false;
             }
@@ -187,7 +187,7 @@ public class PlayerInventoryUI : InventoryUI
 
         if (inventory[currentIndex].item != null)
         {
-            ingredient = inventory[currentIndex].item.GetComponent<Ingredient>();
+            ingredient = inv.itemSlots[currentIndex].item.GetComponent<Ingredient>();
         }
 
         if (ingredient == null)
@@ -219,7 +219,7 @@ public class PlayerInventoryUI : InventoryUI
 
     private void HandleInfoUi()
     {
-        Item item = inventory[selectedInventorySlot].item;
+        Item item = inv.itemSlots[selectedInventorySlot].item;
         if (item == null)
         {
             itemInfoUi.Deactivate();
@@ -255,11 +255,11 @@ public class PlayerInventoryUI : InventoryUI
     {
         if (StateController.IsInState(State.WORLD))
         {
-            return inventory[hotbar.GetSelectedHotbar()];
+            return inv.itemSlots[hotbar.GetSelectedHotbar()];
         }
         else
         {
-            return inventory[selectedInventorySlot];
+            return inv.itemSlots[selectedInventorySlot];
         }
     }
 }

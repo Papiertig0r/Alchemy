@@ -22,12 +22,15 @@ public class Container : Interactable
 
     public override void Interact()
     {
-        Open();
+        if((UIManager.state & UIStates.CONTAINER) != UIStates.CONTAINER)
+        {
+            Open();
+        }
     }
 
     private void Open()
     {
-        UIManager.containerUI.SetUp(inventory.numberOfSlots);
+        UIManager.containerUI.SetUp(inventory);
         inventory.UpdateUi();
         UIManager.containerUI.Activate();
     }
